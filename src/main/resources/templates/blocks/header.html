@@ -1,0 +1,168 @@
+<div th:fragment="header">
+    <header id="page-topbar">
+        <div class="navbar-header">
+            <div class="d-flex">
+                <!-- LOGO -->
+                <div class="navbar-brand-box">
+                    <a href="index.html" class="logo logo-dark">
+                                <span class="logo-sm">
+                                    <img src="assets/images/logo.svg" alt="" height="22">
+                                </span>
+                        <span class="logo-lg">
+                                    <img src="assets/images/logo-dark.png" alt="" height="17">
+                                </span>
+                    </a>
+
+                    <a href="index.html" class="logo logo-light">
+                                <span class="logo-sm">
+                                    <img src="assets/images/logo-sm.png" alt="" height="22">
+                                </span>
+                        <span class="logo-lg">
+                                    <img src="assets/images/logo-light.png" alt="" height="18">
+                                </span>
+                    </a>
+                </div>
+
+                <button type="button" class="btn btn-sm px-3 font-size-24 header-item waves-effect" id="vertical-menu-btn">
+                    <i class="mdi mdi-menu"></i>
+                </button>
+
+                <div class="d-none d-sm-block">
+                    <div class="dropdown pt-3 d-inline-block">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Добавить <i class="mdi mdi-chevron-down"></i>
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="#"><i class="mdi mdi-plus-circle"></i> Транспортное средство</a>
+                            <a class="dropdown-item" href="#"><i class="mdi mdi-plus-circle"></i> Прицеп</a>
+                            <a class="dropdown-item" href="#"><i class="mdi mdi-plus-circle"></i> Водителя</a>
+                            <a class="dropdown-item" href="#"><i class="mdi mdi-plus-circle"></i> Грузовладельца</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex">
+                <div class="dropdown d-none d-lg-inline-block">
+                    <button type="button" class="btn header-item noti-icon waves-effect" data-toggle="fullscreen">
+                        <i class="mdi mdi-fullscreen"></i>
+                    </button>
+                </div>
+
+                <div class="dropdown d-inline-block">
+                    <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="rounded-circle header-profile-user" src="assets/images/users/user-4.jpg"
+                             alt="Header Avatar">
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <!-- item-->
+                        <a class="dropdown-item" href="#"><i class="mdi mdi-account-circle font-size-17 align-middle mr-1"></i> Profile</a>
+                        <a class="dropdown-item" href="#"><i class="mdi mdi-wallet font-size-17 align-middle mr-1"></i> My Wallet</a>
+                        <a class="dropdown-item d-block" href="#"><span class="badge badge-success float-right">11</span><i class="mdi mdi-settings font-size-17 align-middle mr-1"></i> Settings</a>
+                        <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline font-size-17 align-middle mr-1"></i> Lock screen</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-danger" href="#"><i class="bx bx-power-off font-size-17 align-middle mr-1 text-danger"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="vertical-menu">
+        <div data-simplebar class="h-100">
+            <div id="sidebar-menu">
+                <ul class="metismenu list-unstyled" id="side-menu">
+                    <li class="menu-title">Главная</li>
+
+                    <li>
+                        <a href="index.html" class="has-arrow waves-effect">
+                            <i class="ti-home"></i>
+                            <span>Панель управления</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="ti-email"></i>
+                            <span>Перевозки</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="email-inbox.html">Список перевозок</a></li>
+                            <li><a href="email-read.html">Новая перевозка</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="menu-title">Грузоперевозки</li>
+
+                    <li>
+                        <a href="/cargo-owner" class=" waves-effect">
+                            <i class="ti-user"></i>
+                            <span>Грузовладельцы</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="index.html" class=" waves-effect">
+                            <i class="ti-package"></i>
+                            <span>Грузы</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="index.html" class=" waves-effect">
+                            <i class="ti-pie-chart"></i>
+                            <span>Наши организации</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="index.html" class=" waves-effect">
+                            <i class="ti-truck"></i>
+                            <span>Перевозчики</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="index.html" class=" waves-effect">
+                            <i class="ti-car"></i>
+                            <span>Транспорт</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="index.html" class=" waves-effect">
+                            <i class="ti-harddrive"></i>
+                            <span>Прицепы</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="index.html" class=" waves-effect">
+                            <i class="ti-credit-card"></i>
+                            <span>Формы оплаты</span>
+                        </a>
+                    </li>
+
+                    <li class="menu-title">Extras</li>
+
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="ti-more"></i>
+                            <span>Multi Level</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="true">
+                            <li><a href="javascript: void(0);">Level 1.1</a></li>
+                            <li><a href="javascript: void(0);" class="has-arrow">Level 1.2</a>
+                                <ul class="sub-menu" aria-expanded="true">
+                                    <li><a href="javascript: void(0);">Level 2.1</a></li>
+                                    <li><a href="javascript: void(0);">Level 2.2</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

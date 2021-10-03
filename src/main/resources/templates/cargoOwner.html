@@ -1,0 +1,373 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <title th:text="'Панель управления - ' + ${title}"></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Панель управления, для ведения отчётностей" name="description" />
+    <meta content="aGreen" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+    <link href="/assets/libs/chartist/chartist.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Css -->
+    <link href="/assets/css/bootstrap-dark.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="/assets/css/app-dark.min.css" id="app-style" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+</head>
+
+<body data-sidebar="dark">
+<div id="layout-wrapper">
+    <header th:insert="blocks/header :: header"></header>
+    <div class="main-content">
+        <div class="page-content">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-sm-6">
+                        <div class="page-title-box">
+                            <h4 class="font-size-18" th:text="${title}"></h4>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item active" th:text="${description}"></li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="float-right d-none d-md-block">
+                            <div class="dropdown">
+                                <button class="btn btn-primary waves-effect" type="button" onclick="newCargoOwner()"><i class="mdi mdi-account-plus-outline mr-1"></i> Новый</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-6">
+                        <div class="card animate__animated animate__fadeIn animate__fast">
+                            <div class="card-body">
+                                <h4 class="card-title">Список грузовладельцев</h4>
+                                <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Организация</th>
+                                        <th>Юридический адрес</th>
+                                        <th>Номер телефона</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="element : ${cargoOwners}">
+                                        <td th:text="${element.getId()}"></td>
+                                        <td th:text="${element.getName()}"></td>
+                                        <td th:text="${element.getLegalAddress()}"></td>
+                                        <td th:text="${element.getNumberPhone()}"></td>
+                                        <td><button class="btn btn-success btn-sm waves-effect" th:onclick="'moreDetailed(' + ${element.getId()} + ')'">Подробнее</button> </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="inner-block">
+                            <div class="card animate__animated animate__fadeIn animate__fast">
+                                <div class="card-body">
+                                    <h4 class="card-title">Новый грузовладелец</h4>
+                                    <p class="card-title-desc">Добавьте нового грузовладельца.</p>
+                                    <form action="/cargo-owner" method="post">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Название организации</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" name="name" class="form-control" placeholder="Название организации" required="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Юридический адрес</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" name="legalAddress" class="form-control" placeholder="Юридический адрес" required="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Почтовый адрес</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" name="postalAddress" class="form-control" placeholder="Почтовый адрес" required="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Фактический адрес</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" name="actualAddress" class="form-control" placeholder="Фактический адрес" required="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Номер телефона</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" name="numberPhone" class="form-control" placeholder="Номер телефона" required="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Контактное лицо</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" name="contactPerson" class="form-control" placeholder="Контактное лицо" required="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Номер контактного лица</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" name="numberPerson" class="form-control" placeholder="Номер контактного лица" required="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">ИНН</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" name="inn" class="form-control" placeholder="ИНН" required="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">КПП</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" name="kpp" class="form-control" placeholder="КПП" required="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">ОГРН</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" name="ogrn" class="form-control" placeholder="ОГРН" required="">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <button type="submit" th:id="btn-load" class="btn btn-success waves-effect">Добавить</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-6"></div>
+                    <div class="col-xl-6"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:insert="blocks/footer :: footer"></div>
+</div>
+<!-- JAVASCRIPT -->
+<script src="assets/libs/jquery/jquery.min.js"></script>
+<script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/libs/metismenu/metisMenu.min.js"></script>
+<script src="assets/libs/simplebar/simplebar.min.js"></script>
+<script src="assets/libs/node-waves/waves.min.js"></script>
+<!-- Required datatable js -->
+<script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+<!-- Buttons examples -->
+<script src="assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+<script src="assets/libs/jszip/jszip.min.js"></script>
+<script src="assets/libs/pdfmake/build/pdfmake.min.js"></script>
+<script src="assets/libs/pdfmake/build/vfs_fonts.js"></script>
+<script src="assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script src="assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script src="assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+<!-- Responsive examples -->
+<script src="assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+<!-- Datatable init js -->
+<script src="assets/js/pages/datatables.init.js"></script>
+<script src="assets/js/app.js"></script>
+
+<script type="text/javascript" th:inline="javascript">
+    function newCargoOwner() {
+        let innerBlock = $('.inner-block');
+        innerBlock.empty();
+        innerBlock.append('<div class="card animate__animated animate__fadeIn animate__fast">\n' +
+            '                            <div class="card-body">\n' +
+            '                                <h4 class="card-title">Новый грузовладелец</h4>\n' +
+            '                                <p class="card-title-desc">Добавьте нового грузовладельца.</p>\n' +
+            '                                <form action="/cargo-owner" method="post">\n' +
+            '                                    <div class="form-group row">\n' +
+            '                                        <label class="col-sm-3 col-form-label">Название организации</label>\n' +
+            '                                        <div class="col-sm-9">\n' +
+            '                                            <input type="text" name="name" class="form-control" placeholder="Название организации" required>\n' +
+            '                                        </div>\n' +
+            '                                    </div>\n' +
+            '                                    <div class="form-group row">\n' +
+            '                                        <label class="col-sm-3 col-form-label">Юридический адрес</label>\n' +
+            '                                        <div class="col-sm-9">\n' +
+            '                                            <input type="text" name="legalAddress" class="form-control" placeholder="Юридический адрес" required>\n' +
+            '                                        </div>\n' +
+            '                                    </div>\n' +
+            '                                    <div class="form-group row">\n' +
+            '                                        <label class="col-sm-3 col-form-label">Почтовый адрес</label>\n' +
+            '                                        <div class="col-sm-9">\n' +
+            '                                            <input type="text" name="postalAddress" class="form-control" placeholder="Почтовый адрес" required>\n' +
+            '                                        </div>\n' +
+            '                                    </div>\n' +
+            '                                    <div class="form-group row">\n' +
+            '                                        <label class="col-sm-3 col-form-label">Фактический адрес</label>\n' +
+            '                                        <div class="col-sm-9">\n' +
+            '                                            <input type="text" name="actualAddress" class="form-control" placeholder="Фактический адрес" required>\n' +
+            '                                        </div>\n' +
+            '                                    </div>\n' +
+            '                                    <div class="form-group row">\n' +
+            '                                        <label class="col-sm-3 col-form-label">Номер телефона</label>\n' +
+            '                                        <div class="col-sm-9">\n' +
+            '                                            <input type="text" name="numberPhone" class="form-control" placeholder="Номер телефона" required>\n' +
+            '                                        </div>\n' +
+            '                                    </div>\n' +
+            '                                    <div class="form-group row">\n' +
+            '                                        <label class="col-sm-3 col-form-label">Контактное лицо</label>\n' +
+            '                                        <div class="col-sm-9">\n' +
+            '                                            <input type="text" name="contactPerson" class="form-control" placeholder="Контактное лицо" required>\n' +
+            '                                        </div>\n' +
+            '                                    </div>\n' +
+            '                                    <div class="form-group row">\n' +
+            '                                        <label class="col-sm-3 col-form-label">Номер контактного лица</label>\n' +
+            '                                        <div class="col-sm-9">\n' +
+            '                                            <input type="text" name="numberPerson" class="form-control" placeholder="Номер контактного лица" required>\n' +
+            '                                        </div>\n' +
+            '                                    </div>\n' +
+            '                                    <div class="form-group row">\n' +
+            '                                        <label class="col-sm-3 col-form-label">ИНН</label>\n' +
+            '                                        <div class="col-sm-9">\n' +
+            '                                            <input type="text" name="inn" class="form-control" placeholder="ИНН" required>\n' +
+            '                                        </div>\n' +
+            '                                    </div>\n' +
+            '                                    <div class="form-group row">\n' +
+            '                                        <label class="col-sm-3 col-form-label">КПП</label>\n' +
+            '                                        <div class="col-sm-9">\n' +
+            '                                            <input type="text" name="kpp" class="form-control" placeholder="КПП" required>\n' +
+            '                                        </div>\n' +
+            '                                    </div>\n' +
+            '                                    <div class="form-group row">\n' +
+            '                                        <label class="col-sm-3 col-form-label">ОГРН</label>\n' +
+            '                                        <div class="col-sm-9">\n' +
+            '                                            <input type="text" name="ogrn" class="form-control" placeholder="ОГРН" required>\n' +
+            '                                        </div>\n' +
+            '                                    </div>\n' +
+            '                                    <div class="row">\n' +
+            '                                        <button type="submit" th:id="btn-load" class="btn btn-success waves-effect">Добавить</button>\n' +
+            '                                    </div>\n' +
+            '                                </form>\n' +
+            '                            </div>\n' +
+            '                        </div>');
+    }
+    function moreDetailed(id) {
+        let cargoOwners = [[${cargoOwners}]];
+        for (let i = 0; i < cargoOwners.length; i++) {
+            let cargoOwner = cargoOwners[i];
+            if(cargoOwner.id === id) {
+                let innerBlock = $('.inner-block');
+                innerBlock.empty();
+                innerBlock.append('<div class="card animate__animated animate__fadeIn animate__fast">\n' +
+                    '                            <div class="card-body">\n' +
+                    '                                <h4 class="card-title">Подробности</h4>\n' +
+                    '                                <form action="/cargo-owner/save/' + cargoOwner.id + '" method="post">\n' +
+                    '                                    <div class="form-group row">\n' +
+                    '                                        <label class="col-sm-3 col-form-label">Название организации</label>\n' +
+                    '                                        <div class="col-sm-9">\n' +
+                    '                                            <input value="' + cargoOwner.name + '" text="' + cargoOwner.name + '" type="text" name="name" class="form-control form-details" placeholder="Название организации" required disabled>\n' +
+                    '                                        </div>\n' +
+                    '                                    </div>\n' +
+                    '                                    <div class="form-group row">\n' +
+                    '                                        <label class="col-sm-3 col-form-label">Юридический адрес</label>\n' +
+                    '                                        <div class="col-sm-9">\n' +
+                    '                                            <input value="' + cargoOwner.legalAddress + '" text="' + cargoOwner.legalAddress + '" type="text" name="legalAddress" class="form-control form-details" placeholder="Юридический адрес" required disabled>\n' +
+                    '                                        </div>\n' +
+                    '                                    </div>\n' +
+                    '                                    <div class="form-group row">\n' +
+                    '                                        <label class="col-sm-3 col-form-label">Почтовый адрес</label>\n' +
+                    '                                        <div class="col-sm-9">\n' +
+                    '                                            <input value="' + cargoOwner.postalAddress + '" text="' + cargoOwner.postalAddress + '" type="text" name="postalAddress" class="form-control form-details" placeholder="Почтовый адрес" required disabled>\n' +
+                    '                                        </div>\n' +
+                    '                                    </div>\n' +
+                    '                                    <div class="form-group row">\n' +
+                    '                                        <label class="col-sm-3 col-form-label">Фактический адрес</label>\n' +
+                    '                                        <div class="col-sm-9">\n' +
+                    '                                            <input value="' + cargoOwner.actualAddress + '" text="' + cargoOwner.actualAddress + '" type="text" name="actualAddress" class="form-control form-details" placeholder="Фактический адрес" required disabled>\n' +
+                    '                                        </div>\n' +
+                    '                                    </div>\n' +
+                    '                                    <div class="form-group row">\n' +
+                    '                                        <label class="col-sm-3 col-form-label">Номер телефона</label>\n' +
+                    '                                        <div class="col-sm-9">\n' +
+                    '                                            <input value="' + cargoOwner.numberPhone + '" text="' + cargoOwner.numberPhone + '" type="text" name="numberPhone" class="form-control form-details" placeholder="Номер телефона" required disabled>\n' +
+                    '                                        </div>\n' +
+                    '                                    </div>\n' +
+                    '                                    <div class="form-group row">\n' +
+                    '                                        <label class="col-sm-3 col-form-label">Контактное лицо</label>\n' +
+                    '                                        <div class="col-sm-9">\n' +
+                    '                                            <input value="' + cargoOwner.contactPerson + '" text="' + cargoOwner.contactPerson + '" type="text" name="contactPerson" class="form-control form-details" placeholder="Контактное лицо" required disabled>\n' +
+                    '                                        </div>\n' +
+                    '                                    </div>\n' +
+                    '                                    <div class="form-group row">\n' +
+                    '                                        <label class="col-sm-3 col-form-label">Номер контактного лица</label>\n' +
+                    '                                        <div class="col-sm-9">\n' +
+                    '                                            <input value="' + cargoOwner.numberPerson + '" text="' + cargoOwner.numberPerson + '" type="text" name="numberPerson" class="form-control form-details" placeholder="Номер контактного лица" required disabled>\n' +
+                    '                                        </div>\n' +
+                    '                                    </div>\n' +
+                    '                                    <div class="form-group row">\n' +
+                    '                                        <label class="col-sm-3 col-form-label">ИНН</label>\n' +
+                    '                                        <div class="col-sm-9">\n' +
+                    '                                            <input value="' + cargoOwner.inn + '" text="' + cargoOwner.inn + '" type="text" name="inn" class="form-control form-details" placeholder="ИНН" required disabled>\n' +
+                    '                                        </div>\n' +
+                    '                                    </div>\n' +
+                    '                                    <div class="form-group row">\n' +
+                    '                                        <label class="col-sm-3 col-form-label">КПП</label>\n' +
+                    '                                        <div class="col-sm-9">\n' +
+                    '                                            <input value="' + cargoOwner.kpp + '" text="' + cargoOwner.kpp + '" type="text" name="kpp" class="form-control form-details" placeholder="КПП" required disabled>\n' +
+                    '                                        </div>\n' +
+                    '                                    </div>\n' +
+                    '                                    <div class="form-group row">\n' +
+                    '                                        <label class="col-sm-3 col-form-label">ОГРН</label>\n' +
+                    '                                        <div class="col-sm-9">\n' +
+                    '                                            <input value="' + cargoOwner.ogrn + '" text="' + cargoOwner.ogrn + '" type="text" name="ogrn" class="form-control form-details" placeholder="ОГРН" required disabled>\n' +
+                    '                                        </div>\n' +
+                    '                                    </div>\n' +
+                    '                                   <div class="form-group row buttons-save" style="display: none">\n' +
+                    '                                       <button type="submit" class="btn btn-success waves-effect mr-1">Сохранить</button>\n' +
+                    '                                       <button type="button" id="btn-cancel" class="btn btn-primary waves-effect" onclick="hideButtonsSave()">Отмена</button>\n' +
+                    '                                   </div>\n' +
+                    '                                </form>\n' +
+                    '                                <div class="form-group row buttons-edit">\n' +
+                    '                                   <button type="button" id="btn-edit" class="btn btn-success waves-effect mr-1" onclick="showButtonsSave()">Редактировать</button>\n' +
+                    '                                   <form action="/cargo-owner/remove/' + cargoOwner.id + '" method="post">\n' +
+                    '                                       <button type="submit" class="btn btn-danger waves-effect">Удалить</button>\n' +
+                    '                                   </form>\n' +
+                    '                                </div>\n' +
+                    '                            </div>\n' +
+                    '                        </div>');
+            }
+        }
+    }
+</script>
+
+<script type="text/javascript" th:inline="javascript">
+    $(document).ready(function() {
+    });
+
+    function showButtonsSave() {
+        $('.buttons-edit').hide();
+        $('.buttons-save').show();
+        $('.form-details').removeAttr("disabled")
+    }
+
+    function hideButtonsSave() {
+        $('.buttons-edit').show();
+        $('.buttons-save').hide();
+        $('.form-details').attr("disabled", "");
+    }
+
+</script>
+</body>
+
+</html>
