@@ -7,9 +7,20 @@ public class Driver {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String organization;
+    private String numberPhone;
+    @OneToOne
+    private Transporter transporter;
     @OneToOne
     private Passport passport;
+
+    public Driver() {
+    }
+
+    public Driver(String numberPhone, Transporter transporter, Passport passport) {
+        this.numberPhone = numberPhone;
+        this.transporter = transporter;
+        this.passport = passport;
+    }
 
     public Long getId() {
         return id;
@@ -19,12 +30,20 @@ public class Driver {
         this.id = id;
     }
 
-    public String getOrganization() {
-        return organization;
+    public String getNumberPhone() {
+        return numberPhone;
     }
 
-    public void setOrganization(String organization) {
-        this.organization = organization;
+    public void setNumberPhone(String numberPhone) {
+        this.numberPhone = numberPhone;
+    }
+
+    public Transporter getTransporter() {
+        return transporter;
+    }
+
+    public void setTransporter(Transporter transporter) {
+        this.transporter = transporter;
     }
 
     public Passport getPassport() {

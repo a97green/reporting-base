@@ -1,0 +1,334 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <title th:text="'Панель управления - ' + ${title}"></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Панель управления, для ведения отчётностей" name="description" />
+    <meta content="aGreen" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+    <link href="/assets/libs/chartist/chartist.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Css -->
+    <link href="/assets/css/bootstrap-dark.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="/assets/css/app-dark.min.css" id="app-style" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+</head>
+
+<body data-sidebar="dark">
+<div id="layout-wrapper">
+    <header th:insert="blocks/header :: header"></header>
+    <div class="main-content">
+        <div class="page-content">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-sm-6">
+                        <div class="page-title-box">
+                            <h4 class="font-size-18" th:text="${title}"></h4>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item active" th:text="${description}"></li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="float-right d-none d-md-block">
+                            <div class="dropdown">
+                                <button class="btn btn-primary waves-effect" type="button"  data-toggle="modal" data-target="#myModal" onclick="newDriver()"><i class="mdi mdi-account-plus-outline mr-1"></i> Новый</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card animate__animated animate__fadeIn animate__fast">
+                            <div class="card-body">
+                                <h4 class="card-title">Список водителей</h4>
+                                <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Организация</th>
+                                        <th>Водитель</th>
+                                        <th>Номер телефона</th>
+                                        <th>Серия и номер пасспорта</th>
+                                        <th>Кем и когда выдан</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="element : ${drivers}">
+                                        <td th:text="${element.getId()}"></td>
+                                        <td th:text="${element.getTransporter().getName()}"></td>
+                                        <td th:text="${element.getNumberPhone()}"></td>
+                                        <td th:text="${element.getPassport().getLastName()} + ' ' + ${element.getPassport().getFirstName()}"></td>
+                                        <td th:text="${element.getPassport().getSerialPassport()} + ' ' + ${element.getPassport().getNumberPassport()}"></td>
+                                        <td th:text="${element.getPassport().getIssued()} + ' ' + ${element.getPassport().getIssuedDate()}"></td>
+                                        <td><button class="btn btn-success waves-effect" data-toggle="modal" data-target="#myModal" th:onclick="'moreDetailed(' + ${element.getId()} + ')'"><i class="mdi mdi-vector-difference"></i></button></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div id="myModal" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="inner-block">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-6"></div>
+                    <div class="col-xl-6"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:insert="blocks/footer :: footer"></div>
+</div>
+<!-- JAVASCRIPT -->
+<script src="assets/libs/jquery/jquery.min.js"></script>
+<script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/libs/metismenu/metisMenu.min.js"></script>
+<script src="assets/libs/simplebar/simplebar.min.js"></script>
+<script src="assets/libs/node-waves/waves.min.js"></script>
+<!-- Required datatable js -->
+<script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+<!-- Buttons examples -->
+<script src="assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+<script src="assets/libs/jszip/jszip.min.js"></script>
+<script src="assets/libs/pdfmake/build/pdfmake.min.js"></script>
+<script src="assets/libs/pdfmake/build/vfs_fonts.js"></script>
+<script src="assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script src="assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script src="assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+<!-- Responsive examples -->
+<script src="assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+<!-- Datatable init js -->
+<script src="assets/js/pages/datatables.init.js"></script>
+<script src="assets/js/app.js"></script>
+
+<script type="text/javascript" th:inline="javascript">
+    function newDriver() {
+        let innerBlock = $('.inner-block');
+        innerBlock.empty();
+        innerBlock.append('                            <div class="card animate__animated animate__fadeIn animate__fast">\n' +
+            '                                <div class="card-body">\n' +
+            '                                    <h4 class="card-title">Новый водитель</h4>\n' +
+            '                                    <p class="card-title-desc">Добавьте нового водителя.</p>\n' +
+            '                                    <form id="form-input" action="/driver" method="post">\n' +
+            '\n' +
+            '                                        <h5 class="card-title text-center border-top"><br>Основная информация<br></h5>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Организация</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                            <select name="idTransporter" class="form-control idTransporter" required>\n' +
+            '                                            </select>\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Номер телефона</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="numberPhone" class="form-control" placeholder="Номер телефона" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '\n' +
+            '                                        <h5 class="card-title text-center border-top"><br>Паспортные данные<br></h5>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Фамилия</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="lastName" class="form-control" placeholder="Имя" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Имя</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="firstName" class="form-control" placeholder="Фамилия" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Отчество</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="patronymic" class="form-control" placeholder="Отчество" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Серия паспорта</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="serialPassport" class="form-control" placeholder="Серия паспорта" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Номер паспорта</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="numberPassport" class="form-control" placeholder="Номер паспорта" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Кем выдан</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="issued" class="form-control" placeholder="Кем выдан" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Дата выдачи</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="date" name="issuedDate" class="form-control" placeholder="Дата выдачи" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '\n' +
+            '                                        <div class="row">\n' +
+            '                                            <button type="submit" th:id="btn-load" class="btn btn-primary waves-effect"><i class="mdi mdi-check mr-1"></i>Добавить</button>\n' +
+            '                                        </div>\n' +
+            '                                    </form>\n' +
+            '                                </div>\n' +
+            '                            </div>\n');
+        innerNew();
+
+    }
+    function moreDetailed(id) {
+        let elements = [[${drivers}]];
+        for (let i = 0; i < elements.length; i++) {
+            let element = elements[i];
+            if(element.id === id) {
+                let transporter = element.transporter;
+                let innerBlock = $('.inner-block');
+                innerBlock.empty();
+                innerBlock.append('<div class="card animate__animated animate__fadeIn animate__fast">\n' +
+                    '                            <div class="card-body">\n' +
+                    '                                <h4 class="card-title">Карточка водителя</h4>\n' +
+                    '                                <form action="/driver/save/' + element.id + '" method="post">\n' +
+                    '                                    <h5 class="card-title text-center border-top"><br>Основная информация<br></h5>\n' +
+                    '                                    <div class="form-group row">\n' +
+                    '                                        <label class="col-sm-3 col-form-label">Организация</label>\n' +
+                    '                                        <div class="col-sm-9">\n' +
+                    '                                            <select name="idTransporter" class="form-control form-details idTransporter" required disabled>\n' +
+                    '                                            </select>\n' +
+                    '                                        </div>\n' +
+                    '                                    </div>' +
+                    '                                    <div class="form-group row">\n' +
+                    '                                        <label class="col-sm-3 col-form-label">Номер телефона</label>\n' +
+                    '                                        <div class="col-sm-9">\n' +
+                    '                                            <input value="' + element.numberPhone + '" text="' + element.numberPhone + '" type="text" name="numberPhone" class="form-control form-details" placeholder="Номер телефона" required disabled>\n' +
+                    '                                        </div>\n' +
+                    '                                    </div>\n' +
+
+                    '                                    <h5 class="card-title text-center border-top"><br>Паспортные данные<br></h5>\n' +
+
+                    '                                    <div class="form-group row">\n' +
+                    '                                        <label class="col-sm-3 col-form-label">Фамилия</label>\n' +
+                    '                                        <div class="col-sm-9">\n' +
+                    '                                            <input value="' + element.passport.lastName + '" text="' + element.passport.lastName + '" type="text" name="lastName" class="form-control form-details" placeholder="ОГРН" required disabled>\n' +
+                    '                                        </div>\n' +
+                    '                                    </div>\n' +
+                    '                                    <div class="form-group row">\n' +
+                    '                                        <label class="col-sm-3 col-form-label">Имя</label>\n' +
+                    '                                        <div class="col-sm-9">\n' +
+                    '                                            <input value="' + element.passport.firstName + '" text="' + element.passport.firstName + '" type="text" name="firstName" class="form-control form-details" placeholder="ОГРН" required disabled>\n' +
+                    '                                        </div>\n' +
+                    '                                    </div>\n' +                        '                                    <div class="form-group row">\n' +
+                    '                                        <label class="col-sm-3 col-form-label">Отчество</label>\n' +
+                    '                                        <div class="col-sm-9">\n' +
+                    '                                            <input value="' + element.passport.patronymic + '" text="' + element.passport.patronymic + '" type="text" name="patronymic" class="form-control form-details" placeholder="ОГРН" required disabled>\n' +
+                    '                                        </div>\n' +
+                    '                                    </div>\n' +                        '                                    <div class="form-group row">\n' +
+                    '                                        <label class="col-sm-3 col-form-label">Серия паспорта</label>\n' +
+                    '                                        <div class="col-sm-9">\n' +
+                    '                                            <input value="' + element.passport.serialPassport + '" text="' + element.passport.serialPassport + '" type="text" name="serialPassport" class="form-control form-details" placeholder="ОГРН" required disabled>\n' +
+                    '                                        </div>\n' +
+                    '                                    </div>\n' +                        '                                    <div class="form-group row">\n' +
+                    '                                        <label class="col-sm-3 col-form-label">Номер паспорта</label>\n' +
+                    '                                        <div class="col-sm-9">\n' +
+                    '                                            <input value="' + element.passport.numberPassport + '" text="' + element.passport.numberPassport + '" type="text" name="numberPassport" class="form-control form-details" placeholder="ОГРН" required disabled>\n' +
+                    '                                        </div>\n' +
+                    '                                    </div>\n' +                        '                                    <div class="form-group row">\n' +
+                    '                                        <label class="col-sm-3 col-form-label">Кем выдан</label>\n' +
+                    '                                        <div class="col-sm-9">\n' +
+                    '                                            <input value="' + element.passport.issued + '" text="' + element.passport.issued + '" type="text" name="issued" class="form-control form-details" placeholder="ОГРН" required disabled>\n' +
+                    '                                        </div>\n' +
+                    '                                    </div>\n' +                        '                                    <div class="form-group row">\n' +
+                    '                                        <label class="col-sm-3 col-form-label">Дата выдачи</label>\n' +
+                    '                                        <div class="col-sm-9">\n' +
+                    '                                            <input value="' + element.passport.issuedDate + '" text="' + element.passport.issuedDate + '" type="text" name="issuedDate" class="form-control form-details" placeholder="ОГРН" required disabled>\n' +
+                    '                                        </div>\n' +
+                    '                                    </div>\n' +
+
+
+                    '                                   <div class="form-group row buttons-save" style="display: none">\n' +
+                    '                                       <button type="submit" class="btn btn-primary waves-effect mr-1"><i class="mdi mdi-content-save-outline mr-1"></i>Сохранить</button>\n' +
+                    '                                       <button type="button" id="btn-cancel" class="btn btn-dark waves-effect" onclick="hideButtonsSave()"><i class="mdi mdi-cancel mr-1"></i>Отмена</button>\n' +
+                    '                                   </div>\n' +
+                    '                                </form>\n' +
+                    '                                <div class="form-group row buttons-edit">\n' +
+                    '                                   <button type="button" id="btn-edit" class="btn btn-primary waves-effect mr-1" onclick="showButtonsSave()"><i class="mdi mdi-file-document-edit-outline mr-1"></i>Редактировать</button>\n' +
+                    '                                   <form action="/driver/remove/' + element.id + '" method="post">\n' +
+                    '                                       <button type="submit" class="btn btn-danger waves-effect"><i class="mdi mdi mdi-delete-circle-outline mr-1"></i>Удалить</button>\n' +
+                    '                                   </form>\n' +
+                    '                                </div>\n' +
+                    '                            </div>\n' +
+                    '                        </div>');
+                innerDetails(transporter);
+            }
+        }
+    }
+
+    function innerDetails(transporter) {
+        let option = $('.idTransporter');
+        let transporters = [[${transporters}]]
+        option.append('<option value="' + transporter.id + '">' + transporter.name + '</option>')
+        for (let i = 0; i < transporters.length; i++) {
+            if (transporters[i].id !== transporter.id) {
+                option.append('<option value="' + transporters[i].id + '">' + transporters[i].name + '</option>')
+            }
+        }
+    }
+    function innerNew() {
+        let option = $('.idTransporter');
+        let transporters = [[${transporters}]]
+        for (let i = 0; i < transporters.length; i++) {
+            option.append('<option value="' + transporters[i].id + '">' + transporters[i].name + '</option>')
+        }
+    }
+</script>
+<script type="text/javascript" th:inline="javascript">
+    $(document).ready(function() {
+    });
+
+    function showButtonsSave() {
+        $('.buttons-edit').hide();
+        $('.buttons-save').show();
+        $('.form-details').removeAttr("disabled")
+    }
+
+    function hideButtonsSave() {
+        $('.buttons-edit').show();
+        $('.buttons-save').hide();
+        $('.form-details').attr("disabled", "");
+    }
+
+</script>
+</body>
+
+</html>

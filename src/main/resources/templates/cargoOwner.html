@@ -41,14 +41,14 @@
                     <div class="col-sm-6">
                         <div class="float-right d-none d-md-block">
                             <div class="dropdown">
-                                <button class="btn btn-primary waves-effect" type="button" onclick="newCargoOwner()"><i class="mdi mdi-account-plus-outline mr-1"></i> Новый</button>
+                                <button class="btn btn-primary waves-effect" type="button" data-toggle="modal" data-target="#myModal" onclick="newCargoOwner()"><i class="mdi mdi-account-plus-outline mr-1"></i> Новый</button>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-xl-6">
+                    <div class="col-xl-12">
                         <div class="card animate__animated animate__fadeIn animate__fast">
                             <div class="card-body">
                                 <h4 class="card-title">Список грузовладельцев</h4>
@@ -59,6 +59,11 @@
                                         <th>Организация</th>
                                         <th>Юридический адрес</th>
                                         <th>Номер телефона</th>
+                                        <th>ИНН/КПП</th>
+                                        <th>Расчётный счёт</th>
+                                        <th>Корр. счёт</th>
+                                        <th>БИК</th>
+                                        <th>Филиал</th>
                                         <th></th>
                                     </tr>
                                     </thead>
@@ -68,7 +73,12 @@
                                         <td th:text="${element.getName()}"></td>
                                         <td th:text="${element.getLegalAddress()}"></td>
                                         <td th:text="${element.getNumberPhone()}"></td>
-                                        <td><button class="btn btn-success btn-sm waves-effect" th:onclick="'moreDetailed(' + ${element.getId()} + ')'">Подробнее</button> </td>
+                                        <td th:text="${element.getRequisites().getInn()} + '/' +  ${element.getRequisites().getKpp()}"></td>
+                                        <td th:text="${element.getRequisites().getPayAccount()}"></td>
+                                        <td th:text="${element.getRequisites().getCorAccount()}"></td>
+                                        <td th:text="${element.getRequisites().getBik()}"></td>
+                                        <td th:text="${element.getRequisites().getNameBank()}"></td>
+                                        <td><button class="btn btn-success waves-effect" data-toggle="modal" data-target="#myModal" th:onclick="'moreDetailed(' + ${element.getId()} + ')'"><i class="mdi mdi-vector-difference"></i></button> </td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -76,76 +86,16 @@
                         </div>
                     </div>
                     <div class="col-xl-6">
-                        <div class="inner-block">
-                            <div class="card animate__animated animate__fadeIn animate__fast">
-                                <div class="card-body">
-                                    <h4 class="card-title">Новый грузовладелец</h4>
-                                    <p class="card-title-desc">Добавьте нового грузовладельца.</p>
-                                    <form action="/cargo-owner" method="post">
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Название организации</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" name="name" class="form-control" placeholder="Название организации" required="">
-                                            </div>
+                        <div id="myModal" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="inner-block">
                                         </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Юридический адрес</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" name="legalAddress" class="form-control" placeholder="Юридический адрес" required="">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Почтовый адрес</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" name="postalAddress" class="form-control" placeholder="Почтовый адрес" required="">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Фактический адрес</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" name="actualAddress" class="form-control" placeholder="Фактический адрес" required="">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Номер телефона</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" name="numberPhone" class="form-control" placeholder="Номер телефона" required="">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Контактное лицо</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" name="contactPerson" class="form-control" placeholder="Контактное лицо" required="">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Номер контактного лица</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" name="numberPerson" class="form-control" placeholder="Номер контактного лица" required="">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">ИНН</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" name="inn" class="form-control" placeholder="ИНН" required="">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">КПП</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" name="kpp" class="form-control" placeholder="КПП" required="">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">ОГРН</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" name="ogrn" class="form-control" placeholder="ОГРН" required="">
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <button type="submit" th:id="btn-load" class="btn btn-success waves-effect">Добавить</button>
-                                        </div>
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -185,167 +135,879 @@
 <!-- Datatable init js -->
 <script src="assets/js/pages/datatables.init.js"></script>
 <script src="assets/js/app.js"></script>
+<script src="assets/js/jquery.maskedinput.min.js"></script>
+
+<script type="text/javascript" th:inline="javascript">
+    function showOoo() {
+        // let innerInput = $('.inner-input');
+        let innerBlock = $('.inner-block');
+        innerBlock.empty();
+        innerBlock.append(
+            '                            <div class="card animate__animated animate__fadeIn animate__fast">\n' +
+            '                                <div class="card-body">\n' +
+            '                                    <h4 class="card-title">Новый перевозчик</h4>\n' +
+            '                                    <p class="card-title-desc">Добавьте нового грузовладельца</p>\n' +
+            '                                    <form id="form-input" action="/cargo-owner/ooo" method="post">\n' +
+            '\n' +
+            '\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Тип организации</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <div class="btn-group btn-group-toggle" data-toggle="buttons">\n' +
+            '                                                    <label class="btn btn-primary active">\n' +
+            '                                                        <input type="radio" name="typeOrganization" value="ООО" id="radioOoo" checked="" onclick="showOoo()"> ООО\n' +
+            '                                                    </label>\n' +
+            '                                                    <label class="btn btn-primary">\n' +
+            '                                                        <input type="radio" name="typeOrganization" value="ИП" id="radioIp" onclick="showIp()"> ИП\n' +
+            '                                                    </label>\n' +
+            '                                                    <label class="btn btn-primary">\n' +
+            '                                                        <input type="radio" name="typeOrganization" value="ЧЛ" id="radioCHL" onclick="showChl()"> Частное лицо\n' +
+            '                                                    </label>\n' +
+            '                                                </div>\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <h5 class="card-title text-center border-top"><br>Основная информация<br></h5>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Название организации</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="name" class="form-control" placeholder="Название организации" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Юридический адрес</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="legalAddress" class="form-control" placeholder="Юридический адрес" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Почтовый адрес</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="postalAddress" class="form-control" placeholder="Почтовый адрес" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Фактический адрес</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="actualAddress" class="form-control" placeholder="Фактический адрес" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Номер телефона</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input id="numberPhone" type="text" name="numberPhone" class="form-control" placeholder="Номер телефона" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '\n' +
+            '\n' +
+            '                                        <h5 class="card-title text-center border-top"><br>Банковские реквизиты<br></h5>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">ИНН</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="inn" class="form-control" placeholder="ИНН" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">КПП</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="kpp" class="form-control" placeholder="КПП" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Расчётный счёт</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="payAccount" class="form-control" placeholder="Расчётный счёт" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Корр. счёт</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="corAccount" class="form-control" placeholder="Корр. счёт" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">БИК</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="bik" class="form-control" placeholder="БИК" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Филиал</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="nameBank" class="form-control" placeholder="Филиал" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '\n' +
+            '                                            <div class="form-group row">\n' +
+            '                                                <label class="col-sm-3 col-form-label">ОГРН</label>\n' +
+            '                                                <div class="col-sm-9">\n' +
+            '                                                    <input type="text" name="ogrn" class="form-control" placeholder="ОГРН" required="">\n' +
+            '                                                </div>\n' +
+            '                                            </div>' +
+            '                                        <div class="row">\n' +
+            '                                            <button type="submit" th:id="btn-load" class="btn btn-primary waves-effect"><i class="mdi mdi-check mr-1"></i>Добавить</button>\n' +
+            '                                        </div>\n' +
+            '                                    </form>\n' +
+            '                                </div>\n' +
+            '                            </div>\n');
+        $("#numberPhone").mask("8(999) 999-9999");
+    }
+
+    function showIp() {
+        let innerBlock = $('.inner-block');
+        innerBlock.empty();
+        innerBlock.append(
+            '                            <div class="card animate__animated animate__fadeIn animate__fast">\n' +
+            '                                <div class="card-body">\n' +
+            '                                    <h4 class="card-title">Новый перевозчик</h4>\n' +
+            '                                    <p class="card-title-desc">Добавьте нового грузовладельца</p>\n' +
+            '                                    <form id="form-input" action="/cargo-owner/ip" method="post">\n' +
+            '\n' +
+            '\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Тип организации</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <div class="btn-group btn-group-toggle" data-toggle="buttons">\n' +
+            '                                                    <label class="btn btn-primary">\n' +
+            '                                                        <input type="radio" name="typeOrganization" value="ООО" id="radioOoo" onclick="showOoo()"> ООО\n' +
+            '                                                    </label>\n' +
+            '                                                    <label class="btn btn-primary active">\n' +
+            '                                                        <input type="radio" name="typeOrganization" value="ИП" id="radioIp" checked="" onclick="showIp()"> ИП\n' +
+            '                                                    </label>\n' +
+            '                                                    <label class="btn btn-primary">\n' +
+            '                                                        <input type="radio" name="typeOrganization" value="ЧЛ" id="radioCHL" onclick="showChl()"> Частное лицо\n' +
+            '                                                    </label>\n' +
+            '                                                </div>\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <h5 class="card-title text-center border-top"><br>Основная информация<br></h5>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Название организации</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="name" class="form-control" placeholder="Название организации" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Юридический адрес</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="legalAddress" class="form-control" placeholder="Юридический адрес" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Почтовый адрес</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="postalAddress" class="form-control" placeholder="Почтовый адрес" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Фактический адрес</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="actualAddress" class="form-control" placeholder="Фактический адрес" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Номер телефона</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input id="numberPhone" type="text" name="numberPhone" class="form-control" placeholder="Номер телефона" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '\n' +
+            '\n' +
+            '                                        <h5 class="card-title text-center border-top"><br>Банковские реквизиты<br></h5>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">ИНН</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="inn" class="form-control" placeholder="ИНН" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">КПП</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="kpp" class="form-control" placeholder="КПП" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Расчётный счёт</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="payAccount" class="form-control" placeholder="Расчётный счёт" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Корр. счёт</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="corAccount" class="form-control" placeholder="Корр. счёт" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">БИК</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="bik" class="form-control" placeholder="БИК" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Филиал</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="nameBank" class="form-control" placeholder="Филиал" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '<div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">ОГРНИП</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="ogrnIp" class="form-control" placeholder="ОГРНИП" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <h5 class="card-title text-center border-top"><br>Паспортные данные<br></h5>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Фамилия</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="lastName" class="form-control" placeholder="Имя" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Имя</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="firstName" class="form-control" placeholder="Фамилия" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Отчество</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="patronymic" class="form-control" placeholder="Отчество" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Серия паспорта</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="serialPassport" class="form-control" placeholder="Серия паспорта" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Номер паспорта</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="numberPassport" class="form-control" placeholder="Номер паспорта" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Кем выдан</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="issued" class="form-control" placeholder="Кем выдан" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Дата выдачи</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="date" name="issuedDate" class="form-control" placeholder="Дата выдачи" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>' +
+            '                                        <div class="row">\n' +
+            '                                            <button type="submit" th:id="btn-load" class="btn btn-primary waves-effect"><i class="mdi mdi-check mr-1"></i>Добавить</button>\n' +
+            '                                        </div>\n' +
+            '                                    </form>\n' +
+            '                                </div>\n' +
+            '                            </div>\n');
+        $("#numberPhone").mask("8(999) 999-9999");
+    }
+
+    function showChl() {
+        let innerBlock = $('.inner-block');
+        innerBlock.empty();
+        innerBlock.append(
+            '                            <div class="card animate__animated animate__fadeIn animate__fast">\n' +
+            '                                <div class="card-body">\n' +
+            '                                    <h4 class="card-title">Новый перевозчик</h4>\n' +
+            '                                    <p class="card-title-desc">Добавьте нового грузовладельца</p>\n' +
+            '                                    <form id="form-input" action="/cargo-owner/chl" method="post">\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Тип организации</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <div class="btn-group btn-group-toggle" data-toggle="buttons">\n' +
+            '                                                    <label class="btn btn-primary">\n' +
+            '                                                        <input type="radio" name="typeOrganization" value="ООО" id="radioOoo" onclick="showOoo()"> ООО\n' +
+            '                                                    </label>\n' +
+            '                                                    <label class="btn btn-primary">\n' +
+            '                                                        <input type="radio" name="typeOrganization" value="ИП" id="radioIp" onclick="showIp()"> ИП\n' +
+            '                                                    </label>\n' +
+            '                                                    <label class="btn btn-primary active">\n' +
+            '                                                        <input type="radio" name="typeOrganization" value="ЧЛ" id="radioCHL" checked="" onclick="showChl()"> Частное лицо\n' +
+            '                                                    </label>\n' +
+            '                                                </div>\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <h5 class="card-title text-center border-top"><br>Основная информация<br></h5>\n' +
+            '                                        <div class="form-group row" style="display: none">\n' +
+            '                                            <label class="col-sm-3 col-form-label"></label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" value="Частное лицо" name="name" class="form-control" placeholder="" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Номер телефона</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input id="numberPhone" type="text" name="numberPhone" class="form-control" placeholder="Номер телефона" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <h5 class="card-title text-center border-top"><br>Банковские реквизиты<br></h5>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">ИНН</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="inn" class="form-control" placeholder="ИНН" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">КПП</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="kpp" class="form-control" placeholder="КПП" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Расчётный счёт</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="payAccount" class="form-control" placeholder="Расчётный счёт" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Корр. счёт</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="corAccount" class="form-control" placeholder="Корр. счёт" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">БИК</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="bik" class="form-control" placeholder="БИК" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Филиал</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="nameBank" class="form-control" placeholder="Филиал" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+
+            '                                        <h5 class="card-title text-center border-top"><br>Паспортные данные<br></h5>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Фамилия</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="lastName" class="form-control" placeholder="Имя" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Имя</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="firstName" class="form-control" placeholder="Фамилия" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Отчество</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="patronymic" class="form-control" placeholder="Отчество" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Серия паспорта</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="serialPassport" class="form-control" placeholder="Серия паспорта" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Номер паспорта</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="numberPassport" class="form-control" placeholder="Номер паспорта" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Кем выдан</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="issued" class="form-control" placeholder="Кем выдан" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Дата выдачи</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="date" name="issuedDate" class="form-control" placeholder="Дата выдачи" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>' +
+        '                                        <div class="row">\n' +
+        '                                            <button type="submit" th:id="btn-load" class="btn btn-primary waves-effect"><i class="mdi mdi-check mr-1"></i>Добавить</button>\n' +
+        '                                        </div>\n' +
+        '                                    </form>\n' +
+        '                                </div>\n' +
+        '                            </div>\n');
+        $("#numberPhone").mask("8(999) 999-9999");
+    }
+
+</script>
+
 
 <script type="text/javascript" th:inline="javascript">
     function newCargoOwner() {
         let innerBlock = $('.inner-block');
         innerBlock.empty();
-        innerBlock.append('<div class="card animate__animated animate__fadeIn animate__fast">\n' +
-            '                            <div class="card-body">\n' +
-            '                                <h4 class="card-title">Новый грузовладелец</h4>\n' +
-            '                                <p class="card-title-desc">Добавьте нового грузовладельца.</p>\n' +
-            '                                <form action="/cargo-owner" method="post">\n' +
-            '                                    <div class="form-group row">\n' +
-            '                                        <label class="col-sm-3 col-form-label">Название организации</label>\n' +
-            '                                        <div class="col-sm-9">\n' +
-            '                                            <input type="text" name="name" class="form-control" placeholder="Название организации" required>\n' +
+        innerBlock.append('                            <div class="card animate__animated animate__fadeIn animate__fast">\n' +
+            '                                <div class="card-body">\n' +
+            '                                    <h4 class="card-title">Новый перевозчик</h4>\n' +
+            '                                    <p class="card-title-desc">Добавьте нового грузовладельца</p>\n' +
+            '                                    <form id="form-input" action="/cargo-owner/ooo" method="post">\n' +
+            '\n' +
+            '\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Тип организации</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <div class="btn-group btn-group-toggle" data-toggle="buttons">\n' +
+            '                                                    <label class="btn btn-primary">\n' +
+            '                                                        <input type="radio" name="typeOrganization" value="ООО" id="radioOoo" checked="" onclick="showOoo()"> ООО\n' +
+            '                                                    </label>\n' +
+            '                                                    <label class="btn btn-primary">\n' +
+            '                                                        <input type="radio" name="typeOrganization" value="ИП" id="radioIp" onclick="showIp()"> ИП\n' +
+            '                                                    </label>\n' +
+            '                                                    <label class="btn btn-primary">\n' +
+            '                                                        <input type="radio" name="typeOrganization" value="ЧЛ" id="radioCHL" onclick="showChl()"> Частное лицо\n' +
+            '                                                    </label>\n' +
+            '                                                </div>\n' +
+            '                                            </div>\n' +
             '                                        </div>\n' +
-            '                                    </div>\n' +
-            '                                    <div class="form-group row">\n' +
-            '                                        <label class="col-sm-3 col-form-label">Юридический адрес</label>\n' +
-            '                                        <div class="col-sm-9">\n' +
-            '                                            <input type="text" name="legalAddress" class="form-control" placeholder="Юридический адрес" required>\n' +
+            '                                        <h5 class="card-title text-center border-top"><br>Основная информация<br></h5>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Название организации</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="name" class="form-control" placeholder="Название организации" required="">\n' +
+            '                                            </div>\n' +
             '                                        </div>\n' +
-            '                                    </div>\n' +
-            '                                    <div class="form-group row">\n' +
-            '                                        <label class="col-sm-3 col-form-label">Почтовый адрес</label>\n' +
-            '                                        <div class="col-sm-9">\n' +
-            '                                            <input type="text" name="postalAddress" class="form-control" placeholder="Почтовый адрес" required>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Юридический адрес</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="legalAddress" class="form-control" placeholder="Юридический адрес" required="">\n' +
+            '                                            </div>\n' +
             '                                        </div>\n' +
-            '                                    </div>\n' +
-            '                                    <div class="form-group row">\n' +
-            '                                        <label class="col-sm-3 col-form-label">Фактический адрес</label>\n' +
-            '                                        <div class="col-sm-9">\n' +
-            '                                            <input type="text" name="actualAddress" class="form-control" placeholder="Фактический адрес" required>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Почтовый адрес</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="postalAddress" class="form-control" placeholder="Почтовый адрес" required="">\n' +
+            '                                            </div>\n' +
             '                                        </div>\n' +
-            '                                    </div>\n' +
-            '                                    <div class="form-group row">\n' +
-            '                                        <label class="col-sm-3 col-form-label">Номер телефона</label>\n' +
-            '                                        <div class="col-sm-9">\n' +
-            '                                            <input type="text" name="numberPhone" class="form-control" placeholder="Номер телефона" required>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Фактический адрес</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="actualAddress" class="form-control" placeholder="Фактический адрес" required="">\n' +
+            '                                            </div>\n' +
             '                                        </div>\n' +
-            '                                    </div>\n' +
-            '                                    <div class="form-group row">\n' +
-            '                                        <label class="col-sm-3 col-form-label">Контактное лицо</label>\n' +
-            '                                        <div class="col-sm-9">\n' +
-            '                                            <input type="text" name="contactPerson" class="form-control" placeholder="Контактное лицо" required>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Номер телефона</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input id="numberPhone" type="text" name="numberPhone" class="form-control" placeholder="Номер телефона" required="">\n' +
+            '                                            </div>\n' +
             '                                        </div>\n' +
-            '                                    </div>\n' +
-            '                                    <div class="form-group row">\n' +
-            '                                        <label class="col-sm-3 col-form-label">Номер контактного лица</label>\n' +
-            '                                        <div class="col-sm-9">\n' +
-            '                                            <input type="text" name="numberPerson" class="form-control" placeholder="Номер контактного лица" required>\n' +
+            '\n' +
+            '\n' +
+            '                                        <h5 class="card-title text-center border-top"><br>Банковские реквизиты<br></h5>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">ИНН</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="inn" class="form-control" placeholder="ИНН" required="">\n' +
+            '                                            </div>\n' +
             '                                        </div>\n' +
-            '                                    </div>\n' +
-            '                                    <div class="form-group row">\n' +
-            '                                        <label class="col-sm-3 col-form-label">ИНН</label>\n' +
-            '                                        <div class="col-sm-9">\n' +
-            '                                            <input type="text" name="inn" class="form-control" placeholder="ИНН" required>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">КПП</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="kpp" class="form-control" placeholder="КПП" required="">\n' +
+            '                                            </div>\n' +
             '                                        </div>\n' +
-            '                                    </div>\n' +
-            '                                    <div class="form-group row">\n' +
-            '                                        <label class="col-sm-3 col-form-label">КПП</label>\n' +
-            '                                        <div class="col-sm-9">\n' +
-            '                                            <input type="text" name="kpp" class="form-control" placeholder="КПП" required>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Расчётный счёт</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="payAccount" class="form-control" placeholder="Расчётный счёт" required="">\n' +
+            '                                            </div>\n' +
             '                                        </div>\n' +
-            '                                    </div>\n' +
-            '                                    <div class="form-group row">\n' +
-            '                                        <label class="col-sm-3 col-form-label">ОГРН</label>\n' +
-            '                                        <div class="col-sm-9">\n' +
-            '                                            <input type="text" name="ogrn" class="form-control" placeholder="ОГРН" required>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Корр. счёт</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="corAccount" class="form-control" placeholder="Корр. счёт" required="">\n' +
+            '                                            </div>\n' +
             '                                        </div>\n' +
-            '                                    </div>\n' +
-            '                                    <div class="row">\n' +
-            '                                        <button type="submit" th:id="btn-load" class="btn btn-success waves-effect">Добавить</button>\n' +
-            '                                    </div>\n' +
-            '                                </form>\n' +
-            '                            </div>\n' +
-            '                        </div>');
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">БИК</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="bik" class="form-control" placeholder="БИК" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Филиал</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="nameBank" class="form-control" placeholder="Филиал" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '\n' +
+            '                                        <div class="inner-input">\n' +
+            '                                            <div class="form-group row">\n' +
+            '                                                <label class="col-sm-3 col-form-label">ОГРН</label>\n' +
+            '                                                <div class="col-sm-9">\n' +
+            '                                                    <input type="text" name="ogrn" class="form-control" placeholder="ОГРН" required="">\n' +
+            '                                                </div>\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="row">\n' +
+            '                                            <button type="submit" th:id="btn-load" class="btn btn-primary waves-effect"><i class="mdi mdi-check mr-1"></i>Добавить</button>\n' +
+            '                                        </div>\n' +
+            '                                    </form>\n' +
+            '                                </div>\n' +
+            '                            </div>\n');
+        $("#numberPhone").mask("8(999) 999-9999");
+
     }
     function moreDetailed(id) {
         let cargoOwners = [[${cargoOwners}]];
         for (let i = 0; i < cargoOwners.length; i++) {
-            let cargoOwner = cargoOwners[i];
-            if(cargoOwner.id === id) {
+            let element = cargoOwners[i];
+            if(element.id === id) {
                 let innerBlock = $('.inner-block');
                 innerBlock.empty();
-                innerBlock.append('<div class="card animate__animated animate__fadeIn animate__fast">\n' +
-                    '                            <div class="card-body">\n' +
-                    '                                <h4 class="card-title">Подробности</h4>\n' +
-                    '                                <form action="/cargo-owner/save/' + cargoOwner.id + '" method="post">\n' +
-                    '                                    <div class="form-group row">\n' +
-                    '                                        <label class="col-sm-3 col-form-label">Название организации</label>\n' +
-                    '                                        <div class="col-sm-9">\n' +
-                    '                                            <input value="' + cargoOwner.name + '" text="' + cargoOwner.name + '" type="text" name="name" class="form-control form-details" placeholder="Название организации" required disabled>\n' +
-                    '                                        </div>\n' +
-                    '                                    </div>\n' +
-                    '                                    <div class="form-group row">\n' +
-                    '                                        <label class="col-sm-3 col-form-label">Юридический адрес</label>\n' +
-                    '                                        <div class="col-sm-9">\n' +
-                    '                                            <input value="' + cargoOwner.legalAddress + '" text="' + cargoOwner.legalAddress + '" type="text" name="legalAddress" class="form-control form-details" placeholder="Юридический адрес" required disabled>\n' +
-                    '                                        </div>\n' +
-                    '                                    </div>\n' +
-                    '                                    <div class="form-group row">\n' +
-                    '                                        <label class="col-sm-3 col-form-label">Почтовый адрес</label>\n' +
-                    '                                        <div class="col-sm-9">\n' +
-                    '                                            <input value="' + cargoOwner.postalAddress + '" text="' + cargoOwner.postalAddress + '" type="text" name="postalAddress" class="form-control form-details" placeholder="Почтовый адрес" required disabled>\n' +
-                    '                                        </div>\n' +
-                    '                                    </div>\n' +
-                    '                                    <div class="form-group row">\n' +
-                    '                                        <label class="col-sm-3 col-form-label">Фактический адрес</label>\n' +
-                    '                                        <div class="col-sm-9">\n' +
-                    '                                            <input value="' + cargoOwner.actualAddress + '" text="' + cargoOwner.actualAddress + '" type="text" name="actualAddress" class="form-control form-details" placeholder="Фактический адрес" required disabled>\n' +
-                    '                                        </div>\n' +
-                    '                                    </div>\n' +
-                    '                                    <div class="form-group row">\n' +
-                    '                                        <label class="col-sm-3 col-form-label">Номер телефона</label>\n' +
-                    '                                        <div class="col-sm-9">\n' +
-                    '                                            <input value="' + cargoOwner.numberPhone + '" text="' + cargoOwner.numberPhone + '" type="text" name="numberPhone" class="form-control form-details" placeholder="Номер телефона" required disabled>\n' +
-                    '                                        </div>\n' +
-                    '                                    </div>\n' +
-                    '                                    <div class="form-group row">\n' +
-                    '                                        <label class="col-sm-3 col-form-label">Контактное лицо</label>\n' +
-                    '                                        <div class="col-sm-9">\n' +
-                    '                                            <input value="' + cargoOwner.contactPerson + '" text="' + cargoOwner.contactPerson + '" type="text" name="contactPerson" class="form-control form-details" placeholder="Контактное лицо" required disabled>\n' +
-                    '                                        </div>\n' +
-                    '                                    </div>\n' +
-                    '                                    <div class="form-group row">\n' +
-                    '                                        <label class="col-sm-3 col-form-label">Номер контактного лица</label>\n' +
-                    '                                        <div class="col-sm-9">\n' +
-                    '                                            <input value="' + cargoOwner.numberPerson + '" text="' + cargoOwner.numberPerson + '" type="text" name="numberPerson" class="form-control form-details" placeholder="Номер контактного лица" required disabled>\n' +
-                    '                                        </div>\n' +
-                    '                                    </div>\n' +
-                    '                                    <div class="form-group row">\n' +
-                    '                                        <label class="col-sm-3 col-form-label">ИНН</label>\n' +
-                    '                                        <div class="col-sm-9">\n' +
-                    '                                            <input value="' + cargoOwner.inn + '" text="' + cargoOwner.inn + '" type="text" name="inn" class="form-control form-details" placeholder="ИНН" required disabled>\n' +
-                    '                                        </div>\n' +
-                    '                                    </div>\n' +
-                    '                                    <div class="form-group row">\n' +
-                    '                                        <label class="col-sm-3 col-form-label">КПП</label>\n' +
-                    '                                        <div class="col-sm-9">\n' +
-                    '                                            <input value="' + cargoOwner.kpp + '" text="' + cargoOwner.kpp + '" type="text" name="kpp" class="form-control form-details" placeholder="КПП" required disabled>\n' +
-                    '                                        </div>\n' +
-                    '                                    </div>\n' +
-                    '                                    <div class="form-group row">\n' +
-                    '                                        <label class="col-sm-3 col-form-label">ОГРН</label>\n' +
-                    '                                        <div class="col-sm-9">\n' +
-                    '                                            <input value="' + cargoOwner.ogrn + '" text="' + cargoOwner.ogrn + '" type="text" name="ogrn" class="form-control form-details" placeholder="ОГРН" required disabled>\n' +
-                    '                                        </div>\n' +
-                    '                                    </div>\n' +
-                    '                                   <div class="form-group row buttons-save" style="display: none">\n' +
-                    '                                       <button type="submit" class="btn btn-success waves-effect mr-1">Сохранить</button>\n' +
-                    '                                       <button type="button" id="btn-cancel" class="btn btn-primary waves-effect" onclick="hideButtonsSave()">Отмена</button>\n' +
-                    '                                   </div>\n' +
-                    '                                </form>\n' +
-                    '                                <div class="form-group row buttons-edit">\n' +
-                    '                                   <button type="button" id="btn-edit" class="btn btn-success waves-effect mr-1" onclick="showButtonsSave()">Редактировать</button>\n' +
-                    '                                   <form action="/cargo-owner/remove/' + cargoOwner.id + '" method="post">\n' +
-                    '                                       <button type="submit" class="btn btn-danger waves-effect">Удалить</button>\n' +
-                    '                                   </form>\n' +
-                    '                                </div>\n' +
-                    '                            </div>\n' +
-                    '                        </div>');
+                if (element.typeOrganization === "ООО") {
+                    innerBlock.append('<div class="card animate__animated animate__fadeIn animate__fast">\n' +
+                        '                            <div class="card-body">\n' +
+                        '                                <h4 class="card-title">Карточка заказчика: ' + element.name + '</h4>\n' +
+                        '                                <form action="/cargo-owner/save/ooo/' + element.id + '" method="post">\n' +
+                        '                                    <h5 class="card-title text-center border-top"><br>Основная информация<br></h5>\n' +
+                        '                                    <div class="form-group row">\n' +
+                        '                                        <label class="col-sm-3 col-form-label">Название организации</label>\n' +
+                        '                                        <div class="col-sm-9">\n' +
+                        '                                            <input value="' + element.name + '" text="' + element.name + '" type="text" name="name" class="form-control form-details" placeholder="Название организации" required disabled>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>\n' +
+                        '                                    <div class="form-group row">\n' +
+                        '                                        <label class="col-sm-3 col-form-label">Юридический адрес</label>\n' +
+                        '                                        <div class="col-sm-9">\n' +
+                        '                                            <input value="' + element.legalAddress + '" text="' + element.legalAddress + '" type="text" name="legalAddress" class="form-control form-details" placeholder="Юридический адрес" required disabled>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>\n' +
+                        '                                    <div class="form-group row">\n' +
+                        '                                        <label class="col-sm-3 col-form-label">Почтовый адрес</label>\n' +
+                        '                                        <div class="col-sm-9">\n' +
+                        '                                            <input value="' + element.postalAddress + '" text="' + element.postalAddress + '" type="text" name="postalAddress" class="form-control form-details" placeholder="Почтовый адрес" required disabled>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>\n' +
+                        '                                    <div class="form-group row">\n' +
+                        '                                        <label class="col-sm-3 col-form-label">Фактический адрес</label>\n' +
+                        '                                        <div class="col-sm-9">\n' +
+                        '                                            <input value="' + element.actualAddress + '" text="' + element.actualAddress + '" type="text" name="actualAddress" class="form-control form-details" placeholder="Фактический адрес" required disabled>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>\n' +
+                        '                                    <div class="form-group row">\n' +
+                        '                                        <label class="col-sm-3 col-form-label">Номер телефона</label>\n' +
+                        '                                        <div class="col-sm-9">\n' +
+                        '                                            <input id="numberPhone" value="' + element.numberPhone + '" text="' + element.numberPhone + '" type="text" name="numberPhone" class="form-control form-details" placeholder="Номер телефона" required disabled>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>\n' +
+
+
+                        '                                    <h5 class="card-title text-center border-top"><br>Банковские реквизиты<br></h5>\n' +
+                        '                                    <div class="form-group row">\n' +
+                        '                                        <label class="col-sm-3 col-form-label">ИНН</label>\n' +
+                        '                                        <div class="col-sm-9">\n' +
+                        '                                            <input value="' + element.requisites.inn + '" text="' + element.requisites.inn + '" type="text" name="inn" class="form-control form-details" placeholder="ИНН" required disabled>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>\n' +
+                        '                                    <div class="form-group row">\n' +
+                        '                                        <label class="col-sm-3 col-form-label">КПП</label>\n' +
+                        '                                        <div class="col-sm-9">\n' +
+                        '                                            <input value="' + element.requisites.kpp + '" text="' + element.requisites.kpp + '" type="text" name="kpp" class="form-control form-details" placeholder="КПП" required disabled>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>\n' +
+                        '                                        <div class="form-group row">\n' +
+                        '                                            <label class="col-sm-3 col-form-label">Расчётный счёт</label>\n' +
+                        '                                            <div class="col-sm-9">\n' +
+                        '                                                <input value="' + element.requisites.payAccount + '" text="' + element.requisites.payAccount + '" type="text" name="payAccount" class="form-control form-details" placeholder="Расчётный счёт" required="" disabled>\n' +
+                        '                                            </div>\n' +
+                        '                                        </div>\n' +
+                        '                                        <div class="form-group row">\n' +
+                        '                                            <label class="col-sm-3 col-form-label">Корр. счёт</label>\n' +
+                        '                                            <div class="col-sm-9">\n' +
+                        '                                                <input value="' + element.requisites.corAccount + '" text="' + element.requisites.corAccount + '" type="text" name="corAccount" class="form-control form-details" placeholder="Корр. счёт" required="" disabled>\n' +
+                        '                                            </div>\n' +
+                        '                                        </div>\n' +
+                        '                                        <div class="form-group row">\n' +
+                        '                                            <label class="col-sm-3 col-form-label">БИК</label>\n' +
+                        '                                            <div class="col-sm-9">\n' +
+                        '                                                <input value="' + element.requisites.bik + '" text="' + element.requisites.bik + '" type="text" name="bik" class="form-control form-details" placeholder="БИК" required="" disabled>\n' +
+                        '                                            </div>\n' +
+                        '                                        </div>\n' +
+                        '                                        <div class="form-group row">\n' +
+                        '                                            <label class="col-sm-3 col-form-label">Филиал</label>\n' +
+                        '                                            <div class="col-sm-9">\n' +
+                        '                                                <input value="' + element.requisites.nameBank + '" text="' + element.requisites.nameBank + '" type="text" name="nameBank" class="form-control form-details" placeholder="Филиал" required="" disabled>\n' +
+                        '                                            </div>\n' +
+                        '                                        </div>\n' +
+                        '                                    <div class="form-group row">\n' +
+                        '                                        <label class="col-sm-3 col-form-label">ОГРН</label>\n' +
+                        '                                        <div class="col-sm-9">\n' +
+                        '                                            <input value="' + element.ogrn + '" text="' + element.ogrn + '" type="text" name="ogrn" class="form-control form-details" placeholder="ОГРН" required disabled>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>\n' +
+                        '                                   <div class="form-group row buttons-save" style="display: none">\n' +
+                        '                                       <button type="submit" class="btn btn-primary waves-effect mr-1"><i class="mdi mdi-content-save-outline mr-1"></i>Сохранить</button>\n' +
+                        '                                       <button type="button" id="btn-cancel" class="btn btn-dark waves-effect" onclick="hideButtonsSave()"><i class="mdi mdi-cancel mr-1"></i>Отмена</button>\n' +
+                        '                                   </div>\n' +
+                        '                                </form>\n' +
+                        '                                <div class="form-group row buttons-edit">\n' +
+                        '                                   <button type="button" id="btn-edit" class="btn btn-primary waves-effect mr-1" onclick="showButtonsSave()"><i class="mdi mdi-file-document-edit-outline mr-1"></i>Редактировать</button>\n' +
+                        '                                   <form action="/cargo-owner/remove/' + element.id + '" method="post">\n' +
+                        '                                       <button type="submit" class="btn btn-danger waves-effect"><i class="mdi mdi mdi-delete-circle-outline mr-1"></i>Удалить</button>\n' +
+                        '                                   </form>\n' +
+                        '                                </div>\n' +
+                        '                            </div>\n' +
+                        '                        </div>');
+                }
+                else if (element.typeOrganization === "ИП") {
+                    innerBlock.append('<div class="card animate__animated animate__fadeIn animate__fast">\n' +
+                        '                            <div class="card-body">\n' +
+                        '                                <h4 class="card-title">Карточка заказчика: ' + element.name + '</h4>\n' +
+                        '                                <form action="/cargo-owner/save/ip/' + element.id + '" method="post">\n' +
+                        '                                    <h5 class="card-title text-center border-top"><br>Основная информация<br></h5>\n' +
+                        '                                    <div class="form-group row">\n' +
+                        '                                        <label class="col-sm-3 col-form-label">Название организации</label>\n' +
+                        '                                        <div class="col-sm-9">\n' +
+                        '                                            <input value="' + element.name + '" text="' + element.name + '" type="text" name="name" class="form-control form-details" placeholder="Название организации" required disabled>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>\n' +
+                        '                                    <div class="form-group row">\n' +
+                        '                                        <label class="col-sm-3 col-form-label">Юридический адрес</label>\n' +
+                        '                                        <div class="col-sm-9">\n' +
+                        '                                            <input value="' + element.legalAddress + '" text="' + element.legalAddress + '" type="text" name="legalAddress" class="form-control form-details" placeholder="Юридический адрес" required disabled>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>\n' +
+                        '                                    <div class="form-group row">\n' +
+                        '                                        <label class="col-sm-3 col-form-label">Почтовый адрес</label>\n' +
+                        '                                        <div class="col-sm-9">\n' +
+                        '                                            <input value="' + element.postalAddress + '" text="' + element.postalAddress + '" type="text" name="postalAddress" class="form-control form-details" placeholder="Почтовый адрес" required disabled>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>\n' +
+                        '                                    <div class="form-group row">\n' +
+                        '                                        <label class="col-sm-3 col-form-label">Фактический адрес</label>\n' +
+                        '                                        <div class="col-sm-9">\n' +
+                        '                                            <input value="' + element.actualAddress + '" text="' + element.actualAddress + '" type="text" name="actualAddress" class="form-control form-details" placeholder="Фактический адрес" required disabled>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>\n' +
+                        '                                    <div class="form-group row">\n' +
+                        '                                        <label class="col-sm-3 col-form-label">Номер телефона</label>\n' +
+                        '                                        <div class="col-sm-9">\n' +
+                        '                                            <input id="numberPhone" value="' + element.numberPhone + '" text="' + element.numberPhone + '" type="text" name="numberPhone" class="form-control form-details" placeholder="Номер телефона" required disabled>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>\n' +
+
+
+                        '                                    <h5 class="card-title text-center border-top"><br>Банковские реквизиты<br></h5>\n' +
+                        '                                    <div class="form-group row">\n' +
+                        '                                        <label class="col-sm-3 col-form-label">ИНН</label>\n' +
+                        '                                        <div class="col-sm-9">\n' +
+                        '                                            <input value="' + element.requisites.inn + '" text="' + element.requisites.inn + '" type="text" name="inn" class="form-control form-details" placeholder="ИНН" required disabled>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>\n' +
+                        '                                    <div class="form-group row">\n' +
+                        '                                        <label class="col-sm-3 col-form-label">КПП</label>\n' +
+                        '                                        <div class="col-sm-9">\n' +
+                        '                                            <input value="' + element.requisites.kpp + '" text="' + element.requisites.kpp + '" type="text" name="kpp" class="form-control form-details" placeholder="КПП" required disabled>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>\n' +
+                        '                                        <div class="form-group row">\n' +
+                        '                                            <label class="col-sm-3 col-form-label">Расчётный счёт</label>\n' +
+                        '                                            <div class="col-sm-9">\n' +
+                        '                                                <input value="' + element.requisites.payAccount + '" text="' + element.requisites.payAccount + '" type="text" name="payAccount" class="form-control form-details" placeholder="Расчётный счёт" required="" disabled>\n' +
+                        '                                            </div>\n' +
+                        '                                        </div>\n' +
+                        '                                        <div class="form-group row">\n' +
+                        '                                            <label class="col-sm-3 col-form-label">Корр. счёт</label>\n' +
+                        '                                            <div class="col-sm-9">\n' +
+                        '                                                <input value="' + element.requisites.corAccount + '" text="' + element.requisites.corAccount + '" type="text" name="corAccount" class="form-control form-details" placeholder="Корр. счёт" required="" disabled>\n' +
+                        '                                            </div>\n' +
+                        '                                        </div>\n' +
+                        '                                        <div class="form-group row">\n' +
+                        '                                            <label class="col-sm-3 col-form-label">БИК</label>\n' +
+                        '                                            <div class="col-sm-9">\n' +
+                        '                                                <input value="' + element.requisites.bik + '" text="' + element.requisites.bik + '" type="text" name="bik" class="form-control form-details" placeholder="БИК" required="" disabled>\n' +
+                        '                                            </div>\n' +
+                        '                                        </div>\n' +
+                        '                                        <div class="form-group row">\n' +
+                        '                                            <label class="col-sm-3 col-form-label">Филиал</label>\n' +
+                        '                                            <div class="col-sm-9">\n' +
+                        '                                                <input value="' + element.requisites.nameBank + '" text="' + element.requisites.nameBank + '" type="text" name="nameBank" class="form-control form-details" placeholder="Филиал" required="" disabled>\n' +
+                        '                                            </div>\n' +
+                        '                                        </div>\n' +
+                        '                                    <div class="form-group row">\n' +
+                        '                                        <label class="col-sm-3 col-form-label">ОГРНИП</label>\n' +
+                        '                                        <div class="col-sm-9">\n' +
+                        '                                            <input value="' + element.ogrnIp + '" text="' + element.ogrnIp + '" type="text" name="ogrnIp" class="form-control form-details" placeholder="ОГРН" required disabled>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>\n' +
+                        '                                    <h5 class="card-title text-center border-top"><br>Паспортные данные<br></h5>\n' +
+
+                        '                                    <div class="form-group row">\n' +
+                        '                                        <label class="col-sm-3 col-form-label">Фамилия</label>\n' +
+                        '                                        <div class="col-sm-9">\n' +
+                        '                                            <input value="' + element.passport.lastName + '" text="' + element.passport.lastName + '" type="text" name="lastName" class="form-control form-details" placeholder="ОГРН" required disabled>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>\n' +
+                        '                                    <div class="form-group row">\n' +
+                        '                                        <label class="col-sm-3 col-form-label">Имя</label>\n' +
+                        '                                        <div class="col-sm-9">\n' +
+                        '                                            <input value="' + element.passport.firstName + '" text="' + element.passport.firstName + '" type="text" name="firstName" class="form-control form-details" placeholder="ОГРН" required disabled>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>\n' +                        '                                    <div class="form-group row">\n' +
+                        '                                        <label class="col-sm-3 col-form-label">Отчество</label>\n' +
+                        '                                        <div class="col-sm-9">\n' +
+                        '                                            <input value="' + element.passport.patronymic + '" text="' + element.passport.patronymic + '" type="text" name="patronymic" class="form-control form-details" placeholder="ОГРН" required disabled>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>\n' +                        '                                    <div class="form-group row">\n' +
+                        '                                        <label class="col-sm-3 col-form-label">Серия паспорта</label>\n' +
+                        '                                        <div class="col-sm-9">\n' +
+                        '                                            <input value="' + element.passport.serialPassport + '" text="' + element.passport.serialPassport + '" type="text" name="serialPassport" class="form-control form-details" placeholder="ОГРН" required disabled>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>\n' +                        '                                    <div class="form-group row">\n' +
+                        '                                        <label class="col-sm-3 col-form-label">Номер паспорта</label>\n' +
+                        '                                        <div class="col-sm-9">\n' +
+                        '                                            <input value="' + element.passport.numberPassport + '" text="' + element.passport.numberPassport + '" type="text" name="numberPassport" class="form-control form-details" placeholder="ОГРН" required disabled>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>\n' +                        '                                    <div class="form-group row">\n' +
+                        '                                        <label class="col-sm-3 col-form-label">Кем выдан</label>\n' +
+                        '                                        <div class="col-sm-9">\n' +
+                        '                                            <input value="' + element.passport.issued + '" text="' + element.passport.issued + '" type="text" name="issued" class="form-control form-details" placeholder="ОГРН" required disabled>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>\n' +                        '                                    <div class="form-group row">\n' +
+                        '                                        <label class="col-sm-3 col-form-label">Дата выдачи</label>\n' +
+                        '                                        <div class="col-sm-9">\n' +
+                        '                                            <input value="' + element.passport.issuedDate + '" text="' + element.passport.issuedDate + '" type="text" name="issuedDate" class="form-control form-details" placeholder="ОГРН" required disabled>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>\n' +
+
+                        '                                   <div class="form-group row buttons-save" style="display: none">\n' +
+                        '                                       <button type="submit" class="btn btn-primary waves-effect mr-1"><i class="mdi mdi-content-save-outline mr-1"></i>Сохранить</button>\n' +
+                        '                                       <button type="button" id="btn-cancel" class="btn btn-dark waves-effect" onclick="hideButtonsSave()"><i class="mdi mdi-cancel mr-1"></i>Отмена</button>\n' +
+                        '                                   </div>\n' +
+                        '                                </form>\n' +
+                        '                                <div class="form-group row buttons-edit">\n' +
+                        '                                   <button type="button" id="btn-edit" class="btn btn-primary waves-effect mr-1" onclick="showButtonsSave()"><i class="mdi mdi-file-document-edit-outline mr-1"></i>Редактировать</button>\n' +
+                        '                                   <form action="/cargo-owner/remove/' + element.id + '" method="post">\n' +
+                        '                                       <button type="submit" class="btn btn-danger waves-effect"><i class="mdi mdi mdi-delete-circle-outline mr-1"></i>Удалить</button>\n' +
+                        '                                   </form>\n' +
+                        '                                </div>\n' +
+                        '                            </div>\n' +
+                        '                        </div>');
+                }
+                else {
+                    innerBlock.append('<div class="card animate__animated animate__fadeIn animate__fast">\n' +
+                        '                            <div class="card-body">\n' +
+                        '                                <h4 class="card-title">Карточка заказчика: ' + element.name + '</h4>\n' +
+                        '                                <form action="/cargo-owner/save/chl/' + element.id + '" method="post">\n' +
+                        '                                    <h5 class="card-title text-center border-top"><br>Основная информация<br></h5>\n' +
+                        '                                        <div class="form-group row" style="display: none">\n' +
+                        '                                            <label class="col-sm-3 col-form-label"></label>\n' +
+                        '                                            <div class="col-sm-9">\n' +
+                        '                                                <input type="text" value="Частное лицо" name="name" class="form-control" placeholder="" required="">\n' +
+                        '                                            </div>\n' +
+                        '                                        </div>\n' +
+                        '                                    <div class="form-group row">\n' +
+                        '                                        <label class="col-sm-3 col-form-label">Номер телефона</label>\n' +
+                        '                                        <div class="col-sm-9">\n' +
+                        '                                            <input id="numberPhone" value="' + element.numberPhone + '" text="' + element.numberPhone + '" type="text" name="numberPhone" class="form-control form-details" placeholder="Номер телефона" required disabled>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>\n' +
+
+
+                        '                                    <h5 class="card-title text-center border-top"><br>Банковские реквизиты<br></h5>\n' +
+                        '                                    <div class="form-group row">\n' +
+                        '                                        <label class="col-sm-3 col-form-label">ИНН</label>\n' +
+                        '                                        <div class="col-sm-9">\n' +
+                        '                                            <input value="' + element.requisites.inn + '" text="' + element.requisites.inn + '" type="text" name="inn" class="form-control form-details" placeholder="ИНН" required disabled>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>\n' +
+                        '                                    <div class="form-group row">\n' +
+                        '                                        <label class="col-sm-3 col-form-label">КПП</label>\n' +
+                        '                                        <div class="col-sm-9">\n' +
+                        '                                            <input value="' + element.requisites.kpp + '" text="' + element.requisites.kpp + '" type="text" name="kpp" class="form-control form-details" placeholder="КПП" required disabled>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>\n' +
+                        '                                        <div class="form-group row">\n' +
+                        '                                            <label class="col-sm-3 col-form-label">Расчётный счёт</label>\n' +
+                        '                                            <div class="col-sm-9">\n' +
+                        '                                                <input value="' + element.requisites.payAccount + '" text="' + element.requisites.payAccount + '" type="text" name="payAccount" class="form-control form-details" placeholder="Расчётный счёт" required="" disabled>\n' +
+                        '                                            </div>\n' +
+                        '                                        </div>\n' +
+                        '                                        <div class="form-group row">\n' +
+                        '                                            <label class="col-sm-3 col-form-label">Корр. счёт</label>\n' +
+                        '                                            <div class="col-sm-9">\n' +
+                        '                                                <input value="' + element.requisites.corAccount + '" text="' + element.requisites.corAccount + '" type="text" name="corAccount" class="form-control form-details" placeholder="Корр. счёт" required="" disabled>\n' +
+                        '                                            </div>\n' +
+                        '                                        </div>\n' +
+                        '                                        <div class="form-group row">\n' +
+                        '                                            <label class="col-sm-3 col-form-label">БИК</label>\n' +
+                        '                                            <div class="col-sm-9">\n' +
+                        '                                                <input value="' + element.requisites.bik + '" text="' + element.requisites.bik + '" type="text" name="bik" class="form-control form-details" placeholder="БИК" required="" disabled>\n' +
+                        '                                            </div>\n' +
+                        '                                        </div>\n' +
+                        '                                        <div class="form-group row">\n' +
+                        '                                            <label class="col-sm-3 col-form-label">Филиал</label>\n' +
+                        '                                            <div class="col-sm-9">\n' +
+                        '                                                <input value="' + element.requisites.nameBank + '" text="' + element.requisites.nameBank + '" type="text" name="nameBank" class="form-control form-details" placeholder="Филиал" required="" disabled>\n' +
+                        '                                            </div>\n' +
+                        '                                        </div>\n' +
+                        '                                    <div class="form-group row">\n' +
+                        '                                        <label class="col-sm-3 col-form-label">ОГРНИП</label>\n' +
+                        '                                        <div class="col-sm-9">\n' +
+                        '                                            <input value="' + element.ogrnIp + '" text="' + element.ogrnIp + '" type="text" name="ogrnIp" class="form-control form-details" placeholder="ОГРН" required disabled>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>\n' +
+                        '                                    <h5 class="card-title text-center border-top"><br>Паспортные данные<br></h5>\n' +
+
+                        '                                    <div class="form-group row">\n' +
+                        '                                        <label class="col-sm-3 col-form-label">Фамилия</label>\n' +
+                        '                                        <div class="col-sm-9">\n' +
+                        '                                            <input value="' + element.passport.lastName + '" text="' + element.passport.lastName + '" type="text" name="lastName" class="form-control form-details" placeholder="ОГРН" required disabled>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>\n' +
+                        '                                    <div class="form-group row">\n' +
+                        '                                        <label class="col-sm-3 col-form-label">Имя</label>\n' +
+                        '                                        <div class="col-sm-9">\n' +
+                        '                                            <input value="' + element.passport.firstName + '" text="' + element.passport.firstName + '" type="text" name="firstName" class="form-control form-details" placeholder="ОГРН" required disabled>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>\n' +                        '                                    <div class="form-group row">\n' +
+                        '                                        <label class="col-sm-3 col-form-label">Отчество</label>\n' +
+                        '                                        <div class="col-sm-9">\n' +
+                        '                                            <input value="' + element.passport.patronymic + '" text="' + element.passport.patronymic + '" type="text" name="patronymic" class="form-control form-details" placeholder="ОГРН" required disabled>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>\n' +                        '                                    <div class="form-group row">\n' +
+                        '                                        <label class="col-sm-3 col-form-label">Серия паспорта</label>\n' +
+                        '                                        <div class="col-sm-9">\n' +
+                        '                                            <input value="' + element.passport.serialPassport + '" text="' + element.passport.serialPassport + '" type="text" name="serialPassport" class="form-control form-details" placeholder="ОГРН" required disabled>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>\n' +                        '                                    <div class="form-group row">\n' +
+                        '                                        <label class="col-sm-3 col-form-label">Номер паспорта</label>\n' +
+                        '                                        <div class="col-sm-9">\n' +
+                        '                                            <input value="' + element.passport.numberPassport + '" text="' + element.passport.numberPassport + '" type="text" name="numberPassport" class="form-control form-details" placeholder="ОГРН" required disabled>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>\n' +                        '                                    <div class="form-group row">\n' +
+                        '                                        <label class="col-sm-3 col-form-label">Кем выдан</label>\n' +
+                        '                                        <div class="col-sm-9">\n' +
+                        '                                            <input value="' + element.passport.issued + '" text="' + element.passport.issued + '" type="text" name="issued" class="form-control form-details" placeholder="ОГРН" required disabled>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>\n' +                        '                                    <div class="form-group row">\n' +
+                        '                                        <label class="col-sm-3 col-form-label">Дата выдачи</label>\n' +
+                        '                                        <div class="col-sm-9">\n' +
+                        '                                            <input value="' + element.passport.issuedDate + '" text="' + element.passport.issuedDate + '" type="text" name="issuedDate" class="form-control form-details" placeholder="ОГРН" required disabled>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>\n' +
+
+                        '                                   <div class="form-group row buttons-save" style="display: none">\n' +
+                        '                                       <button type="submit" class="btn btn-primary waves-effect mr-1"><i class="mdi mdi-content-save-outline mr-1"></i>Сохранить</button>\n' +
+                        '                                       <button type="button" id="btn-cancel" class="btn btn-dark waves-effect" onclick="hideButtonsSave()"><i class="mdi mdi-cancel mr-1"></i>Отмена</button>\n' +
+                        '                                   </div>\n' +
+                        '                                </form>\n' +
+                        '                                <div class="form-group row buttons-edit">\n' +
+                        '                                   <button type="button" id="btn-edit" class="btn btn-primary waves-effect mr-1" onclick="showButtonsSave()"><i class="mdi mdi-file-document-edit-outline mr-1"></i>Редактировать</button>\n' +
+                        '                                   <form action="/cargo-owner/remove/' + element.id + '" method="post">\n' +
+                        '                                       <button type="submit" class="btn btn-danger waves-effect"><i class="mdi mdi mdi-delete-circle-outline mr-1"></i>Удалить</button>\n' +
+                        '                                   </form>\n' +
+                        '                                </div>\n' +
+                        '                            </div>\n' +
+                        '                        </div>');
+                }
+                $("#numberPhone").mask("8(999) 999-9999");
             }
         }
     }

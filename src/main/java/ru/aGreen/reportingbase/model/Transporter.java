@@ -12,10 +12,39 @@ public class Transporter {
     private String postalAddress; // почт
     private String actualAddress; // факт
     private String numberPhone;
-    private String inn;
+    private String typeOrganization;
+    private String ogrn;
     private String ogrnIp;
     @OneToOne
     private Passport passport;
+    @OneToOne
+    private Requisites requisites;
+
+    public Transporter() {
+    }
+
+    public Transporter(String name, String legalAddress, String postalAddress, String actualAddress, String numberPhone, String typeOrganization, String ogrn, Requisites requisites) {
+        this.name = name;
+        this.legalAddress = legalAddress;
+        this.postalAddress = postalAddress;
+        this.actualAddress = actualAddress;
+        this.numberPhone = numberPhone;
+        this.typeOrganization = typeOrganization;
+        this.ogrn = ogrn;
+        this.requisites = requisites;
+    }
+
+    public Transporter(String name, String legalAddress, String postalAddress, String actualAddress, String numberPhone, String typeOrganization, String ogrnIp, Passport passport, Requisites requisites) {
+        this.name = name;
+        this.legalAddress = legalAddress;
+        this.postalAddress = postalAddress;
+        this.actualAddress = actualAddress;
+        this.numberPhone = numberPhone;
+        this.typeOrganization = typeOrganization;
+        this.ogrnIp = ogrnIp;
+        this.passport = passport;
+        this.requisites = requisites;
+    }
 
     public Long getId() {
         return id;
@@ -65,12 +94,12 @@ public class Transporter {
         this.numberPhone = numberPhone;
     }
 
-    public String getInn() {
-        return inn;
+    public String getOgrn() {
+        return ogrn;
     }
 
-    public void setInn(String inn) {
-        this.inn = inn;
+    public void setOgrn(String ogrn) {
+        this.ogrn = ogrn;
     }
 
     public String getOgrnIp() {
@@ -81,11 +110,27 @@ public class Transporter {
         this.ogrnIp = ogrnIp;
     }
 
+    public String getTypeOrganization() {
+        return typeOrganization;
+    }
+
+    public void setTypeOrganization(String typeOrganization) {
+        this.typeOrganization = typeOrganization;
+    }
+
     public Passport getPassport() {
         return passport;
     }
 
     public void setPassport(Passport passport) {
         this.passport = passport;
+    }
+
+    public Requisites getRequisites() {
+        return requisites;
+    }
+
+    public void setRequisites(Requisites requisites) {
+        this.requisites = requisites;
     }
 }

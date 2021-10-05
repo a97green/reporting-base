@@ -18,6 +18,19 @@ public class Passport {
     private String issued; // выдан
     private String issuedDate;
 
+    public Passport() {
+    }
+
+    public Passport(String lastName, String firstName, String patronymic, String serialPassport, String numberPassport, String issued, String issuedDate) {
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.patronymic = patronymic;
+        this.serialPassport = serialPassport;
+        this.numberPassport = numberPassport;
+        this.issued = issued;
+        this.issuedDate = issuedDate;
+    }
+
     public Long getId() {
         return id;
     }
