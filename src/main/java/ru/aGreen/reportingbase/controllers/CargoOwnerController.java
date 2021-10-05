@@ -40,32 +40,35 @@ public class CargoOwnerController {
 
     @PostMapping("/cargo-owner/ooo")
     public String setCargoOwnerOoo(@RequestParam String name,
-                                @RequestParam String legalAddress,
-                                @RequestParam String postalAddress,
-                                @RequestParam String actualAddress,
-                                @RequestParam String numberPhone,
-                                @RequestParam String typeOrganization,
-                                @RequestParam String inn,
-                                @RequestParam String kpp,
-                                @RequestParam String ogrn,
-                                @RequestParam String payAccount,
-                                @RequestParam String corAccount,
-                                @RequestParam String bik,
-                                @RequestParam String nameBank,
+                                    @RequestParam String legalAddress,
+                                    @RequestParam String postalAddress,
+                                    @RequestParam String actualAddress,
+                                    @RequestParam String numberPhone,
+                                    @RequestParam String orgInn,
+                                    @RequestParam String orgKpp,
+                                    @RequestParam String typeOrganization,
+                                    @RequestParam String inn,
+                                    @RequestParam String kpp,
+                                    @RequestParam String ogrn,
+                                    @RequestParam String payAccount,
+                                    @RequestParam String corAccount,
+                                    @RequestParam String bik,
+                                    @RequestParam String nameBank,
                                 Model model) {
         Requisites requisites = new Requisites(inn, kpp, payAccount, corAccount, bik, nameBank);
         requisitesRepository.save(requisites);
-        CargoOwner cargoOwner = new CargoOwner(name, legalAddress, postalAddress, actualAddress, numberPhone, typeOrganization, ogrn, requisites);
+        CargoOwner cargoOwner = new CargoOwner(name, legalAddress, postalAddress, actualAddress, numberPhone, orgInn, orgKpp, typeOrganization, ogrn, requisites);
         cargoOwnerRepository.save(cargoOwner);
         return "redirect:/cargo-owner";
     }
 
     @PostMapping("/cargo-owner/ip")
     public String setCargoOwnerIp(@RequestParam String name,
-                                @RequestParam String legalAddress,
-                                @RequestParam String postalAddress,
-                                @RequestParam String actualAddress,
-                                @RequestParam String numberPhone,
+                                  @RequestParam String legalAddress,
+                                  @RequestParam String postalAddress,
+                                  @RequestParam String actualAddress,
+                                  @RequestParam String numberPhone,
+                                  @RequestParam String orgInn,
                                   @RequestParam String inn,
                                   @RequestParam String kpp,
                                   @RequestParam String typeOrganization,
@@ -81,12 +84,12 @@ public class CargoOwnerController {
                                   @RequestParam String corAccount,
                                   @RequestParam String bik,
                                   @RequestParam String nameBank,
-                                Model model) {
+                                  Model model) {
         Requisites requisites = new Requisites(inn, kpp, payAccount, corAccount, bik, nameBank);
         requisitesRepository.save(requisites);
         Passport passport = new Passport(lastName, firstName, patronymic, serialPassport, numberPassport, issued, issuedDate);
         passportRepository.save(passport);
-        CargoOwner cargoOwner = new CargoOwner(name, legalAddress, postalAddress, actualAddress, numberPhone, typeOrganization, ogrnIp, passport, requisites);
+        CargoOwner cargoOwner = new CargoOwner(name, legalAddress, postalAddress, actualAddress, numberPhone, orgInn, typeOrganization, ogrnIp, passport, requisites);
         cargoOwnerRepository.save(cargoOwner);
         return "redirect:/cargo-owner";
     }
@@ -120,11 +123,13 @@ public class CargoOwnerController {
 
     @PostMapping("/cargo-owner/save/ooo/{id}")
     public String saveCargoOwner(@PathVariable(value = "id") Long id,
-                                @RequestParam String name,
-                                @RequestParam String legalAddress,
-                                @RequestParam String postalAddress,
-                                @RequestParam String actualAddress,
-                                @RequestParam String numberPhone,
+                                 @RequestParam String name,
+                                 @RequestParam String legalAddress,
+                                 @RequestParam String postalAddress,
+                                 @RequestParam String actualAddress,
+                                 @RequestParam String numberPhone,
+                                 @RequestParam String orgInn,
+                                 @RequestParam String orgKpp,
                                  @RequestParam String inn,
                                  @RequestParam String kpp,
                                  @RequestParam String ogrn,
@@ -132,7 +137,7 @@ public class CargoOwnerController {
                                  @RequestParam String corAccount,
                                  @RequestParam String bik,
                                  @RequestParam String nameBank,
-                                Model model) {
+                                 Model model) {
         CargoOwner cargoOwner = cargoOwnerRepository.findById(id).orElseThrow(() -> new NoSuchElementException(""));
         Requisites requisites = requisitesRepository.findById(cargoOwner.getRequisites().getId()).orElseThrow(() -> new NoSuchElementException(""));
 
@@ -149,6 +154,8 @@ public class CargoOwnerController {
         cargoOwner.setPostalAddress(postalAddress);
         cargoOwner.setActualAddress(actualAddress);
         cargoOwner.setNumberPhone(numberPhone);
+        cargoOwner.setInn(orgInn);
+        cargoOwner.setKpp(orgKpp);
         cargoOwner.setOgrn(ogrn);
         cargoOwnerRepository.save(cargoOwner);
         return "redirect:/cargo-owner";
@@ -161,6 +168,7 @@ public class CargoOwnerController {
                                     @RequestParam String postalAddress,
                                     @RequestParam String actualAddress,
                                     @RequestParam String numberPhone,
+                                    @RequestParam String orgInn,
                                     @RequestParam String inn,
                                     @RequestParam String kpp,
                                     @RequestParam String ogrnIp,
@@ -202,6 +210,7 @@ public class CargoOwnerController {
         cargoOwner.setPostalAddress(postalAddress);
         cargoOwner.setActualAddress(actualAddress);
         cargoOwner.setNumberPhone(numberPhone);
+        cargoOwner.setInn(orgInn);
         cargoOwner.setOgrn(ogrnIp);
         cargoOwner.setPassport(passport);
         cargoOwner.setRequisites(requisites);

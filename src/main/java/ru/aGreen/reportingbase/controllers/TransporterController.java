@@ -7,12 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.aGreen.reportingbase.model.Passport;
-import ru.aGreen.reportingbase.model.Requisites;
-import ru.aGreen.reportingbase.model.Transporter;
-import ru.aGreen.reportingbase.repositories.PassportRepository;
-import ru.aGreen.reportingbase.repositories.RequisitesRepository;
-import ru.aGreen.reportingbase.repositories.TransporterRepository;
+import ru.aGreen.reportingbase.model.*;
+import ru.aGreen.reportingbase.repositories.*;
 
 import java.util.NoSuchElementException;
 
@@ -21,12 +17,16 @@ public class TransporterController {
     private final TransporterRepository transporterRepository;
     private final PassportRepository passportRepository;
     private final RequisitesRepository requisitesRepository;
+    private final VehicleRepository vehicleRepository;
+    private final DriverRepository driverRepository;
 
     @Autowired
-    public TransporterController(TransporterRepository transporterRepository, PassportRepository passportRepository, RequisitesRepository requisitesRepository) {
+    public TransporterController(TransporterRepository transporterRepository, PassportRepository passportRepository, RequisitesRepository requisitesRepository, VehicleRepository vehicleRepository, DriverRepository driverRepository) {
         this.transporterRepository = transporterRepository;
         this.passportRepository = passportRepository;
         this.requisitesRepository = requisitesRepository;
+        this.vehicleRepository = vehicleRepository;
+        this.driverRepository = driverRepository;
     }
 
     @GetMapping("/transporter")
@@ -44,6 +44,8 @@ public class TransporterController {
                                 @RequestParam String postalAddress,
                                 @RequestParam String actualAddress,
                                 @RequestParam String numberPhone,
+                                @RequestParam String orgInn,
+                                @RequestParam String orgKpp,
                                 @RequestParam String inn,
                                 @RequestParam String typeOrganization,
                                 @RequestParam String kpp,
@@ -55,7 +57,7 @@ public class TransporterController {
                                 Model model) {
         Requisites requisites = new Requisites(inn, kpp, payAccount, corAccount, bik, nameBank);
         requisitesRepository.save(requisites);
-        Transporter transporter = new Transporter(name, legalAddress, postalAddress, actualAddress, numberPhone, typeOrganization, ogrn, requisites);
+        Transporter transporter = new Transporter(name, legalAddress, postalAddress, actualAddress, numberPhone, orgInn, orgKpp, typeOrganization, ogrn, requisites);
         transporterRepository.save(transporter);
         return "redirect:/transporter";
     }
@@ -67,6 +69,8 @@ public class TransporterController {
                                  @RequestParam String postalAddress,
                                  @RequestParam String actualAddress,
                                  @RequestParam String numberPhone,
+                                 @RequestParam String orgInn,
+                                 @RequestParam String orgKpp,
                                  @RequestParam String inn,
                                  @RequestParam String kpp,
                                  @RequestParam String ogrn,
@@ -91,6 +95,8 @@ public class TransporterController {
         transporter.setPostalAddress(postalAddress);
         transporter.setActualAddress(actualAddress);
         transporter.setNumberPhone(numberPhone);
+        transporter.setInn(orgInn);
+        transporter.setKpp(orgKpp);
         transporter.setOgrn(ogrn);
         transporter.setRequisites(requisites);
         transporterRepository.save(transporter);
@@ -103,6 +109,7 @@ public class TransporterController {
                                 @RequestParam String postalAddress,
                                 @RequestParam String actualAddress,
                                 @RequestParam String numberPhone,
+                                @RequestParam String orgInn,
                                 @RequestParam String inn,
                                 @RequestParam String kpp,
                                 @RequestParam String typeOrganization,
@@ -123,7 +130,7 @@ public class TransporterController {
         requisitesRepository.save(requisites);
         Passport passport = new Passport(lastName, firstName, patronymic, serialPassport, numberPassport, issued, issuedDate);
         passportRepository.save(passport);
-        Transporter transporter = new Transporter(name, legalAddress, postalAddress, actualAddress, numberPhone, typeOrganization, ogrnIp, passport, requisites);
+        Transporter transporter = new Transporter(name, legalAddress, postalAddress, actualAddress, numberPhone, orgInn, typeOrganization, ogrnIp, passport, requisites);
         transporterRepository.save(transporter);
         return "redirect:/transporter";
     }
@@ -135,6 +142,7 @@ public class TransporterController {
                                     @RequestParam String postalAddress,
                                     @RequestParam String actualAddress,
                                     @RequestParam String numberPhone,
+                                    @RequestParam String orgInn,
                                     @RequestParam String inn,
                                     @RequestParam String kpp,
                                     @RequestParam String ogrnIp,
@@ -176,6 +184,7 @@ public class TransporterController {
         transporter.setPostalAddress(postalAddress);
         transporter.setActualAddress(actualAddress);
         transporter.setNumberPhone(numberPhone);
+        transporter.setInn(orgInn);
         transporter.setOgrn(ogrnIp);
         transporter.setPassport(passport);
         transporter.setRequisites(requisites);
@@ -185,7 +194,19 @@ public class TransporterController {
 
     @PostMapping("/transporter/remove/{id}")
     public String removeCargoOwner(@PathVariable(value = "id") Long id, Model model) {
-        transporterRepository.delete(transporterRepository.findById(id).orElseThrow(() -> new NoSuchElementException("")));
+        Transporter transporter = transporterRepository.findById(id).orElseThrow(() -> new NoSuchElementException(""));
+        for (Vehicle vehicle : vehicleRepository.findAll()) {
+            if (vehicle.getTransporter().getId().equals(transporter.getId())) {
+                return "redirect:/transporter";
+            }
+        }
+        for (Driver driver :driverRepository.findAll()) {
+            if (driver.getTransporter().getId().equals(transporter.getId())) {
+                return "redirect:/transporter";
+            }
+        }
+
+        transporterRepository.delete(transporter);
         return "redirect:/transporter";
     }
 }

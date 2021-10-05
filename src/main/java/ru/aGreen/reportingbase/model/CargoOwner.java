@@ -13,6 +13,8 @@ public class CargoOwner {
     private String actualAddress; // факт
     private String numberPhone;
     private String typeOrganization;
+    private String inn;
+    private String kpp;
     private String ogrn;
     private String ogrnIp;
     @OneToOne
@@ -24,24 +26,27 @@ public class CargoOwner {
     }
 
     //Конструктор ООО
-    public CargoOwner(String name, String legalAddress, String postalAddress, String actualAddress, String numberPhone, String typeOrganization, String ogrn, Requisites requisites) {
+    public CargoOwner(String name, String legalAddress, String postalAddress, String actualAddress, String numberPhone, String inn, String kpp, String typeOrganization, String ogrn, Requisites requisites) {
         this.name = name;
         this.legalAddress = legalAddress;
         this.postalAddress = postalAddress;
         this.actualAddress = actualAddress;
         this.numberPhone = numberPhone;
+        this.inn = inn;
+        this.kpp = kpp;
         this.typeOrganization = typeOrganization;
         this.ogrn = ogrn;
         this.requisites = requisites;
     }
 
     //Конструктор ИП
-    public CargoOwner(String name, String legalAddress, String postalAddress, String actualAddress, String numberPhone, String typeOrganization, String ogrnIp, Passport passport, Requisites requisites) {
+    public CargoOwner(String name, String legalAddress, String postalAddress, String actualAddress, String numberPhone, String inn, String typeOrganization, String ogrnIp, Passport passport, Requisites requisites) {
         this.name = name;
         this.legalAddress = legalAddress;
         this.postalAddress = postalAddress;
         this.actualAddress = actualAddress;
         this.numberPhone = numberPhone;
+        this.inn = inn;
         this.typeOrganization = typeOrganization;
         this.ogrnIp = ogrnIp;
         this.passport = passport;
@@ -143,5 +148,21 @@ public class CargoOwner {
 
     public void setPassport(Passport passport) {
         this.passport = passport;
+    }
+
+    public String getInn() {
+        return inn;
+    }
+
+    public void setInn(String inn) {
+        this.inn = inn;
+    }
+
+    public String getKpp() {
+        return kpp;
+    }
+
+    public void setKpp(String kpp) {
+        this.kpp = kpp;
     }
 }

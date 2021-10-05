@@ -9,11 +9,20 @@ public class Vehicle {
     private Long id;
     private String model;
     private String stateNumber;
-    private String typeVehicle;
     @OneToOne
     private Trailer trailer;
     @OneToOne
     private Transporter transporter;
+
+    public Vehicle() {
+    }
+
+    public Vehicle(String model, String stateNumber, Trailer trailer, Transporter transporter) {
+        this.model = model;
+        this.stateNumber = stateNumber;
+        this.trailer = trailer;
+        this.transporter = transporter;
+    }
 
     public Long getId() {
         return id;
@@ -37,14 +46,6 @@ public class Vehicle {
 
     public void setStateNumber(String stateNumber) {
         this.stateNumber = stateNumber;
-    }
-
-    public String getTypeVehicle() {
-        return typeVehicle;
-    }
-
-    public void setTypeVehicle(String typeVehicle) {
-        this.typeVehicle = typeVehicle;
     }
 
     public Trailer getTrailer() {

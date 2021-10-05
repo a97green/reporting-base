@@ -1,9 +1,6 @@
 package ru.aGreen.reportingbase.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Trailer {
@@ -12,6 +9,17 @@ public class Trailer {
     private Long id;
     private String model;
     private String stateNumber;
+    @OneToOne
+    private Transporter transporter;
+
+    public Trailer() {
+    }
+
+    public Trailer(String model, String stateNumber, Transporter transporter) {
+        this.model = model;
+        this.stateNumber = stateNumber;
+        this.transporter = transporter;
+    }
 
     public Long getId() {
         return id;
@@ -35,5 +43,13 @@ public class Trailer {
 
     public void setStateNumber(String stateNumber) {
         this.stateNumber = stateNumber;
+    }
+
+    public Transporter getTransporter() {
+        return transporter;
+    }
+
+    public void setTransporter(Transporter transporter) {
+        this.transporter = transporter;
     }
 }

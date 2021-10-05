@@ -58,8 +58,8 @@
                                         <th>ID</th>
                                         <th>Организация</th>
                                         <th>Юридический адрес</th>
-                                        <th>Номер телефона</th>
                                         <th>ИНН/КПП</th>
+                                        <th>Номер телефона</th>
                                         <th>Расчётный счёт</th>
                                         <th>Корр. счёт</th>
                                         <th>БИК</th>
@@ -72,8 +72,8 @@
                                         <td th:text="${element.getId()}"></td>
                                         <td th:text="${element.getName()}"></td>
                                         <td th:text="${element.getLegalAddress()}"></td>
+                                        <td th:text="${element.getInn()} + '/' +  ${element.getKpp()}"></td>
                                         <td th:text="${element.getNumberPhone()}"></td>
-                                        <td th:text="${element.getRequisites().getInn()} + '/' +  ${element.getRequisites().getKpp()}"></td>
                                         <td th:text="${element.getRequisites().getPayAccount()}"></td>
                                         <td th:text="${element.getRequisites().getCorAccount()}"></td>
                                         <td th:text="${element.getRequisites().getBik()}"></td>
@@ -139,30 +139,225 @@
 
 <script type="text/javascript" th:inline="javascript">
     function showOoo() {
-        let innerInput = $('.inner-input');
-        let formInput = $('#form-input');
-        innerInput.empty();
-        formInput.attr("action", "/transporter/ooo")
-        innerInput.append(
-            '                                            <div class="form-group row">\n' +
-            '                                                <label class="col-sm-3 col-form-label">ОГРН</label>\n' +
-            '                                                <div class="col-sm-9">\n' +
-            '                                                    <input type="text" name="ogrn" class="form-control" placeholder="ОГРН" required="">\n' +
+        let innerBlock = $('.inner-block');
+        innerBlock.empty();
+        innerBlock.append('<div class="card animate__animated animate__fadeIn animate__fast">\n' +
+            '                                <div class="card-body">\n' +
+            '                                    <h4 class="card-title">Новый перевозчик</h4>\n' +
+            '                                    <p class="card-title-desc">Добавьте нового перевозчика.</p>\n' +
+            '                                    <form id="form-input" action="/transporter/ooo" method="post">\n' +
+            '\n' +
+            '\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Тип организации</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <div class="btn-group btn-group-toggle" data-toggle="buttons">\n' +
+            '                                                    <label class="btn btn-primary active">\n' +
+            '                                                        <input type="radio" name="typeOrganization" value="ООО" id="radioOoo" checked="" onclick="showOoo()"> ООО\n' +
+            '                                                    </label>\n' +
+            '                                                    <label class="btn btn-primary">\n' +
+            '                                                        <input type="radio" name="typeOrganization" value="ИП" id="radioIp" onclick="showIp()"> ИП\n' +
+            '                                                    </label>\n' +
             '                                                </div>\n' +
-            '                                            </div>');
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <h5 class="card-title text-center border-top"><br>Основная информация<br></h5>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Название организации</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="name" class="form-control" placeholder="Название организации" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Юридический адрес</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="legalAddress" class="form-control" placeholder="Юридический адрес" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Почтовый адрес</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="postalAddress" class="form-control" placeholder="Почтовый адрес" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Фактический адрес</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="actualAddress" class="form-control" placeholder="Фактический адрес" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">ИНН/КПП</label>\n' +
+            '                                            <div class="col-sm-4">\n' +
+            '                                                <input type="text" name="orgInn" class="form-control" placeholder="ИНН" required="">\n' +
+            '                                            </div>\n' +
+            '                                            <div class="col-sm-5">\n' +
+            '                                                <input type="text" name="orgKpp" class="form-control" placeholder="КПП" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                             <label class="col-sm-3 col-form-label">ОГРН</label>\n' +
+            '                                             <div class="col-sm-9">\n' +
+            '                                                 <input type="text" name="ogrn" class="form-control" placeholder="ОГРН" required="">\n' +
+            '                                             </div>\n' +
+            '                                        </div>' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Номер телефона</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="numberPhone" class="form-control" placeholder="Номер телефона" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+
+            '                                        <h5 class="card-title text-center border-top"><br>Банковские реквизиты<br></h5>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">ИНН</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="inn" class="form-control" placeholder="ИНН" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">КПП</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="kpp" class="form-control" placeholder="КПП" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Расчётный счёт</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="payAccount" class="form-control" placeholder="Расчётный счёт" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Корр. счёт</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="corAccount" class="form-control" placeholder="Корр. счёт" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">БИК</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="bik" class="form-control" placeholder="БИК" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Филиал</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="nameBank" class="form-control" placeholder="Филиал" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="row">\n' +
+            '                                            <button type="submit" th:id="btn-load" class="btn btn-primary waves-effect"><i class="mdi mdi-check mr-1"></i>Добавить</button>\n' +
+            '                                        </div>\n' +
+            '                                    </form>\n' +
+            '                                </div>\n' +
+            '                            </div>');
     }
 
     function showIp() {
-        let innerInput = $('.inner-input');
-        let formInput = $('#form-input');
-        innerInput.empty();
-        formInput.attr("action", "/transporter/ip")
-        innerInput.append('<div class="form-group row">\n' +
+        let innerBlock = $('.inner-block');
+        innerBlock.empty();
+        innerBlock.append('<div class="card animate__animated animate__fadeIn animate__fast">\n' +
+            '                                <div class="card-body">\n' +
+            '                                    <h4 class="card-title">Новый перевозчик</h4>\n' +
+            '                                    <p class="card-title-desc">Добавьте нового перевозчика.</p>\n' +
+            '                                    <form id="form-input" action="/transporter/ip" method="post">\n' +
+            '\n' +
+            '\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Тип организации</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <div class="btn-group btn-group-toggle" data-toggle="buttons">\n' +
+            '                                                    <label class="btn btn-primary">\n' +
+            '                                                        <input type="radio" name="typeOrganization" value="ООО" id="radioOoo" checked="" onclick="showOoo()"> ООО\n' +
+            '                                                    </label>\n' +
+            '                                                    <label class="btn btn-primary active">\n' +
+            '                                                        <input type="radio" name="typeOrganization" value="ИП" id="radioIp" onclick="showIp()"> ИП\n' +
+            '                                                    </label>\n' +
+            '                                                </div>\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <h5 class="card-title text-center border-top"><br>Основная информация<br></h5>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Название организации</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="name" class="form-control" placeholder="Название организации" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Юридический адрес</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="legalAddress" class="form-control" placeholder="Юридический адрес" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Почтовый адрес</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="postalAddress" class="form-control" placeholder="Почтовый адрес" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Фактический адрес</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="actualAddress" class="form-control" placeholder="Фактический адрес" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">ИНН</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="orgInn" class="form-control" placeholder="ИНН" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
             '                                            <label class="col-sm-3 col-form-label">ОГРНИП</label>\n' +
             '                                            <div class="col-sm-9">\n' +
             '                                                <input type="text" name="ogrnIp" class="form-control" placeholder="ОГРНИП" required="">\n' +
             '                                            </div>\n' +
             '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Номер телефона</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="numberPhone" class="form-control" placeholder="Номер телефона" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+
+            '                                        <h5 class="card-title text-center border-top"><br>Банковские реквизиты<br></h5>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">ИНН</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="inn" class="form-control" placeholder="ИНН" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">КПП</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="kpp" class="form-control" placeholder="КПП" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Расчётный счёт</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="payAccount" class="form-control" placeholder="Расчётный счёт" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Корр. счёт</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="corAccount" class="form-control" placeholder="Корр. счёт" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">БИК</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="bik" class="form-control" placeholder="БИК" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">Филиал</label>\n' +
+            '                                            <div class="col-sm-9">\n' +
+            '                                                <input type="text" name="nameBank" class="form-control" placeholder="Филиал" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+
             '                                        <h5 class="card-title text-center border-top"><br>Паспортные данные<br></h5>\n' +
             '                                        <div class="form-group row">\n' +
             '                                            <label class="col-sm-3 col-form-label">Фамилия</label>\n' +
@@ -205,7 +400,14 @@
             '                                            <div class="col-sm-9">\n' +
             '                                                <input type="date" name="issuedDate" class="form-control" placeholder="Дата выдачи" required="">\n' +
             '                                            </div>\n' +
-            '                                        </div>');
+            '                                        </div>' +
+            '</div>\n' +
+            '                                        <div class="row">\n' +
+            '                                            <button type="submit" th:id="btn-load" class="btn btn-primary waves-effect"><i class="mdi mdi-check mr-1"></i>Добавить</button>\n' +
+            '                                        </div>\n' +
+            '                                    </form>\n' +
+            '                                </div>\n' +
+            '                            </div>');
     }
 </script>
 
@@ -213,7 +415,7 @@
     function newTransporter() {
         let innerBlock = $('.inner-block');
         innerBlock.empty();
-        innerBlock.append('                            <div class="card animate__animated animate__fadeIn animate__fast">\n' +
+        innerBlock.append('<div class="card animate__animated animate__fadeIn animate__fast">\n' +
             '                                <div class="card-body">\n' +
             '                                    <h4 class="card-title">Новый перевозчик</h4>\n' +
             '                                    <p class="card-title-desc">Добавьте нового перевозчика.</p>\n' +
@@ -224,7 +426,7 @@
             '                                            <label class="col-sm-3 col-form-label">Тип организации</label>\n' +
             '                                            <div class="col-sm-9">\n' +
             '                                                <div class="btn-group btn-group-toggle" data-toggle="buttons">\n' +
-            '                                                    <label class="btn btn-primary">\n' +
+            '                                                    <label class="btn btn-primary active">\n' +
             '                                                        <input type="radio" name="typeOrganization" value="ООО" id="radioOoo" checked="" onclick="showOoo()"> ООО\n' +
             '                                                    </label>\n' +
             '                                                    <label class="btn btn-primary">\n' +
@@ -259,13 +461,25 @@
             '                                            </div>\n' +
             '                                        </div>\n' +
             '                                        <div class="form-group row">\n' +
+            '                                            <label class="col-sm-3 col-form-label">ИНН/КПП</label>\n' +
+            '                                            <div class="col-sm-4">\n' +
+            '                                                <input type="text" name="orgInn" class="form-control" placeholder="ИНН" required="">\n' +
+            '                                            </div>\n' +
+            '                                            <div class="col-sm-5">\n' +
+            '                                                <input type="text" name="orgKpp" class="form-control" placeholder="КПП" required="">\n' +
+            '                                            </div>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="form-group row">\n' +
+            '                                             <label class="col-sm-3 col-form-label">ОГРН</label>\n' +
+            '                                             <div class="col-sm-9">\n' +
+            '                                                 <input type="text" name="ogrn" class="form-control" placeholder="ОГРН" required="">\n' +
+            '                                             </div>\n' +
+            '                                        </div>                                        <div class="form-group row">\n' +
             '                                            <label class="col-sm-3 col-form-label">Номер телефона</label>\n' +
             '                                            <div class="col-sm-9">\n' +
             '                                                <input type="text" name="numberPhone" class="form-control" placeholder="Номер телефона" required="">\n' +
             '                                            </div>\n' +
             '                                        </div>\n' +
-            '\n' +
-            '\n' +
             '                                        <h5 class="card-title text-center border-top"><br>Банковские реквизиты<br></h5>\n' +
             '                                        <div class="form-group row">\n' +
             '                                            <label class="col-sm-3 col-form-label">ИНН</label>\n' +
@@ -303,21 +517,12 @@
             '                                                <input type="text" name="nameBank" class="form-control" placeholder="Филиал" required="">\n' +
             '                                            </div>\n' +
             '                                        </div>\n' +
-            '\n' +
-            '                                        <div class="inner-input">\n' +
-            '                                            <div class="form-group row">\n' +
-            '                                                <label class="col-sm-3 col-form-label">ОГРН</label>\n' +
-            '                                                <div class="col-sm-9">\n' +
-            '                                                    <input type="text" name="ogrn" class="form-control" placeholder="ОГРН" required="">\n' +
-            '                                                </div>\n' +
-            '                                            </div>\n' +
-            '                                        </div>\n' +
             '                                        <div class="row">\n' +
             '                                            <button type="submit" th:id="btn-load" class="btn btn-primary waves-effect"><i class="mdi mdi-check mr-1"></i>Добавить</button>\n' +
             '                                        </div>\n' +
             '                                    </form>\n' +
             '                                </div>\n' +
-            '                            </div>\n');
+            '                            </div>');
     }
     function moreDetailed(id) {
         let elements = [[${transporters}]];
@@ -357,9 +562,12 @@
                         '                                        </div>\n' +
                         '                                    </div>\n' +
                         '                                    <div class="form-group row">\n' +
-                        '                                        <label class="col-sm-3 col-form-label">Номер телефона</label>\n' +
-                        '                                        <div class="col-sm-9">\n' +
-                        '                                            <input value="' + element.numberPhone + '" text="' + element.numberPhone + '" type="text" name="numberPhone" class="form-control form-details" placeholder="Номер телефона" required disabled>\n' +
+                        '                                        <label class="col-sm-3 col-form-label">ИНН/КПП</label>\n' +
+                        '                                        <div class="col-sm-4">\n' +
+                        '                                            <input value="' + element.inn + '" text="' + element.inn + '" type="text" name="orgInn" class="form-control form-details" placeholder="ИНН" required disabled>\n' +
+                        '                                        </div>\n' +
+                        '                                        <div class="col-sm-5">\n' +
+                        '                                            <input value="' + element.kpp + '" text="' + element.kpp + '" type="text" name="orgKpp" class="form-control form-details" placeholder="КПП" required disabled>\n' +
                         '                                        </div>\n' +
                         '                                    </div>\n' +
                         '                                    <div class="form-group row">\n' +
@@ -368,6 +576,13 @@
                         '                                            <input value="' + element.ogrn + '" text="' + element.ogrn + '" type="text" name="ogrn" class="form-control form-details" placeholder="ОГРН" required disabled>\n' +
                         '                                        </div>\n' +
                         '                                    </div>\n' +
+                        '                                    <div class="form-group row">\n' +
+                        '                                        <label class="col-sm-3 col-form-label">Номер телефона</label>\n' +
+                        '                                        <div class="col-sm-9">\n' +
+                        '                                            <input value="' + element.numberPhone + '" text="' + element.numberPhone + '" type="text" name="numberPhone" class="form-control form-details" placeholder="Номер телефона" required disabled>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>\n' +
+
                         '                                    <h5 class="card-title text-center border-top"><br>Банковские реквизиты<br></h5>\n' +
                         '                                    <div class="form-group row">\n' +
                         '                                        <label class="col-sm-3 col-form-label">ИНН</label>\n' +
@@ -450,9 +665,9 @@
                         '                                        </div>\n' +
                         '                                    </div>\n' +
                         '                                    <div class="form-group row">\n' +
-                        '                                        <label class="col-sm-3 col-form-label">Номер телефона</label>\n' +
+                        '                                        <label class="col-sm-3 col-form-label">ИНН</label>\n' +
                         '                                        <div class="col-sm-9">\n' +
-                        '                                            <input value="' + element.numberPhone + '" text="' + element.numberPhone + '" type="text" name="numberPhone" class="form-control form-details" placeholder="Номер телефона" required disabled>\n' +
+                        '                                            <input value="' + element.inn + '" text="' + element.inn + '" type="text" name="orgInn" class="form-control form-details" placeholder="ИНН" required disabled>\n' +
                         '                                        </div>\n' +
                         '                                    </div>\n' +
                         '                                    <div class="form-group row">\n' +
@@ -461,6 +676,13 @@
                         '                                            <input value="' + element.ogrnIp + '" text="' + element.ogrnIp + '" type="text" name="ogrnIp" class="form-control form-details" placeholder="ОГРН" required disabled>\n' +
                         '                                        </div>\n' +
                         '                                    </div>\n' +
+                        '                                    <div class="form-group row">\n' +
+                        '                                        <label class="col-sm-3 col-form-label">Номер телефона</label>\n' +
+                        '                                        <div class="col-sm-9">\n' +
+                        '                                            <input value="' + element.numberPhone + '" text="' + element.numberPhone + '" type="text" name="numberPhone" class="form-control form-details" placeholder="Номер телефона" required disabled>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>\n' +
+
                         '                                    <h5 class="card-title text-center border-top"><br>Банковские реквизиты<br></h5>\n' +
                         '                                    <div class="form-group row">\n' +
                         '                                        <label class="col-sm-3 col-form-label">ИНН</label>\n' +

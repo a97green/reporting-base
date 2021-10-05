@@ -12,6 +12,8 @@ public class Transporter {
     private String postalAddress; // почт
     private String actualAddress; // факт
     private String numberPhone;
+    private String inn;
+    private String kpp;
     private String typeOrganization;
     private String ogrn;
     private String ogrnIp;
@@ -22,24 +24,27 @@ public class Transporter {
 
     public Transporter() {
     }
-
-    public Transporter(String name, String legalAddress, String postalAddress, String actualAddress, String numberPhone, String typeOrganization, String ogrn, Requisites requisites) {
+    // ООО
+    public Transporter(String name, String legalAddress, String postalAddress, String actualAddress, String numberPhone, String inn, String kpp, String typeOrganization, String ogrn, Requisites requisites) {
         this.name = name;
         this.legalAddress = legalAddress;
         this.postalAddress = postalAddress;
         this.actualAddress = actualAddress;
         this.numberPhone = numberPhone;
+        this.inn = inn;
+        this.kpp = kpp;
         this.typeOrganization = typeOrganization;
         this.ogrn = ogrn;
         this.requisites = requisites;
     }
-
-    public Transporter(String name, String legalAddress, String postalAddress, String actualAddress, String numberPhone, String typeOrganization, String ogrnIp, Passport passport, Requisites requisites) {
+    // ИП
+    public Transporter(String name, String legalAddress, String postalAddress, String actualAddress, String numberPhone, String inn, String typeOrganization, String ogrnIp, Passport passport, Requisites requisites) {
         this.name = name;
         this.legalAddress = legalAddress;
         this.postalAddress = postalAddress;
         this.actualAddress = actualAddress;
         this.numberPhone = numberPhone;
+        this.inn = inn;
         this.typeOrganization = typeOrganization;
         this.ogrnIp = ogrnIp;
         this.passport = passport;
@@ -132,5 +137,21 @@ public class Transporter {
 
     public void setRequisites(Requisites requisites) {
         this.requisites = requisites;
+    }
+
+    public String getInn() {
+        return inn;
+    }
+
+    public void setInn(String inn) {
+        this.inn = inn;
+    }
+
+    public String getKpp() {
+        return kpp;
+    }
+
+    public void setKpp(String kpp) {
+        this.kpp = kpp;
     }
 }
