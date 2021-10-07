@@ -32,8 +32,8 @@ public class CargoOwnerController {
     @GetMapping("/cargo-owner")
     public String getCargoOwner(Model model) {
         Iterable<CargoOwner> cargoOwners = cargoOwnerRepository.findAll();
-        model.addAttribute("title", "Грузовладельцы");
-        model.addAttribute("description", "На данной странице вы можете просмотреть весь список грузовладельцев");
+        model.addAttribute("title", "Заказчики");
+        model.addAttribute("description", "На данной странице вы можете просмотреть список Заказчиков");
         model.addAttribute("cargoOwners", cargoOwners);
         return "cargoOwner";
     }
@@ -212,6 +212,51 @@ public class CargoOwnerController {
         cargoOwner.setNumberPhone(numberPhone);
         cargoOwner.setInn(orgInn);
         cargoOwner.setOgrn(ogrnIp);
+        cargoOwner.setPassport(passport);
+        cargoOwner.setRequisites(requisites);
+        cargoOwnerRepository.save(cargoOwner);
+        return "redirect:/cargo-owner";
+    }
+
+    @PostMapping("/cargo-owner/save/chl/{id}")
+    public String saveTransporterChl(@PathVariable(value = "id") Long id,
+                                     @RequestParam String name,
+                                     @RequestParam String inn,
+                                     @RequestParam String kpp,
+                                     @RequestParam String payAccount,
+                                     @RequestParam String corAccount,
+                                     @RequestParam String bik,
+                                     @RequestParam String nameBank,
+                                     @RequestParam String lastName,
+                                     @RequestParam String firstName,
+                                     @RequestParam String patronymic,
+                                     @RequestParam String serialPassport,
+                                     @RequestParam String numberPassport,
+                                     @RequestParam String issued,
+                                     @RequestParam String issuedDate,
+                                     Model model) {
+        CargoOwner cargoOwner = cargoOwnerRepository.findById(id).orElseThrow(() -> new NoSuchElementException(""));
+        Passport passport = passportRepository.findById(cargoOwner.getPassport().getId()).orElseThrow(() -> new NoSuchElementException(""));
+        Requisites requisites = requisitesRepository.findById(cargoOwner.getRequisites().getId()).orElseThrow(() -> new NoSuchElementException(""));
+
+        requisites.setInn(inn);
+        requisites.setKpp(kpp);
+        requisites.setPayAccount(payAccount);
+        requisites.setCorAccount(corAccount);
+        requisites.setBik(bik);
+        requisites.setNameBank(nameBank);
+        requisitesRepository.save(requisites);
+
+        passport.setLastName(lastName);
+        passport.setFirstName(firstName);
+        passport.setPatronymic(patronymic);
+        passport.setSerialPassport(serialPassport);
+        passport.setNumberPassport(numberPassport);
+        passport.setIssued(issued);
+        passport.setIssuedDate(issuedDate);
+        passportRepository.save(passport);
+
+        cargoOwner.setName(name);
         cargoOwner.setPassport(passport);
         cargoOwner.setRequisites(requisites);
         cargoOwnerRepository.save(cargoOwner);

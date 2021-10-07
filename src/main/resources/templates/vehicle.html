@@ -41,7 +41,7 @@
                     <div class="col-sm-6">
                         <div class="float-right d-none d-md-block">
                             <div class="dropdown">
-                                <button class="btn btn-primary waves-effect" type="button"  data-toggle="modal" data-target="#myModal" onclick="newDriver()"><i class="mdi mdi-account-plus-outline mr-1"></i> Новый</button>
+                                <button class="btn btn-primary waves-effect" type="button"  data-toggle="modal" data-target="#myModal" onclick="newVehicle()"><i class="mdi mdi-account-plus-outline mr-1"></i> Новый</button>
                             </div>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                                         <td th:text="${element.getModel()}"></td>
                                         <td th:text="${element.getStateNumber()}"></td>
                                         <td th:text="${element.getTrailer().getModel()} + ' (' + ${element.getTrailer().getStateNumber()} + ')'"></td>
-                                        <td><button class="btn btn-success waves-effect" data-toggle="modal" data-target="#myModal" th:onclick="'moreDetailed(' + ${element.getId()} + ')'"><i class="mdi mdi-vector-difference"></i></button></td>
+                                        <td><button th:id="${element.getId()}" class="btn btn-success waves-effect" data-toggle="modal" data-target="#myModal" onclick="details(this)"><i class="mdi mdi-vector-difference"></i></button></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -127,9 +127,10 @@
 <!-- Datatable init js -->
 <script src="assets/js/pages/datatables.init.js"></script>
 <script src="assets/js/app.js"></script>
-
-<script type="text/javascript" th:inline="javascript">
-    function newDriver() {
+<script src="assets/js/jquery.maskedinput.min.js"></script>
+<!-- My scripts -->
+<script th:inline="javascript" type="text/javascript">
+    function newVehicle() {
         let innerBlock = $('.inner-block');
         innerBlock.empty();
         innerBlock.append('                            <div class="card animate__animated animate__fadeIn animate__fast">\n' +
@@ -155,7 +156,7 @@
             '                                        <div class="form-group row">\n' +
             '                                            <label class="col-sm-3 col-form-label">Гоc. номер</label>\n' +
             '                                            <div class="col-sm-9">\n' +
-            '                                                <input type="text" name="stateNumber" class="form-control" placeholder="Гоc. номер" required="">\n' +
+            '                                                <input id="stateNumber" type="text" name="stateNumber" class="form-control" placeholder="Гоc. номер" required="">\n' +
             '                                            </div>\n' +
             '                                        </div>\n' +
             '                                        <div class="form-group row">\n' +
@@ -172,16 +173,26 @@
             '                                </div>\n' +
             '                            </div>\n');
         innerNew();
-
+        $("#stateNumber").mask("a 999 aa 99?9");
     }
-    function moreDetailed(id) {
-        let elements = [[${vehicles}]];
-        for (let i = 0; i < elements.length; i++) {
-            let element = elements[i];
-            if(element.id === id) {
-                let transporter = element.transporter;
-                let trailer = element.trailer;
+    function innerNew() {
+        let option = $('.transporter');
+        let transporters = [[${transporters}]]
+        for (let i = 0; i < transporters.length; i++) {
+            option.append('<option value="' + transporters[i].id + '">' + transporters[i].name + '</option>')
+        }
+        let option2 = $('.trailer');
+        let trailers = [[${trailers}]]
+        for (let i = 0; i < trailers.length; i++) {
+            option2.append('<option value="' + trailers[i].id + '">' + trailers[i].model + '(' + trailers[i].stateNumber + ')</option>')
+        }
+    }
 
+    function details(element) {
+        let vehicles = [[${vehicles}]];
+        for (let i = 0; i < vehicles.length; i++) {
+            if (vehicles[i].id == $(element).attr("id")) {
+                element = vehicles[i];
                 let innerBlock = $('.inner-block');
                 innerBlock.empty();
                 innerBlock.append('<div class="card animate__animated animate__fadeIn animate__fast">\n' +
@@ -192,7 +203,7 @@
                     '                                    <div class="form-group row">\n' +
                     '                                        <label class="col-sm-3 col-form-label">Организация</label>\n' +
                     '                                        <div class="col-sm-9">\n' +
-                    '                                            <select name="transporter" class="form-control form-details transporter" required disabled>\n' +
+                    '                                            <select id="idTransporter" name="transporter" class="form-control form-details transporter" required disabled>\n' +
                     '                                            </select>\n' +
                     '                                        </div>\n' +
                     '                                    </div>' +
@@ -205,13 +216,13 @@
                     '                                    <div class="form-group row">\n' +
                     '                                        <label class="col-sm-3 col-form-label">Гос. номер</label>\n' +
                     '                                        <div class="col-sm-9">\n' +
-                    '                                            <input value="' + element.stateNumber + '" text="' + element.stateNumber + '" type="text" name="stateNumber" class="form-control form-details" placeholder="Гос. номер" required disabled>\n' +
+                    '                                            <input id="stateNumber" value="' + element.stateNumber + '" text="' + element.stateNumber + '" type="text" name="stateNumber" class="form-control form-details" placeholder="Гос. номер" required disabled>\n' +
                     '                                        </div>\n' +
                     '                                    </div>\n' +
                     '                                    <div class="form-group row">\n' +
                     '                                        <label class="col-sm-3 col-form-label">Прицеп</label>\n' +
                     '                                        <div class="col-sm-9">\n' +
-                    '                                            <select name="trailer" class="form-control form-details trailer" required disabled>\n' +
+                    '                                            <select id="idTrailer" name="trailer" class="form-control form-details trailer" required disabled>\n' +
                     '                                            </select>\n' +
                     '                                        </div>\n' +
                     '                                    </div>' +
@@ -228,11 +239,11 @@
                     '                                </div>\n' +
                     '                            </div>\n' +
                     '                        </div>');
-                innerDetails(transporter, trailer);
+                innerDetails(element.transporter, element.trailer);
+                $("#stateNumber").mask("a 999 aa 99?9");
             }
         }
     }
-
     function innerDetails(transporter, trailer) {
         let option = $('.transporter');
         let transporters = [[${transporters}]]
@@ -251,36 +262,9 @@
             }
         }
     }
-    function innerNew() {
-        let option = $('.transporter');
-        let transporters = [[${transporters}]]
-        for (let i = 0; i < transporters.length; i++) {
-            option.append('<option value="' + transporters[i].id + '">' + transporters[i].name + '</option>')
-        }
-        let option2 = $('.trailer');
-        let trailers = [[${trailers}]]
-        for (let i = 0; i < trailers.length; i++) {
-            option2.append('<option value="' + trailers[i].id + '">' + trailers[i].model + '(' + trailers[i].stateNumber + ')</option>')
-        }
-    }
-</script>
-<script type="text/javascript" th:inline="javascript">
-    $(document).ready(function() {
-    });
-
-    function showButtonsSave() {
-        $('.buttons-edit').hide();
-        $('.buttons-save').show();
-        $('.form-details').removeAttr("disabled")
-    }
-
-    function hideButtonsSave() {
-        $('.buttons-edit').show();
-        $('.buttons-save').hide();
-        $('.form-details').attr("disabled", "");
-    }
 
 </script>
+<script th:inline="javascript" src="assets/js/innerForms/button.events.js"></script>
 </body>
 
 </html>

@@ -3,7 +3,7 @@ package ru.aGreen.reportingbase.model;
 import javax.persistence.*;
 
 @Entity
-public class Transporter {
+public class OurCompany {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,10 +22,10 @@ public class Transporter {
     @OneToOne
     private Requisites requisites;
 
-    public Transporter() {
+    public OurCompany() {
     }
     // ООО
-    public Transporter(String name, String legalAddress, String postalAddress, String actualAddress, String numberPhone, String inn, String kpp, String typeOrganization, String ogrn, Requisites requisites) {
+    public OurCompany(String name, String legalAddress, String postalAddress, String actualAddress, String numberPhone, String inn, String kpp, String typeOrganization, String ogrn, Requisites requisites) {
         this.name = name;
         this.legalAddress = legalAddress;
         this.postalAddress = postalAddress;
@@ -38,7 +38,7 @@ public class Transporter {
         this.requisites = requisites;
     }
     // ИП
-    public Transporter(String name, String legalAddress, String postalAddress, String actualAddress, String numberPhone, String inn, String typeOrganization, String ogrnIp, Passport passport, Requisites requisites) {
+    public OurCompany(String name, String legalAddress, String postalAddress, String actualAddress, String numberPhone, String inn, String typeOrganization, String ogrnIp, Passport passport, Requisites requisites) {
         this.name = name;
         this.legalAddress = legalAddress;
         this.postalAddress = postalAddress;
@@ -99,6 +99,22 @@ public class Transporter {
         this.numberPhone = numberPhone;
     }
 
+    public String getInn() {
+        return inn;
+    }
+
+    public void setInn(String inn) {
+        this.inn = inn;
+    }
+
+    public String getKpp() {
+        return kpp;
+    }
+
+    public void setKpp(String kpp) {
+        this.kpp = kpp;
+    }
+
     public String getOgrn() {
         return ogrn;
     }
@@ -107,20 +123,20 @@ public class Transporter {
         this.ogrn = ogrn;
     }
 
-    public String getOgrnIp() {
-        return ogrnIp;
-    }
-
-    public void setOgrnIp(String ogrnIp) {
-        this.ogrnIp = ogrnIp;
-    }
-
     public String getTypeOrganization() {
         return typeOrganization;
     }
 
     public void setTypeOrganization(String typeOrganization) {
         this.typeOrganization = typeOrganization;
+    }
+
+    public String getOgrnIp() {
+        return ogrnIp;
+    }
+
+    public void setOgrnIp(String ogrnIp) {
+        this.ogrnIp = ogrnIp;
     }
 
     public Passport getPassport() {
@@ -137,21 +153,5 @@ public class Transporter {
 
     public void setRequisites(Requisites requisites) {
         this.requisites = requisites;
-    }
-
-    public String getInn() {
-        return inn;
-    }
-
-    public void setInn(String inn) {
-        this.inn = inn;
-    }
-
-    public String getKpp() {
-        return kpp;
-    }
-
-    public void setKpp(String kpp) {
-        this.kpp = kpp;
     }
 }

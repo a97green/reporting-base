@@ -24,7 +24,6 @@ public class CargoOwner {
 
     public CargoOwner() {
     }
-
     //Конструктор ООО
     public CargoOwner(String name, String legalAddress, String postalAddress, String actualAddress, String numberPhone, String inn, String kpp, String typeOrganization, String ogrn, Requisites requisites) {
         this.name = name;
@@ -38,7 +37,6 @@ public class CargoOwner {
         this.ogrn = ogrn;
         this.requisites = requisites;
     }
-
     //Конструктор ИП
     public CargoOwner(String name, String legalAddress, String postalAddress, String actualAddress, String numberPhone, String inn, String typeOrganization, String ogrnIp, Passport passport, Requisites requisites) {
         this.name = name;
@@ -52,7 +50,6 @@ public class CargoOwner {
         this.passport = passport;
         this.requisites = requisites;
     }
-
     //Конструктор ЧЛ
     public CargoOwner(String name, String numberPhone, String typeOrganization, Passport passport, Requisites requisites) {
         this.name = name;
