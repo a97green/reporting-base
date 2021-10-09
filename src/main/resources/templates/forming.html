@@ -1,0 +1,274 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <title th:text="'Панель управления - ' + ${title}"></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Панель управления, для ведения отчётностей" name="description" />
+    <meta content="aGreen" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link href="/assets/libs/chartist/chartist.min.css" rel="stylesheet">
+    <!-- Bootstrap Css -->
+    <link href="/assets/css/bootstrap-dark.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="/assets/css/app-dark.min.css" id="app-style" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+</head>
+
+<body data-sidebar="dark">
+<div id="layout-wrapper">
+    <header th:insert="blocks/header :: header"></header>
+    <div class="main-content">
+        <div class="page-content">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-sm-6">
+                        <div class="page-title-box">
+                            <h4 class="font-size-18" th:text="${title}"></h4>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item active" th:text="${description}"></li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="float-right d-none d-md-block">
+                            <div class="dropdown">
+                                <button class="btn btn-primary waves-effect" type="button" data-toggle="modal" data-target="#myModal" onclick="newForming()"><i class="mdi mdi-account-plus-outline mr-1"></i> Новое</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card animate__animated animate__fadeIn animate__fast">
+                            <div class="card-body">
+                                <h4 class="card-title">Список c формированных рейсов</h4>
+                                <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Менеджер</th>
+                                        <th>Заказчик</th>
+                                        <th>Перевозчик</th>
+                                        <th>Водитель</th>
+                                        <th>Транпортное средство</th>
+                                        <th>Дата погрузки</th>
+                                        <th>Дата выгрузки</th>
+                                        <th>Оплата для заказчика</th>
+                                        <th>Оплата для перевозчика</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="element : ${formings}">
+                                        <td th:text="${element.getId()}"></td>
+                                        <td th:text="${element.getManager().getLastName()} + ' ' + ${element.getManager().getFirstName()} + ' ' + ${element.getManager().getPatronymic()}"></td>
+                                        <td th:text="${element.getCargoOwner().getName()}"></td>
+                                        <td th:text="${element.getTransporter().getName()}"></td>
+                                        <td th:text="${element.getDriver().getPassport().getLastName()} + ' ' + ${element.getDriver().getPassport().getFirstName()} + ' ' + ${element.getDriver().getPassport().getPatronymic()} + ' ' + ${element.getDriver().getNumberPhone()} + ''"></td>
+                                        <td th:text="${element.getVehicle().getModel()} + ' (' + ${element.getVehicle().getStateNumber()} + ')'"></td>
+                                        <td th:text="${element.getLoading().getDate()}"></td>
+                                        <td th:text="${element.getUnloading().getDate()}"></td>
+                                        <td th:text="${element.getCustomerPay().getAmount()}"></td>
+                                        <td th:text="${element.getCarrierPay().getAmount()}"></td>
+                                        <td><button th:id="${element.getId()}" class="btn btn-success waves-effect" data-toggle="modal" data-target="#myModal" onclick="moreDetailed(this)"><i class="mdi mdi-vector-difference"></i></button> </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div id="myModal" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="inner-block">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-6"></div>
+                    <div class="col-xl-6"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:insert="blocks/footer :: footer"></div>
+</div>
+<!-- JAVASCRIPT -->
+<script src="assets/libs/jquery/jquery.min.js"></script>
+<script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/libs/metismenu/metisMenu.min.js"></script>
+<script src="assets/libs/simplebar/simplebar.min.js"></script>
+<script src="assets/libs/node-waves/waves.min.js"></script>
+<!-- Required datatable js -->
+<script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+<!-- Buttons examples -->
+<script src="assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+<script src="assets/libs/jszip/jszip.min.js"></script>
+<script src="assets/libs/pdfmake/build/pdfmake.min.js"></script>
+<script src="assets/libs/pdfmake/build/vfs_fonts.js"></script>
+<script src="assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script src="assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script src="assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+<!-- Responsive examples -->
+<script src="assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+<!-- Datatable init js -->
+<script src="assets/js/pages/datatables.init.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/jquery.maskedinput.min.js"></script>
+<!-- My Scripts -->
+<script type="text/javascript" th:inline="javascript">
+    function moreDetailed(element) {
+        let formings = [[${formings}]];
+        for (let i = 0; i < formings.length; i++) {
+            if (formings[i].id == $(element).attr("id")) {
+                details(formings[i]);
+            }
+        }
+    }
+    function innerDV() {
+        let id = $('#transporter').val();
+
+        let drivers = [[${drivers}]];
+        let vehicles = [[${vehicles}]];
+
+        let optionDrivers = $('.driver');
+        let optionVehicles = $('.vehicle');
+        optionDrivers.empty();
+        optionVehicles.empty();
+        for (let i = 0; i < drivers.length; i++) {
+            if (drivers[i].transporter.id == id) {
+                optionDrivers.append('<option value="' + drivers[i].id + '">' + drivers[i].passport.lastName + ' ' + drivers[i].passport.firstName + ' ' + drivers[i].passport.patronymic + '</option>')
+            }
+        }
+        for (let i = 0; i < vehicles.length; i++) {
+            if (vehicles[i].transporter.id == id) {
+                optionVehicles.append('<option value="' + vehicles[i].id + '">' + vehicles[i].model + '(' + vehicles[i].stateNumber + ')</option>')
+            }
+        }
+    }
+    function innerNew() {
+        let ourCompanies = [[${ourCompanies}]];
+        let formPays = [[${formPays}]];
+        let managers = [[${managers}]];
+        let cargoOwners = [[${cargoOwners}]];
+        let transporters = [[${transporters}]];
+
+        let optionManagers = $('.manager');
+        let optionCargoOwners = $('.cargoOwner');
+        let optionTransporters = $('.transporter');
+        let optionOurCompanyCust = $('.ourCompanyCust');
+        let optionOurCompanyCarr = $('.ourCompanyCarr');
+        let optionFormPayCust = $('.formPayCust');
+        let optionFormPayCarr = $('.formPayCarr');
+
+        for (let i = 0; i < managers.length; i++) {
+            optionManagers.append('<option value="' + managers[i].id + '">' + managers[i].lastName + ' ' + managers[i].firstName + ' ' + managers[i].patronymic + '</option>')
+        }
+        for (let i = 0; i < cargoOwners.length; i++) {
+            optionCargoOwners.append('<option value="' + cargoOwners[i].id + '">' + cargoOwners[i].name + '</option>')
+        }
+        for (let i = 0; i < transporters.length; i++) {
+            optionTransporters.append('<option value="' + transporters[i].id + '">' + transporters[i].name + '</option>')
+        }
+        for (let i = 0; i < ourCompanies.length; i++) {
+            optionOurCompanyCust.append('<option value="' + ourCompanies[i].id + '">' + ourCompanies[i].name + '</option>')
+            optionOurCompanyCarr.append('<option value="' + ourCompanies[i].id + '">' + ourCompanies[i].name + '</option>')
+        }
+        for (let i = 0; i < formPays.length; i++) {
+            optionFormPayCust.append('<option value="' + formPays[i].id + '">' + formPays[i].name + '</option>')
+            optionFormPayCarr.append('<option value="' + formPays[i].id + '">' + formPays[i].name + '</option>')
+        }
+    }
+
+    function innerDetails(element) {
+        let ourCompanies = [[${ourCompanies}]];
+        let formPays = [[${formPays}]];
+        let managers = [[${managers}]];
+        let cargoOwners = [[${cargoOwners}]];
+        let transporters = [[${transporters}]];
+
+        let optionManagers = $('.manager');
+        let optionCargoOwners = $('.cargoOwner');
+        let optionTransporters = $('.transporter');
+        let optionDrivers = $('.driver');
+        let optionVehicles = $('.vehicle');
+        let optionOurCompanyCust = $('.ourCompanyCust');
+        let optionOurCompanyCarr = $('.ourCompanyCarr');
+        let optionFormPayCust = $('.formPayCust');
+        let optionFormPayCarr = $('.formPayCarr');
+
+        optionManagers.append('<option value="' + element.manager.id + '">' + element.manager.lastName + ' ' + element.manager.firstName + ' ' + element.manager.patronymic + '</option>')
+        optionCargoOwners.append('<option value="' + element.cargoOwner.id + '">' + element.cargoOwner.name + '</option>')
+        optionTransporters.append('<option value="' + element.transporter.id + '">' + element.transporter.name + '</option>')
+        optionDrivers.append('<option value="' + element.driver.id + '">' + element.driver.passport.lastName + ' ' + element.driver.passport.firstName + ' ' + element.driver.passport.patronymic + '</option>')
+        optionVehicles.append('<option value="' + element.vehicle.id + '">' + element.vehicle.model + ' (' + element.vehicle.stateNumber + ')</option>')
+        optionOurCompanyCust.append('<option value="' + element.customerPay.ourCompany.id + '">' + element.customerPay.ourCompany.name + '</option>')
+        optionOurCompanyCarr.append('<option value="' + element.carrierPay.ourCompany.id + '">' + element.carrierPay.ourCompany.name + '</option>')
+        optionFormPayCust.append('<option value="' + element.customerPay.formPay.id + '">' + element.customerPay.formPay.name + '</option>')
+        optionFormPayCarr.append('<option value="' + element.carrierPay.formPay.id + '">' + element.carrierPay.formPay.name + '</option>')
+
+        for (let i = 0; i < managers.length; i++) {
+            if (managers[i].id !== element.manager.id) {
+                optionManagers.append('<option value="' + managers[i].id + '">' + managers[i].lastName + ' ' + managers[i].firstName + ' ' + managers[i].patronymic + '</option>')
+            }
+        }
+        for (let i = 0; i < cargoOwners.length; i++) {
+            if (cargoOwners[i].id !== element.cargoOwner.id) {
+                optionCargoOwners.append('<option value="' + cargoOwners[i].id + '">' + cargoOwners[i].name + '</option>')
+            }
+        }
+        for (let i = 0; i < transporters.length; i++) {
+            if (transporters[i].id !== element.transporter.id) {
+                optionTransporters.append('<option value="' + transporters[i].id + '">' + transporters[i].name + '</option>')
+            }
+        }
+        for (let i = 0; i < ourCompanies.length; i++) {
+            if (ourCompanies[i].id !== element.customerPay.ourCompany.id) {
+                optionOurCompanyCust.append('<option value="' + ourCompanies[i].id + '">' + ourCompanies[i].name + '</option>')
+            }
+        }
+        for (let i = 0; i < ourCompanies.length; i++) {
+            if (ourCompanies[i].id !== element.carrierPay.ourCompany.id) {
+                optionOurCompanyCarr.append('<option value="' + ourCompanies[i].id + '">' + ourCompanies[i].name + '</option>')
+            }
+        }
+        for (let i = 0; i < formPays.length; i++) {
+            if (formPays[i].id !== element.customerPay.formPay.id) {
+                optionFormPayCust.append('<option value="' + formPays[i].id + '">' + formPays[i].name + '</option>')
+            }
+        }
+        for (let i = 0; i < formPays.length; i++) {
+            if (formPays[i].id !== element.carrierPay.formPay.id) {
+                optionFormPayCarr.append('<option value="' + formPays[i].id + '">' + formPays[i].name + '</option>')
+            }
+        }
+    }
+
+
+
+</script>
+<script th:inline="javascript" src="assets/js/innerForms/forming/forming.form.js" ></script>
+<script th:inline="javascript" src="assets/js/innerForms/button.events.js"></script>
+<script th:inline="javascript" src="assets/js/innerForms/masked.js"></script>
+</body>
+
+</html>

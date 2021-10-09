@@ -68,8 +68,8 @@
                                     <tr th:each="element : ${drivers}">
                                         <td th:text="${element.getId()}"></td>
                                         <td th:text="${element.getTransporter().getName()}"></td>
-                                        <td th:text="${element.getNumberPhone()}"></td>
                                         <td th:text="${element.getPassport().getLastName()} + ' ' + ${element.getPassport().getFirstName()}"></td>
+                                        <td th:text="${element.getNumberPhone()}"></td>
                                         <td th:text="${element.getPassport().getSerialPassport()} + ' ' + ${element.getPassport().getNumberPassport()}"></td>
                                         <td th:text="${element.getPassport().getIssued()} + ' ' + ${element.getPassport().getIssuedDate()}"></td>
                                         <td><button th:id="${element.getId()}" class="btn btn-success waves-effect" data-toggle="modal" data-target="#myModal" onclick="moreDetailed(this)"><i class="mdi mdi-vector-difference"></i></button></td>

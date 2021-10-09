@@ -20,24 +20,33 @@ public class Forming {
     @OneToOne
     private Cargo cargo;
     @OneToOne
+    private Place loading;
+    @OneToOne
+    private Place unloading;
+    @OneToOne
     private CustomerPay customerPay;
     @OneToOne
     private CarrierPay carrierPay;
+    private String comment;
     private String date;
+
 
     public Forming() {
     }
 
-    public Forming(Manager manager, CargoOwner cargoOwner, Transporter transporter, Driver driver, Vehicle vehicle, Cargo cargo, CustomerPay customerPay, CarrierPay carrierPay, String date) {
+    public Forming(Manager manager, CargoOwner cargoOwner, Transporter transporter, Driver driver, Vehicle vehicle, Cargo cargo, Place loading, Place unloading, CustomerPay customerPay, CarrierPay carrierPay, String date, String comment) {
         this.manager = manager;
         this.cargoOwner = cargoOwner;
         this.transporter = transporter;
         this.driver = driver;
         this.vehicle = vehicle;
         this.cargo = cargo;
+        this.loading = loading;
+        this.unloading = unloading;
         this.customerPay = customerPay;
         this.carrierPay = carrierPay;
         this.date = date;
+        this.comment = comment;
     }
 
     public Long getId() {
@@ -96,6 +105,22 @@ public class Forming {
         this.cargo = cargo;
     }
 
+    public Place getLoading() {
+        return loading;
+    }
+
+    public void setLoading(Place loading) {
+        this.loading = loading;
+    }
+
+    public Place getUnloading() {
+        return unloading;
+    }
+
+    public void setUnloading(Place unloading) {
+        this.unloading = unloading;
+    }
+
     public CustomerPay getCustomerPay() {
         return customerPay;
     }
@@ -118,5 +143,13 @@ public class Forming {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 }
