@@ -41,15 +41,13 @@ function details(element) {
         '                                            </select>' +
         '                                        </div>' +
         '                                    </div>' +
+        '                                    <div class="cargo-add"> </div>'  +
         '                                    <div class="form-group row">' +
-        '                                        <label class="col-sm-3 col-form-label">Груз</label>' +
+        '                                        <label class="col-sm-3 col-form-label">Комментарий</label>' +
         '                                        <div class="col-sm-9">' +
-            '                                        <div class="cargo-add">' +
-            '                                            <input id="cargo" value="' + element.cargo.name + '" text="' + element.cargo.name + '" type="text" name="cargo" class="form-control form-details cargo" placeholder="" required disabled>' +
-            '                                        </div>' +
+        '                                            <input id="comment" value="' + element.comment + '" text="' + element.comment + '" type="text" name="comment" class="form-control form-details comment" placeholder="Комментарии к перевозке" required disabled>' +
         '                                        </div>' +
         '                                    </div>' +
-
         '                                    <h5 class="card-title text-center border-top"><br>Данные о погрузке<br></h5>' +
         '                                    <div class="form-group row">' +
         '                                        <label class="col-sm-3 col-form-label">Дата погрузки</label>' +
@@ -57,21 +55,15 @@ function details(element) {
         '                                            <input id="loadingDate" value="' + element.loading.date + '" text="' + element.loading.date + '" type="date" name="loadingDate" class="form-control form-details loadingDate" placeholder="" required disabled>' +
         '                                        </div>' +
         '                                    </div>' +
-        '                                    <div class="form-group row">' +
-        '                                        <label class="col-sm-3 col-form-label">Место погрузки</label>' +
-        '                                        <div class="col-sm-9">' +
-            '                                        <div class="loadingPlace-add">' +
-            '                                            <input id="loadingPlace" value="' + element.loading.place + '" text="' + element.loading.place + '" type="text" name="loadingPlace" class="form-control form-details loadingPlace" placeholder="" required disabled>' +
-            '                                        </div>' +
-        '                                        </div>' +
-        '                                    </div>' +
+        '                                    <div class="loading-add"> </div>'  +
         '                                    <div class="form-group row">' +
         '                                        <label class="col-sm-3 col-form-label">Контактное лицо</label>' +
-        '                                        <div class="col-sm-5">' +
-        '                                            <input id="loadingPerson" value="' + element.loading.person + '" text="' + element.loading.person + '" type="text" name="loadingPerson" class="form-control form-details loadingPerson" placeholder="" required disabled>' +
-        '                                        </div>' +
         '                                        <div class="col-sm-4">' +
-        '                                            <input id="loadingNumber" value="' + element.loading.date + '" text="' + element.loading.date + '" type="text" name="loadingNumber" class="form-control form-details loadingNumber" placeholder="" required disabled>' +
+        '                                            <input id="loadingPerson" value="' + element.loading.person + '" text="' + element.loading.person + '" type="text" name="loadingPerson" class="form-control form-details loadingPerson" placeholder="Имя" required disabled>' +
+        '                                        </div>' +
+        '                                        <label class="col-sm-2 col-form-label">Номер</label>' +
+        '                                        <div class="col-sm-3">' +
+        '                                            <input id="loadingNumber" value="' + element.loading.number + '" text="' + element.loading.number + '" type="text" name="loadingNumber" class="form-control form-details loadingNumber" placeholder="" required disabled>' +
         '                                        </div>' +
         '                                    </div>' +
 
@@ -82,21 +74,15 @@ function details(element) {
         '                                            <input id="unloadingDate" value="' + element.unloading.date + '" text="' + element.unloading.date + '" type="date" name="unloadingDate" class="form-control form-details unloadingDate" placeholder="" required disabled>' +
         '                                        </div>' +
         '                                    </div>' +
-        '                                    <div class="form-group row">' +
-        '                                        <label class="col-sm-3 col-form-label">Место выгрузке</label>' +
-        '                                        <div class="col-sm-9">' +
-        '                                        <div class="unloadingPlace-add">' +
-        '                                            <input id="unloadingPlace" value="' + element.unloading.place + '" text="' + element.unloading.place + '" type="text" name="unloadingPlace" class="form-control form-details loadingPlace" placeholder="" required disabled>' +
-        '                                        </div>' +
-        '                                        </div>' +
-        '                                    </div>' +
+        '                                    <div class="unloading-add"> </div>'  +
         '                                    <div class="form-group row">' +
         '                                        <label class="col-sm-3 col-form-label">Контактное лицо</label>' +
-        '                                        <div class="col-sm-5">' +
-        '                                            <input id="unloadingPerson" value="' + element.unloading.person + '" text="' + element.unloading.person + '" type="text" name="unloadingPerson" class="form-control form-details loadingPerson" placeholder="" required disabled>' +
-        '                                        </div>' +
         '                                        <div class="col-sm-4">' +
-        '                                            <input id=unloadingNumber" value="' + element.unloading.date + '" text="' + element.unloading.date + '" type="text" name="unloadingNumber" class="form-control form-details loadingNumber" placeholder="" required disabled>' +
+        '                                            <input id="unloadingPerson" value="' + element.unloading.person + '" text="' + element.unloading.person + '" type="text" name="unloadingPerson" class="form-control form-details unloadingPerson" placeholder="Имя" required disabled>' +
+        '                                        </div>' +
+        '                                        <label class="col-sm-2 col-form-label">Номер</label>' +
+        '                                        <div class="col-sm-3">' +
+        '                                            <input id=unloadingNumber" value="' + element.unloading.number + '" text="' + element.unloading.number + '" type="text" name="unloadingNumber" class="form-control form-details unloadingNumber" placeholder="" required disabled>' +
         '                                        </div>' +
         '                                    </div>' +
 
@@ -117,9 +103,10 @@ function details(element) {
         '                                    </div>' +
         '                                    <div class="form-group row">' +
         '                                        <label class="col-sm-3 col-form-label">Сумма рейса</label>' +
-        '                                        <div class="col-sm-4">' +
-        '                                            <input id="amountCust" value="' + element.customerPay.amount + '" text="' + element.customerPay.amount + '" type="text" name="amountCust" class="form-control form-details amountCust" placeholder="Сумма" required disabled>' +
+        '                                        <div class="col-sm-2">' +
+        '                                            <input id="amountCust" value="' + element.customerPay.amount + '" text="' + element.customerPay.amount + '" type="text" name="amountCust" class="form-control form-details amountCust" placeholder="Сумма в рублях" required disabled>' +
         '                                        </div>' +
+        '                                        <label class="col-sm-2 col-form-label">Прописью</label>' +
         '                                        <div class="col-sm-5">' +
         '                                            <input id=amountWordsCust" value="' + element.customerPay.amountWords + '" text="' + element.customerPay.amountWords + '" type="text" name="amountWordsCust" class="form-control form-details amountWordsCust" placeholder="Сумма прописью" required disabled>' +
         '                                        </div>' +
@@ -127,7 +114,7 @@ function details(element) {
         '                                    <div class="form-group row">' +
         '                                        <label class="col-sm-3 col-form-label">Условия оплаты</label>' +
         '                                        <div class="col-sm-9">' +
-        '                                            <input id="payTermsCust" value="' + element.customerPay.payTerms + '" text="' + element.customerPay.payTerms + '" type="text" name="payTermsCust" class="form-control form-details payTermsCust" placeholder="" required disabled>' +
+        '                                            <input id="payTermsCust" value="' + element.customerPay.payTerms + '" text="' + element.customerPay.payTerms + '" type="text" name="payTermsCust" class="form-control form-details payTermsCust" placeholder="Условия оплаты" required disabled>' +
         '                                        </div>' +
         '                                    </div>' +
 
@@ -148,9 +135,10 @@ function details(element) {
         '                                    </div>' +
         '                                    <div class="form-group row">' +
         '                                        <label class="col-sm-3 col-form-label">Сумма рейса</label>' +
-        '                                        <div class="col-sm-4">' +
-        '                                            <input id="amountCarr" value="' + element.customerPay.amount + '" text="' + element.customerPay.amount + '" type="text" name="amountCarr" class="form-control form-details amountCarr" placeholder="Сумма" required disabled>' +
+        '                                        <div class="col-sm-2">' +
+        '                                            <input id="amountCarr" value="' + element.customerPay.amount + '" text="' + element.customerPay.amount + '" type="text" name="amountCarr" class="form-control form-details amountCarr" placeholder="Сумма в рублях" required disabled>' +
         '                                        </div>' +
+        '                                        <label class="col-sm-2 col-form-label">Прописью</label>' +
         '                                        <div class="col-sm-5">' +
         '                                            <input id=amountWordsCarr" value="' + element.customerPay.amountWords + '" text="' + element.customerPay.amountWords + '" type="text" name="amountWordsCarr" class="form-control form-details amountWordsCarr" placeholder="Сумма прописью" required disabled>' +
         '                                        </div>' +
@@ -158,7 +146,7 @@ function details(element) {
         '                                    <div class="form-group row">' +
         '                                        <label class="col-sm-3 col-form-label">Условия оплаты</label>' +
         '                                        <div class="col-sm-9">' +
-        '                                            <input id="payTermsCarr" value="' + element.customerPay.payTerms + '" text="' + element.customerPay.payTerms + '" type="text" name="payTermsCarr" class="form-control form-details payTermsCarr" placeholder="" required disabled>' +
+        '                                            <input id="payTermsCarr" value="' + element.customerPay.payTerms + '" text="' + element.customerPay.payTerms + '" type="text" name="payTermsCarr" class="form-control form-details payTermsCarr" placeholder="Условия оплаты" required disabled>' +
         '                                        </div>' +
         '                                    </div>' +
         '                                   <div class="form-group row buttons-save" style="display: none">' +
@@ -175,6 +163,8 @@ function details(element) {
         '                            </div>' +
         '                        </div>');
     innerDetails(element);
+    $(".unloadingNumber").mask("8 999 999-9999");
+    $("#loadingNumber").mask("8 999 999-9999");
 }
 
 function newForming() {
@@ -185,13 +175,6 @@ function newForming() {
         '                                            <h4 class="card-title">Новое формирование</h4>'  +
         '                                            <p class="card-title-desc">Создайте новое формирование</p>'  +
         '                                            <form id="form-input" action="/forming" method="post">'  +
-        // '                                                <div class="form-group row">'  +
-        // '                                                    <label class="col-sm-3 col-form-label">Организации</label>'  +
-        // '                                                    <div class="col-sm-9">'  +
-        // '                                                        <div class="btn-group btn-group-toggle organization" data-toggle="buttons">'  +
-        // '                                                        </div>'  +
-        // '                                                    </div>'  +
-        // '                                                </div>'  +
         '                                                <h5 class="card-title text-center border-top"><br>Основная информация<br></h5>'  +
         '                                                <div class="form-group row">'  +
         '                                                    <label class="col-sm-3 col-form-label">Менеджер</label>'  +
@@ -250,7 +233,7 @@ function newForming() {
         '                                             <div class="form-group row">' +
         '                                                 <label class="col-sm-3 col-form-label">Комментарий</label>' +
         '                                                    <div class="col-sm-9">' +
-        '                                                        <input id="comment" type="text" name="comment" class="form-control form-details comment" placeholder="" required>' +
+        '                                                        <input id="comment" type="text" name="comment" class="form-control form-details comment" placeholder="Комментарии к перевозке" required>' +
         '                                                  </div>' +
         '                                             </div>' +
         '                                                <h5 class="card-title text-center border-top"><br>Данные о погрузке<br></h5>'  +
@@ -277,7 +260,7 @@ function newForming() {
         '                                                <div class="form-group row">'  +
         '                                                    <label class="col-sm-3 col-form-label">Контактное лицо</label>'  +
         '                                                    <div class="col-sm-5">'  +
-        '                                                        <input id="loadingPerson" type="text" name="loadingPerson" class="form-control form-details loadingPerson" placeholder="" required>'  +
+        '                                                        <input id="loadingPerson" type="text" name="loadingPerson" class="form-control form-details loadingPerson" placeholder="Имя" required>'  +
         '                                                    </div>'  +
         '                                                    <div class="col-sm-4">'  +
         '                                                        <input id="loadingNumber" type="text" name="loadingNumber" class="form-control form-details loadingNumber" placeholder="" required>'  +
@@ -308,10 +291,10 @@ function newForming() {
         '                                                <div class="form-group row">'  +
         '                                                    <label class="col-sm-3 col-form-label">Контактное лицо</label>'  +
         '                                                    <div class="col-sm-5">'  +
-        '                                                        <input id="unloadingPerson" type="text" name="unloadingPerson" class="form-control form-details loadingPerson" placeholder="" required>'  +
+        '                                                        <input id="unloadingPerson" type="text" name="unloadingPerson" class="form-control form-details unloadingPerson" placeholder="Имя" required>'  +
         '                                                    </div>'  +
         '                                                    <div class="col-sm-4">'  +
-        '                                                        <input id=unloadingNumber" type="text" name="unloadingNumber" class="form-control form-details loadingNumber" placeholder="" required>'  +
+        '                                                        <input id=unloadingNumber" type="text" name="unloadingNumber" class="form-control form-details unloadingNumber" placeholder="" required>'  +
         '                                                    </div>'  +
         '                                                </div>'  +
         '                                               <h5 class="card-title text-center border-top"><br>Оплата для грузовладельца<br></h5>' +
@@ -334,7 +317,7 @@ function newForming() {
         '                                              <div class="form-group row">' +
         '                                                 <label class="col-sm-3 col-form-label">Сумма рейса</label>' +
         '                                                  <div class="col-sm-4">' +
-        '                                                        <input id="amountCust" type="text" name="amountCust" class="form-control form-details amountCust" placeholder="Сумма" required>' +
+        '                                                        <input id="amountCust" type="text" name="amountCust" class="form-control form-details amountCust" placeholder="Сумма в рублях" required>' +
         '                                                    </div>' +
         '                                                    <div class="col-sm-5">' +
         '                                                      <input id=amountWordsCust" type="text" name="amountWordsCust" class="form-control form-details amountWordsCust" placeholder="Сумма прописью" required>' +
@@ -343,7 +326,7 @@ function newForming() {
         '                                              <div class="form-group row">' +
         '                                                    <label class="col-sm-3 col-form-label">Условия оплаты</label>' +
         '                                                    <div class="col-sm-9">' +
-        '                                                        <input id="payTermsCust" type="text" name="payTermsCust" class="form-control form-details payTermsCust" placeholder="" required>' +
+        '                                                        <input id="payTermsCust" type="text" name="payTermsCust" class="form-control form-details payTermsCust" placeholder="Условия оплаты" required>' +
         '                                                    </div>' +
         '                                               </div>' +
 
@@ -367,7 +350,7 @@ function newForming() {
         '                                              <div class="form-group row">' +
         '                                                   <label class="col-sm-3 col-form-label">Сумма рейса</label>' +
         '                                                   <div class="col-sm-4">' +
-        '                                                       <input id="amountCarr" type="text" name="amountCarr" class="form-control form-details amountCarr" placeholder="Сумма" required>' +
+        '                                                       <input id="amountCarr" type="text" name="amountCarr" class="form-control form-details amountCarr" placeholder="Сумма в рублях" required>' +
         '                                                 </div>' +
         '                                                    <div class="col-sm-5">' +
         '                                                        <input id=amountWordsCarr" type="text" name="amountWordsCarr" class="form-control form-details amountWordsCarr" placeholder="Сумма прописью" required>' +
@@ -376,7 +359,7 @@ function newForming() {
         '                                             <div class="form-group row">' +
         '                                                 <label class="col-sm-3 col-form-label">Условия оплаты</label>' +
         '                                                    <div class="col-sm-9">' +
-        '                                                        <input id="payTermsCarr" type="text" name="payTermsCarr" class="form-control form-details payTermsCarr" placeholder="" required>' +
+        '                                                        <input id="payTermsCarr" type="text" name="payTermsCarr" class="form-control form-details payTermsCarr" placeholder="Условия оплаты" required>' +
         '                                                  </div>' +
         '                                             </div>' +
         '                                               <div class="row">' +
@@ -387,6 +370,8 @@ function newForming() {
         '                               </div>' +
         '</div>');
     innerNew();
+    $(".unloadingNumber").mask("8 999 999-9999");
+    $("#loadingNumber").mask("8 999 999-9999");
 }
 
 function cargoAdd() {

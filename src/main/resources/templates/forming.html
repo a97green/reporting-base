@@ -52,6 +52,7 @@
                                     <thead>
                                     <tr>
                                         <th>ID</th>
+                                        <th>Дата формирования</th>
                                         <th>Менеджер</th>
                                         <th>Заказчик</th>
                                         <th>Перевозчик</th>
@@ -67,6 +68,7 @@
                                     <tbody>
                                     <tr th:each="element : ${formings}">
                                         <td th:text="${element.getId()}"></td>
+                                        <td th:text="${element.getDate()}"></td>
                                         <td th:text="${element.getManager().getLastName()} + ' ' + ${element.getManager().getFirstName()} + ' ' + ${element.getManager().getPatronymic()}"></td>
                                         <td th:text="${element.getCargoOwner().getName()}"></td>
                                         <td th:text="${element.getTransporter().getName()}"></td>
@@ -211,20 +213,25 @@
         let optionTransporters = $('.transporter');
         let optionDrivers = $('.driver');
         let optionVehicles = $('.vehicle');
+        let optionCargo = $('.cargo-add');
+        let optionLoading = $('.loading-add');
+        let optionUnloading = $('.unloading-add');
         let optionOurCompanyCust = $('.ourCompanyCust');
         let optionOurCompanyCarr = $('.ourCompanyCarr');
         let optionFormPayCust = $('.formPayCust');
         let optionFormPayCarr = $('.formPayCarr');
 
-        optionManagers.append('<option value="' + element.manager.id + '">' + element.manager.lastName + ' ' + element.manager.firstName + ' ' + element.manager.patronymic + '</option>')
-        optionCargoOwners.append('<option value="' + element.cargoOwner.id + '">' + element.cargoOwner.name + '</option>')
-        optionTransporters.append('<option value="' + element.transporter.id + '">' + element.transporter.name + '</option>')
-        optionDrivers.append('<option value="' + element.driver.id + '">' + element.driver.passport.lastName + ' ' + element.driver.passport.firstName + ' ' + element.driver.passport.patronymic + '</option>')
-        optionVehicles.append('<option value="' + element.vehicle.id + '">' + element.vehicle.model + ' (' + element.vehicle.stateNumber + ')</option>')
-        optionOurCompanyCust.append('<option value="' + element.customerPay.ourCompany.id + '">' + element.customerPay.ourCompany.name + '</option>')
-        optionOurCompanyCarr.append('<option value="' + element.carrierPay.ourCompany.id + '">' + element.carrierPay.ourCompany.name + '</option>')
-        optionFormPayCust.append('<option value="' + element.customerPay.formPay.id + '">' + element.customerPay.formPay.name + '</option>')
-        optionFormPayCarr.append('<option value="' + element.carrierPay.formPay.id + '">' + element.carrierPay.formPay.name + '</option>')
+        {
+            optionManagers.append('<option value="' + element.manager.id + '">' + element.manager.lastName + ' ' + element.manager.firstName + ' ' + element.manager.patronymic + '</option>')
+            optionCargoOwners.append('<option value="' + element.cargoOwner.id + '">' + element.cargoOwner.name + '</option>')
+            optionTransporters.append('<option value="' + element.transporter.id + '">' + element.transporter.name + '</option>')
+            optionDrivers.append('<option value="' + element.driver.id + '">' + element.driver.passport.lastName + ' ' + element.driver.passport.firstName + ' ' + element.driver.passport.patronymic + '</option>')
+            optionVehicles.append('<option value="' + element.vehicle.id + '">' + element.vehicle.model + ' (' + element.vehicle.stateNumber + ')</option>')
+            optionOurCompanyCust.append('<option value="' + element.customerPay.ourCompany.id + '">' + element.customerPay.ourCompany.name + '</option>')
+            optionOurCompanyCarr.append('<option value="' + element.carrierPay.ourCompany.id + '">' + element.carrierPay.ourCompany.name + '</option>')
+            optionFormPayCust.append('<option value="' + element.customerPay.formPay.id + '">' + element.customerPay.formPay.name + '</option>')
+            optionFormPayCarr.append('<option value="' + element.carrierPay.formPay.id + '">' + element.carrierPay.formPay.name + '</option>')
+        }
 
         for (let i = 0; i < managers.length; i++) {
             if (managers[i].id !== element.manager.id) {
@@ -261,10 +268,38 @@
                 optionFormPayCarr.append('<option value="' + formPays[i].id + '">' + formPays[i].name + '</option>')
             }
         }
+        for (let i = 0; i < element.cargo.length; i++) {
+            optionCargo.append('' +
+                '                                   <div class="form-group row">' +
+                '                                       <label class="col-sm-3 col-form-label">Груз №' + i + '</label>' +
+                '                                       <div class="col-sm-5">' +
+                '                                           <input id="cargo" value="' + element.cargo[i].name + '" text="' + element.cargo[i].name + '" type="text" name="cargo" class="form-control form-details cargo" placeholder="Наименование груза" required disabled>' +
+                '                                       </div>' +
+                '                                       <label class="col-sm-1 col-form-label">Вес</label>' +
+                '                                       <div class="col-sm-3">' +
+                '                                           <input id="cargo" value="' + element.cargo[i].weight + '" text="' + element.cargo[i].weight + '" type="text" name="cargo" class="form-control form-details cargo" placeholder="Вес груза" required disabled>' +
+                '                                       </div>' +
+                '                                   </div>');
+        }
+        for (let i = 0; i < element.loading.positions.length; i++) {
+            optionLoading.append('' +
+                '                                   <div class="form-group row">' +
+                '                                       <label class="col-sm-3 col-form-label">Место погрузки №' + i + '</label>' +
+                '                                       <div class="col-sm-9">' +
+                '                                           <input id="loadingPlace" value="' + element.loading.positions[i].position + '" text="' + element.loading.positions[i].position + '" type="text" name="loadingPlace" class="form-control form-details loadingPlace" placeholder="" required disabled>' +
+                '                                       </div>' +
+                '                                   </div>');
+        }
+        for (let i = 0; i < element.unloading.positions.length; i++) {
+            optionUnloading.append('' +
+                '                                   <div class="form-group row">' +
+                '                                       <label class="col-sm-3 col-form-label">Место выгрузки №' + i + '</label>' +
+                '                                       <div class="col-sm-9">' +
+                '                                           <input id="loadingPlace" value="' + element.unloading.positions[i].position + '" text="' + element.unloading.positions[i].position + '" type="text" name="loadingPlace" class="form-control form-details loadingPlace" placeholder="" required disabled>' +
+                '                                       </div>' +
+                '                                   </div>');
+        }
     }
-
-
-
 </script>
 <script th:inline="javascript" src="assets/js/innerForms/forming/forming.form.js" ></script>
 <script th:inline="javascript" src="assets/js/innerForms/button.events.js"></script>

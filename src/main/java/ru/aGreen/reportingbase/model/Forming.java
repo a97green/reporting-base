@@ -1,6 +1,7 @@
 package ru.aGreen.reportingbase.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Forming {
@@ -17,8 +18,8 @@ public class Forming {
     private Driver driver;
     @OneToOne
     private Vehicle vehicle;
-    @OneToOne
-    private Cargo cargo;
+    @OneToMany
+    private List<Cargo> cargo;
     @OneToOne
     private Place loading;
     @OneToOne
@@ -34,7 +35,7 @@ public class Forming {
     public Forming() {
     }
 
-    public Forming(Manager manager, CargoOwner cargoOwner, Transporter transporter, Driver driver, Vehicle vehicle, Cargo cargo, Place loading, Place unloading, CustomerPay customerPay, CarrierPay carrierPay, String date, String comment) {
+    public Forming(Manager manager, CargoOwner cargoOwner, Transporter transporter, Driver driver, Vehicle vehicle, List<Cargo> cargo, Place loading, Place unloading, CustomerPay customerPay, CarrierPay carrierPay, String date, String comment) {
         this.manager = manager;
         this.cargoOwner = cargoOwner;
         this.transporter = transporter;
@@ -97,11 +98,11 @@ public class Forming {
         this.vehicle = vehicle;
     }
 
-    public Cargo getCargo() {
+    public List<Cargo> getCargo() {
         return cargo;
     }
 
-    public void setCargo(Cargo cargo) {
+    public void setCargo(List<Cargo> cargo) {
         this.cargo = cargo;
     }
 

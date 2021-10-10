@@ -1,25 +1,24 @@
 package ru.aGreen.reportingbase.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Place {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String place;
     private String person;
     private String number;
     private String date;
+    @OneToMany
+    private List<Position> positions;
 
     public Place() {
     }
 
-    public Place(String place, String person, String number, String date) {
-        this.place = place;
+    public Place(List<Position> positions, String person, String number, String date) {
+        this.positions = positions;
         this.person = person;
         this.number = number;
         this.date = date;
@@ -31,14 +30,6 @@ public class Place {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getPlace() {
-        return place;
-    }
-
-    public void setPlace(String place) {
-        this.place = place;
     }
 
     public String getPerson() {
@@ -63,5 +54,13 @@ public class Place {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public List<Position> getPositions() {
+        return positions;
+    }
+
+    public void setPositions(List<Position> positions) {
+        this.positions = positions;
     }
 }

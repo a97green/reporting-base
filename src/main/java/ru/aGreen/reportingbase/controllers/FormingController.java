@@ -9,9 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.aGreen.reportingbase.model.*;
 import ru.aGreen.reportingbase.repositories.*;
 
-import java.util.Date;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.time.LocalDate;
+import java.util.*;
 
 @Controller
 public class FormingController {
@@ -27,10 +26,11 @@ public class FormingController {
     private final CustomerPayRepository customerPayRepository;
     private final CarrierPayRepository carrierPayRepository;
     private final FormPayRepository formPayRepository;
+    private final PositionRepository positionRepository;
 
 
     @Autowired
-    public FormingController(FormingRepository formingRepository, OurCompanyRepository ourCompanyRepository, ManagerRepository managerRepository, CargoOwnerRepository cargoOwnerRepository, TransporterRepository transporterRepository, DriverRepository driverRepository, VehicleRepository vehicleRepository, CargoRepository cargoRepository, PlaceRepository placeRepository, CustomerPayRepository customerPayRepository, CarrierPayRepository carrierPayRepository, FormPayRepository formPayRepository) {
+    public FormingController(FormingRepository formingRepository, OurCompanyRepository ourCompanyRepository, ManagerRepository managerRepository, CargoOwnerRepository cargoOwnerRepository, TransporterRepository transporterRepository, DriverRepository driverRepository, VehicleRepository vehicleRepository, CargoRepository cargoRepository, PlaceRepository placeRepository, CustomerPayRepository customerPayRepository, CarrierPayRepository carrierPayRepository, FormPayRepository formPayRepository, PositionRepository positionRepository) {
         this.formingRepository = formingRepository;
         this.ourCompanyRepository = ourCompanyRepository;
         this.managerRepository = managerRepository;
@@ -43,6 +43,7 @@ public class FormingController {
         this.customerPayRepository = customerPayRepository;
         this.carrierPayRepository = carrierPayRepository;
         this.formPayRepository = formPayRepository;
+        this.positionRepository = positionRepository;
     }
 
     @GetMapping("/forming")
@@ -82,17 +83,10 @@ public class FormingController {
                              @RequestParam Long transporter,
                              @RequestParam Long driver,
                              @RequestParam Long vehicle,
-                             @RequestParam("cargo[]") List<String> cargo,
-                             @RequestParam("weight[]") List<String> weight,
                              @RequestParam String comment,
-                             @RequestParam String loadingDate,
-                             @RequestParam("loadingPlace[]") List<String> loadingPlace,
-                             @RequestParam String loadingPerson,
-                             @RequestParam String loadingNumber,
-                             @RequestParam String unloadingDate,
-                             @RequestParam("loadingPlace[]") List<String> unloadingPlace,
-                             @RequestParam String unloadingPerson,
-                             @RequestParam String unloadingNumber,
+                             @RequestParam("cargo[]") List<String> cargo, @RequestParam("weight[]") List<String> weight,
+                             @RequestParam("loadingPlace[]") List<String> loadingPlace, @RequestParam String loadingPerson, @RequestParam String loadingDate, @RequestParam String loadingNumber,
+                             @RequestParam("loadingPlace[]") List<String> unloadingPlace, @RequestParam String unloadingPerson, @RequestParam String unloadingNumber, @RequestParam String unloadingDate,
                              @RequestParam Long ourCompanyCust,
                              @RequestParam Long formPayCust,
                              @RequestParam String amountCust,
@@ -104,8 +98,7 @@ public class FormingController {
                              @RequestParam String amountWordsCarr,
                              @RequestParam String payTermsCarr,
                              Model model) {
-        Cargo cargo1 = createCargo(cargo,weight);
-        cargoRepository.save(cargo1);
+        List<Cargo> cargo1 = createCargo(cargo,weight);
         Place loadingPlace1 = createPlace(loadingPlace, loadingPerson, loadingNumber, loadingDate);
         placeRepository.save(loadingPlace1);
         Place unloadingPlace1 = createPlace(unloadingPlace, unloadingPerson, unloadingNumber, unloadingDate);
@@ -125,32 +118,34 @@ public class FormingController {
                 unloadingPlace1,
                 customerPay,
                 carrierPay,
-                new Date().toString(),
+                LocalDate.now().toString(),
                 comment);
         formingRepository.save(forming);
         return "redirect:/forming";
     }
 
-    private Cargo createCargo(List<String> cargos, List<String> weights) {
-        StringBuilder cargo = new StringBuilder();
-        StringBuilder weight = new StringBuilder();
-
-        for (String s : cargos) {
-            cargo.append(s).append(";");
+    private List<Cargo> createCargo(List<String> cargos, List<String> weights) {
+        List<Cargo> cargos1 = new ArrayList<>();
+        for (int i = 0; i < cargos.size(); i++) {
+            if (!(cargos.get(i).equals("") || cargos.get(i) == null)) {
+                Cargo cargo = new Cargo(cargos.get(i), weights.get(i));
+                cargoRepository.save(cargo);
+                cargos1.add(cargo);
+            }
         }
-        for (String s : weights) {
-            weight.append(s).append(";");
-
-        }
-        return new Cargo(cargo.toString(), weight.toString());
+        return cargos1;
     }
 
     private Place createPlace(List<String> places, String person, String number, String date) {
-        StringBuilder place = new StringBuilder();
+        List<Position> positions = new ArrayList<>();
         for (String s : places) {
-            place.append(s).append(";");
+            if (!s.equals("")) {
+                Position position = new Position(s);
+                positionRepository.save(position);
+                positions.add(position);
+            }
         }
-        return new Place(place.toString(), person, number, date);
+        return new Place(positions, person, number, date);
     }
 
 }
