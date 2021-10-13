@@ -4,6 +4,36 @@ function details(element) {
     innerBlock.append('<div class="card animate__animated animate__fadeIn animate__fast">' +
         '                            <div class="card-body">' +
         '                                <h4 class="card-title">Карточка рейса</h4>' +
+        '                                    <div class="form-group row">' +
+        '                                        <label class="col-sm-9 col-form-label"></label>' +
+        '                                        <div class="col-sm-3">' +
+        '                                          <div class="dropdown pt-3 d-inline-block">\n' +
+        '                                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\n' +
+        '                                                 <i class="mdi mdi-printer-check mr-1"></i>Печать <i class="mdi mdi-chevron-down"></i>\n' +
+        '                                            </a>\n' +
+        '                                              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">\n' +
+        '                                                   <form target="_blank" action="/print/act/' + element.id + '" method="get">' +
+        '                                                       <button type="submit" class="dropdown-item">Акт</button>\n' +
+        '                                                   </form>' +
+        '                                                   <form target="_blank"  action="/print/payment/' + element.id + '" method="get">' +
+        '                                                       <button type="submit" class="dropdown-item">Счёт</button>\n' +
+        '                                                   </form>' +
+        '                                                   <form target="_blank" action="/print/invoice/' + element.id + '" method="get">' +
+        '                                                       <button type="submit" class="dropdown-item">Счёт фактура</button>\n' +
+        '                                                   </form>' +
+        '                                                   <form target="_blank" action="/print/app-customer/' + element.id + '" method="get">' +
+        '                                                       <button type="submit" class="dropdown-item">Заявка с заказчиком</button>\n' +
+        '                                                   </form>' +
+        '                                                   <form target="_blank" action="/print/app-carrier/' + element.id + '" method="get">' +
+        '                                                       <button type="submit" class="dropdown-item">Заявка с перевозчиком</button>\n' +
+        '                                                   </form>' +
+        '                                                   <form target="_blank" action="/print/attorney/' + element.id + '" method="get">' +
+        '                                                       <button type="submit" class="dropdown-item">Доверенность</button>\n' +
+        '                                                   </form>' +
+        '                                              </div>\n' +
+        '                                           </div>' +
+        '                                        </div>' +
+        '                                    </div>' +
         '                                <form action="/forming/save/' + element.id + '" method="post">' +
         '                                    <h5 class="card-title text-center border-top"><br>Основная информация<br></h5>' +
         '                                    <div class="form-group row">' +
@@ -136,17 +166,17 @@ function details(element) {
         '                                    <div class="form-group row">' +
         '                                        <label class="col-sm-3 col-form-label">Сумма рейса</label>' +
         '                                        <div class="col-sm-2">' +
-        '                                            <input id="amountCarr" value="' + element.customerPay.amount + '" text="' + element.customerPay.amount + '" type="text" name="amountCarr" class="form-control form-details amountCarr" placeholder="Сумма в рублях" required disabled>' +
+        '                                            <input id="amountCarr" value="' + element.carrierPay.amount + '" text="' + element.carrierPay.amount + '" type="text" name="amountCarr" class="form-control form-details amountCarr" placeholder="Сумма в рублях" required disabled>' +
         '                                        </div>' +
         '                                        <label class="col-sm-2 col-form-label">Прописью</label>' +
         '                                        <div class="col-sm-5">' +
-        '                                            <input id=amountWordsCarr" value="' + element.customerPay.amountWords + '" text="' + element.customerPay.amountWords + '" type="text" name="amountWordsCarr" class="form-control form-details amountWordsCarr" placeholder="Сумма прописью" required disabled>' +
+        '                                            <input id=amountWordsCarr" value="' + element.carrierPay.amountWords + '" text="' + element.carrierPay.amountWords + '" type="text" name="amountWordsCarr" class="form-control form-details amountWordsCarr" placeholder="Сумма прописью" required disabled>' +
         '                                        </div>' +
         '                                    </div>' +
         '                                    <div class="form-group row">' +
         '                                        <label class="col-sm-3 col-form-label">Условия оплаты</label>' +
         '                                        <div class="col-sm-9">' +
-        '                                            <input id="payTermsCarr" value="' + element.customerPay.payTerms + '" text="' + element.customerPay.payTerms + '" type="text" name="payTermsCarr" class="form-control form-details payTermsCarr" placeholder="Условия оплаты" required disabled>' +
+        '                                            <input id="payTermsCarr" value="' + element.carrierPay.payTerms + '" text="' + element.carrierPay.payTerms + '" type="text" name="payTermsCarr" class="form-control form-details payTermsCarr" placeholder="Условия оплаты" required disabled>' +
         '                                        </div>' +
         '                                    </div>' +
         '                                   <div class="form-group row buttons-save" style="display: none">' +
@@ -240,7 +270,7 @@ function newForming() {
         '                                                <div class="form-group row">'  +
         '                                                    <label class="col-sm-3 col-form-label">Дата погрузки</label>'  +
         '                                                    <div class="col-sm-9">'  +
-        '                                                        <input id="loadingDate" type="date" name="loadingDate" class="form-control form-details loadingDate" placeholder="" required>'  +
+        '                                                        <input id="loadingDate" type="date" pattern="dd.MM.yyy" name="loadingDate" class="form-control form-details loadingDate" placeholder="" required>'  +
         '                                                    </div>'  +
         '                                                </div>'  +
         '                                                <div class="form-group row">'  +

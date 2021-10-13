@@ -1,4 +1,5 @@
-<html xmlns:o="urn:schemas-microsoft-com:office:office"
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns:o="urn:schemas-microsoft-com:office:office"
 xmlns:x="urn:schemas-microsoft-com:office:excel"
 xmlns:w="http://www.w3.org/TR/REC-html40">
 
@@ -2762,9 +2763,15 @@ DIV будут заменены.-->
   height:14.25pt'>Универсальный</td>
   <td class=xl7523195></td>
   <td class=xl7623195 colspan=10>Счет-фактура №</td>
-  <td colspan=8 class=xl15823195>1</td>
+  <td colspan=8 class=xl15823195>
+   <div th:text="${forming.getId()}"></div>
+
+  </td>
   <td colspan=2 class=xl15723195>от</td>
-  <td colspan=15 class=xl15823195>2</td>
+  <td colspan=15 class=xl15823195>
+   <div th:text="${forming.getLoading().getDate()}"></div>
+
+  </td>
   <td class=xl7723195></td>
   <td class=xl7723195 colspan=2>(1)</td>
   <td class=xl7723195></td>
@@ -2897,7 +2904,10 @@ DIV будут заменены.-->
   <td class=xl8323195></td>
   <td class=xl8323195></td>
   <td class=xl8323195></td>
-  <td colspan=59 class=xl16023195>3</td>
+  <td colspan=59 class=xl16023195>
+   <div th:text="${forming.getCustomerPay().getOurCompany().getName()}"></div>
+
+  </td>
   <td class=xl6723195></td>
   <td class=xl6723195 colspan=2>(2)</td>
   <td class=xl6723195></td>
@@ -2936,7 +2946,10 @@ DIV будут заменены.-->
   <td class=xl8323195></td>
   <td class=xl8323195></td>
   <td class=xl8323195></td>
-  <td colspan=59 class=xl12423195>4</td>
+  <td colspan=59 class=xl12423195>
+   <div th:text="${forming.getCustomerPay().getOurCompany().getLegalAddress()}"></div>
+
+  </td>
   <td class=xl6723195></td>
   <td class=xl6723195 colspan=3>(2а)</td>
   <td class=xl6723195></td>
@@ -2964,7 +2977,10 @@ DIV будут заменены.-->
   <td class=xl8323195></td>
   <td class=xl8323195></td>
   <td class=xl8323195></td>
-  <td colspan=59 class=xl16023195>5</td>
+  <td colspan=59 class=xl16023195>
+   <div th:text="${forming.getCustomerPay().getOurCompany().getInn()} + '/' + ${forming.getCustomerPay().getOurCompany().getKpp()}"></div>
+
+  </td>
   <td class=xl6723195></td>
   <td class=xl6723195 colspan=3>(2б)</td>
   <td class=xl6723195></td>
@@ -3054,7 +3070,10 @@ DIV будут заменены.-->
   <td class=xl8323195></td>
   <td class=xl8323195></td>
   <td class=xl8323195></td>
-  <td colspan=59 class=xl16023195>6</td>
+  <td colspan=59 class=xl16023195>
+   <div th:text="${forming.getCargoOwner().getName()}"></div>
+
+  </td>
   <td class=xl6723195></td>
   <td class=xl6723195 colspan=2>(6)</td>
   <td class=xl6723195></td>
@@ -3081,7 +3100,10 @@ DIV будут заменены.-->
   <td class=xl8323195></td>
   <td class=xl8323195></td>
   <td class=xl8323195></td>
-  <td colspan=59 class=xl16023195>7</td>
+  <td colspan=59 class=xl16023195>
+   <div th:text="${forming.getCargoOwner().getLegalAddress()}"></div>
+
+  </td>
   <td class=xl6723195></td>
   <td class=xl6723195 colspan=3>(6а)</td>
   <td class=xl6723195></td>
@@ -3112,7 +3134,9 @@ DIV будут заменены.-->
   <td class=xl8323195></td>
   <td class=xl8323195></td>
   <td class=xl8323195></td>
-  <td colspan=59 class=xl16023195>8</td>
+  <td colspan=59 class=xl16023195>
+   <div th:text="${forming.getCargoOwner().getInn()} + '/' + ${forming.getCargoOwner().getKpp()}"></div>
+  </td>
   <td class=xl6723195></td>
   <td class=xl6723195 colspan=3>(6б)</td>
   <td class=xl6723195></td>
@@ -3305,7 +3329,13 @@ DIV будут заменены.-->
   <td colspan=9 class=xl17023195 style='border-right:1.0pt solid black;
   border-left:none'>&nbsp;</td>
   <td colspan=14 class=xl13123195 width=168 style='border-right:.5pt solid black;
-  border-left:none;width:126pt'>9</td>
+  border-left:none;width:126pt'>
+   <p th:text="'Транспортно-экспедиционные услуги по маршруту: ' + ${forming.getLoading().getPositions().get(0).getPosition()} + ' - ' + ${forming.getUnloading().getPositions().get(0).getPosition()} +
+                    ', рейс от ' + ${forming.getLoading().getDate()} + ' г.,' + ' вод. ' + ${forming.getDriver().getPassport().getLastName()} + ', т/с: ' + ${forming.getVehicle().getModel()} + ' ' + ${forming.getVehicle().getStateNumber()} +
+                    ', ' + ${forming.getVehicle().getTrailer().getModel()} + ' ' + ${forming.getVehicle().getTrailer().getStateNumber()}">
+
+   </p>
+  </td>
   <td colspan=5 class=xl11823195 style='border-right:.5pt solid black;
   border-left:none'>_</td>
   <td colspan=2 class=xl10623195 style='border-right:.5pt solid black;
@@ -3317,15 +3347,17 @@ DIV будут заменены.-->
   <td colspan=7 class=xl11823195 style='border-right:.5pt solid black;
   border-left:none'>_</td>
   <td colspan=8 class=xl10923195 style='border-right:.5pt solid black;
-  border-left:none'>7 250,00</td>
+  border-left:none'>
+   <div th:text="${forming.getCustomerPay().getAmount()}"></div>
+  </td>
   <td colspan=5 class=xl11223195 style='border-right:.5pt solid black;
   border-left:none'>без акциза</td>
   <td colspan=5 class=xl11523195 style='border-right:.5pt solid black;
   border-left:none'>20%</td>
   <td colspan=8 class=xl10923195 style='border-right:.5pt solid black;
-  border-left:none'>1 450,00</td>
+  border-left:none'>````````</td>
   <td colspan=8 class=xl10923195 style='border-right:.5pt solid black;
-  border-left:none'>8 700,00</td>
+  border-left:none'>``````</td>
   <td colspan=3 class=xl10623195 style='border-right:.5pt solid black;
   border-left:none'>_</td>
   <td colspan=5 class=xl10623195 style='border-right:.5pt solid black;
@@ -3342,7 +3374,10 @@ DIV будут заменены.-->
   <td colspan=7 class=xl11323195>&nbsp;</td>
   <td colspan=5 class=xl18523195 style='border-right:.5pt solid black'>&nbsp;</td>
   <td colspan=8 class=xl18223195 style='border-right:.5pt solid black;
-  border-left:none'>7250,00</td>
+  border-left:none'>
+   <div th:text="${forming.getCustomerPay().getAmount()}"></div>
+
+  </td>
   <td colspan=10 class=xl17223195 style='border-right:.5pt solid black;
   border-left:none'>Х</td>
   <td colspan=8 class=xl10923195 style='border-right:.5pt solid black;
@@ -4070,7 +4105,10 @@ DIV будут заменены.-->
   <td class=xl6423195></td>
   <td class=xl6423195></td>
   <td class=xl9623195></td>
-  <td colspan=18 class=xl10523195>12</td>
+  <td colspan=18 class=xl10523195>
+   <div th:text="${forming.getLoading().getDate()}"></div>
+
+  </td>
   <td class=xl9423195>г.</td>
   <td class=xl6423195></td>
   <td class=xl6423195></td>
@@ -4312,11 +4350,17 @@ DIV будут заменены.-->
   <td class=xl6423195></td>
  </tr>
  <tr class=xl6523195 height=17 style='height:12.75pt'>
-  <td colspan=43 height=17 class=xl18123195 style='height:12.75pt'>10</td>
+  <td colspan=43 height=17 class=xl18123195 style='height:12.75pt'>
+   <div th:text="${forming.getCustomerPay().getOurCompany().getName()} + ' ИНН/КПП ' + ${forming.getCustomerPay().getOurCompany().getInn()} + '/' + ${forming.getCustomerPay().getOurCompany().getKpp()}"></div>
+
+  </td>
   <td class=xl6523195></td>
   <td class=xl7823195 colspan=3 style='border-right:1.0pt solid black'>[14]</td>
   <td class=xl6523195></td>
-  <td colspan=42 class=xl18123195>11</td>
+  <td colspan=42 class=xl18123195>
+   <div th:text="${forming.getCargoOwner().getName()} + ' ИНН/КПП ' + ${forming.getCargoOwner().getInn()} + '/' + ${forming.getCargoOwner().getKpp()}"></div>
+
+  </td>
   <td class=xl6523195></td>
   <td class=xl7823195 colspan=3>[19]</td>
   <td class=xl6523195></td>

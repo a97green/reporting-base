@@ -37,7 +37,7 @@
                     <div class="col-sm-6">
                         <div class="float-right d-none d-md-block">
                             <div class="dropdown">
-                                <button class="btn btn-primary waves-effect" type="button" data-toggle="modal" data-target="#myModal" onclick="newForming()"><i class="mdi mdi-account-plus-outline mr-1"></i> Новое</button>
+                                <button class="btn btn-primary waves-effect" type="button" data-toggle="modal" data-target="#myModal" onclick="newForming()"><i class="mdi mdi-book-plus-multiple mr-1"></i> Новое</button>
                             </div>
                         </div>
                     </div>
@@ -51,34 +51,48 @@
                                 <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                     <thead>
                                     <tr>
+<!--                                        <th></th>-->
                                         <th>ID</th>
-                                        <th>Дата формирования</th>
+                                        <th>Дата погрузки</th>
                                         <th>Менеджер</th>
+                                        <th>Маршрут</th>
+                                        <th>Наименование груза</th>
                                         <th>Заказчик</th>
                                         <th>Перевозчик</th>
                                         <th>Водитель</th>
-                                        <th>Транпортное средство</th>
-                                        <th>Дата погрузки</th>
                                         <th>Дата выгрузки</th>
-                                        <th>Оплата для заказчика</th>
-                                        <th>Оплата для перевозчика</th>
+                                        <th>Доход/Расход</th>
                                         <th></th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr th:each="element : ${formings}">
+<!--                                        <td th:class="'icon-add' + ${element.getId()}">-->
+<!--                                            <div>-->
+<!--                                                <i class="mdi mdi-account-group"></i>-->
+<!--                                            </div>-->
+<!--                                            <div>-->
+<!--                                                <i class="mdi mdi-format-list-bulleted"></i>-->
+<!--                                            </div>-->
+<!--                                            <div>-->
+<!--                                                <i class="mdi mdi-cash-multiple"></i>-->
+<!--                                            </div>-->
+<!--                                        </td>-->
                                         <td th:text="${element.getId()}"></td>
-                                        <td th:text="${element.getDate()}"></td>
+                                        <td th:text="${element.getLoading().getDate()}"></td>
                                         <td th:text="${element.getManager().getLastName()} + ' ' + ${element.getManager().getFirstName()} + ' ' + ${element.getManager().getPatronymic()}"></td>
+                                        <td th:text="${element.getLoading().getPositions().get(0).getPosition()} + ' - ' + ${element.getUnloading().getPositions().get(0).getPosition()}"></td>
+                                        <td>
+                                            <div th:each="cargo : ${element.getCargo()}">
+                                                <div th:text="${cargo.getName()}"></div>
+                                            </div>
+                                        </td>
                                         <td th:text="${element.getCargoOwner().getName()}"></td>
                                         <td th:text="${element.getTransporter().getName()}"></td>
                                         <td th:text="${element.getDriver().getPassport().getLastName()} + ' ' + ${element.getDriver().getPassport().getFirstName()} + ' ' + ${element.getDriver().getPassport().getPatronymic()} + ' ' + ${element.getDriver().getNumberPhone()} + ''"></td>
-                                        <td th:text="${element.getVehicle().getModel()} + ' (' + ${element.getVehicle().getStateNumber()} + ')'"></td>
-                                        <td th:text="${element.getLoading().getDate()}"></td>
                                         <td th:text="${element.getUnloading().getDate()}"></td>
-                                        <td th:text="${element.getCustomerPay().getAmount()}"></td>
-                                        <td th:text="${element.getCarrierPay().getAmount()}"></td>
-                                        <td><button th:id="${element.getId()}" class="btn btn-success waves-effect" data-toggle="modal" data-target="#myModal" onclick="moreDetailed(this)"><i class="mdi mdi-vector-difference"></i></button> </td>
+                                        <td th:text="${element.getCustomerPay().getAmount()} + '/' + ${element.getCarrierPay().getAmount()}"></td>
+                                        <td><button th:id="${element.getId()}" class="btn btn-outline-success btn-sm waves-effect waves-light" data-toggle="modal" data-target="#myModal" onclick="moreDetailed(this)"><i class="mdi mdi-vector-difference"></i></button> </td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -103,7 +117,43 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-xl-6"></div>
+                    <div class="col-xl-6">
+                        <div class="modal fade bs-example-modal-sm" tabindex="-1" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
+                            <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title mt-0" id="mySmallModalLabel"></h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="inner-accept">
+<!--                                            <div class="card animate__animated animate__fadeIn animate__fast">-->
+<!--                                                <div class="card-body">-->
+<!--                                                        <h4 class="card-title">Подтвердите получение документов от заказчика</h4>-->
+<!--                                                        <form id="form-input" action="/forming" method="post">-->
+<!--                                                            <div class="form-group row">-->
+<!--                                                                <label class="col-sm-3 col-form-label">Менеджер</label>-->
+<!--                                                                <div class="col-sm-9">-->
+<!--                                                                </div>-->
+<!--                                                            </div>-->
+<!--                                                            <div class="form-group row">-->
+<!--                                                                <label class="col-sm-3 col-form-label">Дата получения</label>-->
+<!--                                                                <div class="col-sm-9">-->
+<!--                                                                    <input id="" type="text" name="" class="form-control form-details " placeholder="" required>-->
+<!--                                                                </div>-->
+<!--                                                            </div>-->
+<!--                                                            <div class="row">' +-->
+<!--                                                                <button type="submit" th:id="btn-load" class="btn btn-primary waves-effect"><i class="mdi mdi-check mr-1"></i>Добавить</button>' +-->
+<!--                                                            </div>' +-->
+<!--                                                        </form>' +-->
+<!--                                                    </div>' +-->
+<!--                                                </div>' +-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-xl-6"></div>
                 </div>
             </div>

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.aGreen.reportingbase.model.*;
 import ru.aGreen.reportingbase.repositories.*;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -118,7 +119,7 @@ public class FormingController {
                 unloadingPlace1,
                 customerPay,
                 carrierPay,
-                LocalDate.now().toString(),
+                new SimpleDateFormat("dd.MM.yyyy").format(new Date()),
                 comment);
         formingRepository.save(forming);
         return "redirect:/forming";
