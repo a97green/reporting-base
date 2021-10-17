@@ -1374,8 +1374,8 @@ DIV будут заменены.-->
             <td colspan=6 class=xl10812628>
                 Заказчик:
                 <font class="font515669">
-                    <div th:text="${forming.getCargoOwner().getName()} + ', ИНН ' + ${forming.getCargoOwner().getInn()} + ', КПП ' + ${forming.getCargoOwner().getKpp()} + ','"></div>
-                    <div th:text="${forming.getCargoOwner().getLegalAddress()}"></div>
+                    <div th:text="${forming.getCustomer().getName()} + ', ИНН ' + ${forming.getCustomer().getInn()} + ', КПП ' + ${forming.getCustomer().getKpp()} + ','"></div>
+                    <div th:text="${forming.getCustomer().getLegalAddress()}"></div>
                 </font></td>
             </td>
             <td class=xl1512628></td>
@@ -1393,8 +1393,8 @@ DIV будут заменены.-->
             <td colspan=7 class=xl10212628 width=677 style='width:509pt'>
                 Плательщик:
                 <font class="font515669">
-                    <div th:text="${forming.getCargoOwner().getName()} + ', ИНН ' + ${forming.getCargoOwner().getInn()} + ', КПП ' + ${forming.getCargoOwner().getKpp()} + ','"></div>
-                    <div th:text="${forming.getCargoOwner().getLegalAddress()}"></div>
+                    <div th:text="${forming.getCustomer().getName()} + ', ИНН ' + ${forming.getCustomer().getInn()} + ', КПП ' + ${forming.getCustomer().getKpp()} + ','"></div>
+                    <div th:text="${forming.getCustomer().getLegalAddress()}"></div>
                 </font></td>
             </td>
             <td class=xl1512628></td>

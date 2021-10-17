@@ -1165,7 +1165,7 @@ DIV будут заменены.-->
   height:55.5pt;width:103pt'>Заказчик</td>
             <td colspan=2 class=xl9031110 width=420 style='border-right:2.0pt double black;
   border-left:none;width:315pt'>
-                <div th:text="${forming.getCargoOwner().getName()}"></div>
+                <div th:text="${forming.getCustomer().getName()}"></div>
             </td>
             <td class=xl1531110></td>
             <td class=xl1531110></td>
@@ -1176,7 +1176,7 @@ DIV будут заменены.-->
         <tr height=20 style='height:15.0pt'>
             <td colspan=2 height=20 class=xl9031110 width=420 style='border-right:2.0pt double black;
   height:15.0pt;border-left:none;width:315pt'>
-                <div th:text="'ИНН ' + ${forming.getCargoOwner().getName()} + '; ' + 'КПП ' + ${forming.getCargoOwner().getKpp()} + '; ОГРН ' + ${forming.getCargoOwner().getOgrn()} + '; '"></div>
+                <div th:text="'ИНН ' + ${forming.getCustomer().getName()} + '; ' + 'КПП ' + ${forming.getCustomer().getKpp()} + '; ОГРН ' + ${forming.getCustomer().getOgrn()} + '; '"></div>
             </td>
             <td class=xl1531110></td>
             <td class=xl1531110></td>
@@ -1187,7 +1187,7 @@ DIV будут заменены.-->
         <tr height=33 style='mso-height-source:userset;height:24.75pt'>
             <td colspan=2 height=33 class=xl9231110 width=420 style='border-right:2.0pt double black;
   height:24.75pt;border-left:none;width:315pt'>
-                <div th:text="${forming.getCargoOwner().getLegalAddress()}"></div>
+                <div th:text="${forming.getCustomer().getLegalAddress()}"></div>
              </td>
             <td class=xl1531110></td>
             <td class=xl1531110></td>
@@ -1494,7 +1494,7 @@ DIV будут заменены.-->
             <td height=21 class=xl7731110 width=137 style='height:15.75pt;width:103pt'>Оплата</td>
             <td colspan=2 class=xl9231110 width=420 style='border-right:2.0pt double black;
   border-left:none;width:315pt'>
-                <div th:text="${forming.getCustomerPay().getFormPay().getName()}"></div>
+                <div th:text="${forming.getCustomerPay().getPaymentForm().getName()}"></div>
                 <span
                     style='mso-spacerun:yes'>  </span></td>
             <td class=xl1531110></td>
@@ -1567,7 +1567,7 @@ DIV будут заменены.-->
         <tr height=20 style='height:15.0pt'>
             <td colspan=2 height=20 class=xl6831110 width=346 style='height:15.0pt;
   width:260pt'>
-                <div th:text="${forming.getCargoOwner().getName()}"></div>
+                <div th:text="${forming.getCustomer().getName()}"></div>
 
             </td>
             <td class=xl6831110 width=211 style='width:158pt'>

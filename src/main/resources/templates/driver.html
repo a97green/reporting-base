@@ -141,6 +141,86 @@
             }
         }
     }
+
+    function details(element) {
+        let innerBlock = $('.inner-block');
+        innerBlock.empty();
+        innerBlock.append('<div class="card animate__animated animate__fadeIn animate__fast">\n' +
+            '                            <div class="card-body">\n' +
+            '                                <h4 class="card-title">Карточка водителя</h4>\n' +
+            '                                <form action="/driver/save/' + element.id + '" method="post">\n' +
+            '                                    <h5 class="card-title text-center border-top"><br>Основная информация<br></h5>\n' +
+            '                                    <div class="form-group row">\n' +
+            '                                        <label class="col-sm-3 col-form-label">Организация</label>\n' +
+            '                                        <div class="col-sm-9">\n' +
+            '                                            <select name="idTransporter" class="form-control form-details idTransporter" required disabled>\n' +
+            '                                            </select>\n' +
+            '                                        </div>\n' +
+            '                                    </div>' +
+            '                                    <div class="form-group row">\n' +
+            '                                        <label class="col-sm-3 col-form-label">Номер телефона</label>\n' +
+            '                                        <div class="col-sm-9">\n' +
+            '                                            <input  id="numberPhone" value="' + element.numberPhone + '" text="' + element.numberPhone + '" type="text" name="numberPhone" class="form-control form-details" placeholder="Номер телефона" required disabled>\n' +
+            '                                        </div>\n' +
+            '                                    </div>\n' +
+
+            '                                    <h5 class="card-title text-center border-top"><br>Паспортные данные<br></h5>\n' +
+
+            '                                    <div class="form-group row">\n' +
+            '                                        <label class="col-sm-3 col-form-label">Фамилия</label>\n' +
+            '                                        <div class="col-sm-9">\n' +
+            '                                            <input value="' + element.passport.lastName + '" text="' + element.passport.lastName + '" type="text" name="lastName" class="form-control form-details" placeholder="Фамилия" required disabled>\n' +
+            '                                        </div>\n' +
+            '                                    </div>\n' +
+            '                                    <div class="form-group row">\n' +
+            '                                        <label class="col-sm-3 col-form-label">Имя</label>\n' +
+            '                                        <div class="col-sm-9">\n' +
+            '                                            <input value="' + element.passport.firstName + '" text="' + element.passport.firstName + '" type="text" name="firstName" class="form-control form-details" placeholder="Имя" required disabled>\n' +
+            '                                        </div>\n' +
+            '                                    </div>\n' +                        '                                    <div class="form-group row">\n' +
+            '                                        <label class="col-sm-3 col-form-label">Отчество</label>\n' +
+            '                                        <div class="col-sm-9">\n' +
+            '                                            <input value="' + element.passport.patronymic + '" text="' + element.passport.patronymic + '" type="text" name="patronymic" class="form-control form-details" placeholder="Отчество" required disabled>\n' +
+            '                                        </div>\n' +
+            '                                    </div>\n' +                        '                                    <div class="form-group row">\n' +
+            '                                        <label class="col-sm-3 col-form-label">Серия паспорта</label>\n' +
+            '                                        <div class="col-sm-9">\n' +
+            '                                            <input id="serialPassport" value="' + element.passport.serialPassport + '" text="' + element.passport.serialPassport + '" type="text" name="serialPassport" class="form-control form-details" required disabled>\n' +
+            '                                        </div>\n' +
+            '                                    </div>\n' +                        '                                    <div class="form-group row">\n' +
+            '                                        <label class="col-sm-3 col-form-label">Номер паспорта</label>\n' +
+            '                                        <div class="col-sm-9">\n' +
+            '                                            <input id="numberPassport" value="' + element.passport.numberPassport + '" text="' + element.passport.numberPassport + '" type="text" name="numberPassport" class="form-control form-details" required disabled>\n' +
+            '                                        </div>\n' +
+            '                                    </div>\n' +                        '                                    <div class="form-group row">\n' +
+            '                                        <label class="col-sm-3 col-form-label">Кем выдан</label>\n' +
+            '                                        <div class="col-sm-9">\n' +
+            '                                            <input id="issued" value="' + element.passport.issued + '" text="' + element.passport.issued + '" type="text" name="issued" class="form-control form-details" placeholder="кем выдан" required disabled>\n' +
+            '                                        </div>\n' +
+            '                                    </div>\n' +                        '                                    <div class="form-group row">\n' +
+            '                                        <label class="col-sm-3 col-form-label">Дата выдачи</label>\n' +
+            '                                        <div class="col-sm-9">\n' +
+            '                                            <input value="' + element.passport.issuedDate + '" text="' + element.passport.issuedDate + '" type="text" name="issuedDate" class="form-control form-details" required disabled>\n' +
+            '                                        </div>\n' +
+            '                                    </div>\n' +
+
+
+            '                                   <div class="form-group row buttons-save" style="display: none">\n' +
+            '                                       <button type="submit" class="btn btn-primary waves-effect mr-1"><i class="mdi mdi-content-save-outline mr-1"></i>Сохранить</button>\n' +
+            '                                       <button type="button" id="btn-cancel" class="btn btn-dark waves-effect" onclick="hideButtonsSave()"><i class="mdi mdi-cancel mr-1"></i>Отмена</button>\n' +
+            '                                   </div>\n' +
+            '                                </form>\n' +
+            '                                <div class="form-group row buttons-edit">\n' +
+            '                                   <button type="button" id="btn-edit" class="btn btn-primary waves-effect mr-1" onclick="showButtonsSave()"><i class="mdi mdi-file-document-edit-outline mr-1"></i>Редактировать</button>\n' +
+            '                                   <form action="/driver/remove/' + element.id + '" method="post">\n' +
+            '                                       <button type="submit" class="btn btn-danger waves-effect"><i class="mdi mdi mdi-delete-circle-outline mr-1"></i>Удалить</button>\n' +
+            '                                   </form>\n' +
+            '                                </div>\n' +
+            '                            </div>\n' +
+            '                        </div>');
+        innerDetails(element.transporter);
+    }
+
     function newDriver() {
         let innerBlock = $('.inner-block');
         innerBlock.empty();
@@ -169,13 +249,13 @@
             '                                        <div class="form-group row">\n' +
             '                                            <label class="col-sm-3 col-form-label">Фамилия</label>\n' +
             '                                            <div class="col-sm-9">\n' +
-            '                                                <input type="text" name="lastName" class="form-control" placeholder="Имя" required="">\n' +
+            '                                                <input type="text" name="lastName" class="form-control" placeholder="Фамилия" required="">\n' +
             '                                            </div>\n' +
             '                                        </div>\n' +
             '                                        <div class="form-group row">\n' +
             '                                            <label class="col-sm-3 col-form-label">Имя</label>\n' +
             '                                            <div class="col-sm-9">\n' +
-            '                                                <input type="text" name="firstName" class="form-control" placeholder="Фамилия" required="">\n' +
+            '                                                <input type="text" name="firstName" class="form-control" placeholder="Имя" required="">\n' +
             '                                            </div>\n' +
             '                                        </div>\n' +
             '                                        <div class="form-group row">\n' +
@@ -218,6 +298,7 @@
         innerNew();
         applyMasked();
     }
+
     function innerNew() {
         let option = $('.idTransporter');
         let transporters = [[${transporters}]]
@@ -226,84 +307,6 @@
         }
     }
 
-    function details(element) {
-        let innerBlock = $('.inner-block');
-        innerBlock.empty();
-        innerBlock.append('<div class="card animate__animated animate__fadeIn animate__fast">\n' +
-            '                            <div class="card-body">\n' +
-            '                                <h4 class="card-title">Карточка водителя</h4>\n' +
-            '                                <form action="/driver/save/' + element.id + '" method="post">\n' +
-            '                                    <h5 class="card-title text-center border-top"><br>Основная информация<br></h5>\n' +
-            '                                    <div class="form-group row">\n' +
-            '                                        <label class="col-sm-3 col-form-label">Организация</label>\n' +
-            '                                        <div class="col-sm-9">\n' +
-            '                                            <select name="idTransporter" class="form-control form-details idTransporter" required disabled>\n' +
-            '                                            </select>\n' +
-            '                                        </div>\n' +
-            '                                    </div>' +
-            '                                    <div class="form-group row">\n' +
-            '                                        <label class="col-sm-3 col-form-label">Номер телефона</label>\n' +
-            '                                        <div class="col-sm-9">\n' +
-            '                                            <input  id="numberPhone" value="' + element.numberPhone + '" text="' + element.numberPhone + '" type="text" name="numberPhone" class="form-control form-details" placeholder="Номер телефона" required disabled>\n' +
-            '                                        </div>\n' +
-            '                                    </div>\n' +
-
-            '                                    <h5 class="card-title text-center border-top"><br>Паспортные данные<br></h5>\n' +
-
-            '                                    <div class="form-group row">\n' +
-            '                                        <label class="col-sm-3 col-form-label">Фамилия</label>\n' +
-            '                                        <div class="col-sm-9">\n' +
-            '                                            <input value="' + element.passport.lastName + '" text="' + element.passport.lastName + '" type="text" name="lastName" class="form-control form-details" placeholder="ОГРН" required disabled>\n' +
-            '                                        </div>\n' +
-            '                                    </div>\n' +
-            '                                    <div class="form-group row">\n' +
-            '                                        <label class="col-sm-3 col-form-label">Имя</label>\n' +
-            '                                        <div class="col-sm-9">\n' +
-            '                                            <input value="' + element.passport.firstName + '" text="' + element.passport.firstName + '" type="text" name="firstName" class="form-control form-details" placeholder="ОГРН" required disabled>\n' +
-            '                                        </div>\n' +
-            '                                    </div>\n' +                        '                                    <div class="form-group row">\n' +
-            '                                        <label class="col-sm-3 col-form-label">Отчество</label>\n' +
-            '                                        <div class="col-sm-9">\n' +
-            '                                            <input value="' + element.passport.patronymic + '" text="' + element.passport.patronymic + '" type="text" name="patronymic" class="form-control form-details" placeholder="ОГРН" required disabled>\n' +
-            '                                        </div>\n' +
-            '                                    </div>\n' +                        '                                    <div class="form-group row">\n' +
-            '                                        <label class="col-sm-3 col-form-label">Серия паспорта</label>\n' +
-            '                                        <div class="col-sm-9">\n' +
-            '                                            <input id="serialPassport" value="' + element.passport.serialPassport + '" text="' + element.passport.serialPassport + '" type="text" name="serialPassport" class="form-control form-details" placeholder="ОГРН" required disabled>\n' +
-            '                                        </div>\n' +
-            '                                    </div>\n' +                        '                                    <div class="form-group row">\n' +
-            '                                        <label class="col-sm-3 col-form-label">Номер паспорта</label>\n' +
-            '                                        <div class="col-sm-9">\n' +
-            '                                            <input id="numberPassport" value="' + element.passport.numberPassport + '" text="' + element.passport.numberPassport + '" type="text" name="numberPassport" class="form-control form-details" placeholder="ОГРН" required disabled>\n' +
-            '                                        </div>\n' +
-            '                                    </div>\n' +                        '                                    <div class="form-group row">\n' +
-            '                                        <label class="col-sm-3 col-form-label">Кем выдан</label>\n' +
-            '                                        <div class="col-sm-9">\n' +
-            '                                            <input id="issued" value="' + element.passport.issued + '" text="' + element.passport.issued + '" type="text" name="issued" class="form-control form-details" placeholder="ОГРН" required disabled>\n' +
-            '                                        </div>\n' +
-            '                                    </div>\n' +                        '                                    <div class="form-group row">\n' +
-            '                                        <label class="col-sm-3 col-form-label">Дата выдачи</label>\n' +
-            '                                        <div class="col-sm-9">\n' +
-            '                                            <input value="' + element.passport.issuedDate + '" text="' + element.passport.issuedDate + '" type="text" name="issuedDate" class="form-control form-details" placeholder="ОГРН" required disabled>\n' +
-            '                                        </div>\n' +
-            '                                    </div>\n' +
-
-
-            '                                   <div class="form-group row buttons-save" style="display: none">\n' +
-            '                                       <button type="submit" class="btn btn-primary waves-effect mr-1"><i class="mdi mdi-content-save-outline mr-1"></i>Сохранить</button>\n' +
-            '                                       <button type="button" id="btn-cancel" class="btn btn-dark waves-effect" onclick="hideButtonsSave()"><i class="mdi mdi-cancel mr-1"></i>Отмена</button>\n' +
-            '                                   </div>\n' +
-            '                                </form>\n' +
-            '                                <div class="form-group row buttons-edit">\n' +
-            '                                   <button type="button" id="btn-edit" class="btn btn-primary waves-effect mr-1" onclick="showButtonsSave()"><i class="mdi mdi-file-document-edit-outline mr-1"></i>Редактировать</button>\n' +
-            '                                   <form action="/driver/remove/' + element.id + '" method="post">\n' +
-            '                                       <button type="submit" class="btn btn-danger waves-effect"><i class="mdi mdi mdi-delete-circle-outline mr-1"></i>Удалить</button>\n' +
-            '                                   </form>\n' +
-            '                                </div>\n' +
-            '                            </div>\n' +
-            '                        </div>');
-        innerDetails(element.transporter);
-    }
     function innerDetails(transporter) {
         let option = $('.idTransporter');
         option.append('<option value="' + transporter.id + '">' + transporter.name + '</option>')

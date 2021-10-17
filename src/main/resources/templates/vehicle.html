@@ -143,7 +143,8 @@
             '                                        <div class="form-group row">\n' +
             '                                            <label class="col-sm-3 col-form-label">Организация</label>\n' +
             '                                            <div class="col-sm-9">\n' +
-            '                                            <select name="transporter" class="form-control transporter" required>\n' +
+            '                                            <select name="transporter" class="form-control transporter" required onchange="innerTrailer()">\n' +
+            '                                                <option></option>'  +
             '                                            </select>\n' +
             '                                            </div>\n' +
             '                                        </div>\n' +
@@ -162,7 +163,7 @@
             '                                        <div class="form-group row">\n' +
             '                                            <label class="col-sm-3 col-form-label">Прицеп</label>\n' +
             '                                            <div class="col-sm-9">\n' +
-            '                                            <select name="trailer" class="form-control trailer" required>\n' +
+            '                                            <select name="trailer" class="form-control trailer">\n' +
             '                                            </select>\n' +
             '                                            </div>\n' +
             '                                        </div>\n' +
@@ -172,22 +173,28 @@
             '                                    </form>\n' +
             '                                </div>\n' +
             '                            </div>\n');
-        innerNew();
-        $("#stateNumber").mask("a999aa99?9");
+        innerTransporter();
+        $("#stateNumber").mask("a999aa/99?9");
     }
-    function innerNew() {
+    function innerTransporter() {
         let option = $('.transporter');
         let transporters = [[${transporters}]]
         for (let i = 0; i < transporters.length; i++) {
             option.append('<option value="' + transporters[i].id + '">' + transporters[i].name + '</option>')
         }
-        let option2 = $('.trailer');
+    }
+    function innerTrailer() {
         let trailers = [[${trailers}]]
+        let id = $('.transporter').val();
+        let optionTrailer = $('.trailer');
+        optionTrailer.empty();
+
         for (let i = 0; i < trailers.length; i++) {
-            option2.append('<option value="' + trailers[i].id + '">' + trailers[i].model + '(' + trailers[i].stateNumber + ')</option>')
+            if (trailers[i].transporter.id == id) {
+                optionTrailer.append('<option value="' + trailers[i].id + '">' + trailers[i].model + '(' + trailers[i].stateNumber + ')</option>')
+            }
         }
     }
-
     function details(element) {
         let vehicles = [[${vehicles}]];
         for (let i = 0; i < vehicles.length; i++) {
@@ -203,7 +210,7 @@
                     '                                    <div class="form-group row">\n' +
                     '                                        <label class="col-sm-3 col-form-label">Организация</label>\n' +
                     '                                        <div class="col-sm-9">\n' +
-                    '                                            <select id="idTransporter" name="transporter" class="form-control form-details transporter" required disabled>\n' +
+                    '                                            <select id="idTransporter" name="transporter" class="form-control form-details transporter" onchange="innerTrailer()" required disabled>\n' +
                     '                                            </select>\n' +
                     '                                        </div>\n' +
                     '                                    </div>' +
@@ -222,7 +229,7 @@
                     '                                    <div class="form-group row">\n' +
                     '                                        <label class="col-sm-3 col-form-label">Прицеп</label>\n' +
                     '                                        <div class="col-sm-9">\n' +
-                    '                                            <select id="idTrailer" name="trailer" class="form-control form-details trailer" required disabled>\n' +
+                    '                                            <select id="idTrailer" name="trailer" class="form-control form-details trailer" disabled>\n' +
                     '                                            </select>\n' +
                     '                                        </div>\n' +
                     '                                    </div>' +
@@ -240,7 +247,7 @@
                     '                            </div>\n' +
                     '                        </div>');
                 innerDetails(element.transporter, element.trailer);
-                $("#stateNumber").mask("a 999 aa 99?9");
+                $("#stateNumber").mask("a999aa/99?9");
             }
         }
     }
@@ -258,11 +265,12 @@
         option2.append('<option value="' + trailer.id + '">' + trailer.model +'(' + trailer.stateNumber + ')</option>')
         for (let i = 0; i < trailers.length; i++) {
             if (trailers[i].id !== trailer.id) {
-                option2.append('<option value="' + trailers[i].id + '">' + trailers[i].model + '(' + trailers[i].stateNumber + ')</option>')
+                if (trailers[i].transporter.id == transporter.id) {
+                    option2.append('<option value="' + trailers[i].id + '">' + trailers[i].model + '(' + trailers[i].stateNumber + ')</option>')
+                }
             }
         }
     }
-
 </script>
 <script th:inline="javascript" src="assets/js/innerForms/button.events.js"></script>
 </body>

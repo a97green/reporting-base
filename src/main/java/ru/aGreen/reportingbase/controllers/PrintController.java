@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import ru.aGreen.reportingbase.model.Forming;
+import ru.aGreen.reportingbase.entity.Forming;
 import ru.aGreen.reportingbase.repositories.FormingRepository;
 
 import java.util.NoSuchElementException;

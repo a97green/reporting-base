@@ -3071,7 +3071,7 @@ DIV будут заменены.-->
   <td class=xl8323195></td>
   <td class=xl8323195></td>
   <td colspan=59 class=xl16023195>
-   <div th:text="${forming.getCargoOwner().getName()}"></div>
+   <div th:text="${forming.getCustomer().getName()}"></div>
 
   </td>
   <td class=xl6723195></td>
@@ -3101,7 +3101,7 @@ DIV будут заменены.-->
   <td class=xl8323195></td>
   <td class=xl8323195></td>
   <td colspan=59 class=xl16023195>
-   <div th:text="${forming.getCargoOwner().getLegalAddress()}"></div>
+   <div th:text="${forming.getCustomer().getLegalAddress()}"></div>
 
   </td>
   <td class=xl6723195></td>
@@ -3135,7 +3135,7 @@ DIV будут заменены.-->
   <td class=xl8323195></td>
   <td class=xl8323195></td>
   <td colspan=59 class=xl16023195>
-   <div th:text="${forming.getCargoOwner().getInn()} + '/' + ${forming.getCargoOwner().getKpp()}"></div>
+   <div th:text="${forming.getCustomer().getInn()} + '/' + ${forming.getCustomer().getKpp()}"></div>
   </td>
   <td class=xl6723195></td>
   <td class=xl6723195 colspan=3>(6б)</td>
@@ -4358,7 +4358,7 @@ DIV будут заменены.-->
   <td class=xl7823195 colspan=3 style='border-right:1.0pt solid black'>[14]</td>
   <td class=xl6523195></td>
   <td colspan=42 class=xl18123195>
-   <div th:text="${forming.getCargoOwner().getName()} + ' ИНН/КПП ' + ${forming.getCargoOwner().getInn()} + '/' + ${forming.getCargoOwner().getKpp()}"></div>
+   <div th:text="${forming.getCustomer().getName()} + ' ИНН/КПП ' + ${forming.getCustomer().getInn()} + '/' + ${forming.getCustomer().getKpp()}"></div>
 
   </td>
   <td class=xl6523195></td>
