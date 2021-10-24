@@ -916,7 +916,7 @@ DIV будут заменены.-->
                     <div th:text="${forming.getOurCompany().getName()}"></div>
                 </font>
                 <font class="font531110">
-                    <div th:text="'ИНН ' + ${forming.getOurCompany().getInn()} + ', КПП ' + ${forming.getOurCompany().getKpp()} + ', ОГРН ' + ${forming.getOurCompany().getOgrn()} + ', Р/сч ' +
+                    <div th:text="'ИНН ' + ${forming.getOurCompany().getInn()} + ', ОГРНИП ' + ${forming.getOurCompany().getOgrnIp()} + ', Р/сч ' +
                     ${forming.getOurCompany().getRequisites().getPayAccount()} + ', ' + ${forming.getOurCompany().getRequisites().getNameBank()} + ', БИК ' + ${forming.getOurCompany().getRequisites().getBik()} +
                     ' K/сч ' + ${forming.getOurCompany().getRequisites().getCorAccount()} + ' Юридический адрес: ' + ${forming.getOurCompany().getLegalAddress()} +
                     ' Почтовый адрес: ' + ${forming.getOurCompany().getPostalAddress()}"></div>
@@ -926,7 +926,7 @@ DIV будут заменены.-->
             <td colspan=4 height=44 class=xl7828557 width=594 style='height:33.0pt;
   width:446pt'><font class="font628557">Перевозчик:</font>
                 <font class="font531110">
-                    <div th:text="${forming.getTransporter().getName()} + '; ИНН ' + ${forming.getTransporter().getInn()} + ', КПП ' + ${forming.getTransporter().getKpp()} + ', ОГРНИП ' + ${forming.getTransporter().getOgrnIp()} +
+                    <div th:text="${forming.getTransporter().getName()} + '; ИНН ' + ${forming.getTransporter().getInn()} + ', КПП ' + ${forming.getTransporter().getKpp()} + ', ОГРН ' + ${forming.getTransporter().getOgrnIp()} +
                     ' Пасспорт: ' + ${forming.getTransporter().getPassport().getSerialPassport()} + ' ' + ${forming.getTransporter().getPassport().getNumberPassport()} + ' выдан: ' + ${forming.getTransporter().getPassport().getIssued()} + ' ' + ${forming.getTransporter().getPassport().getIssuedDate()} +
                     '; Юридический адрес: ' + ${forming.getOurCompany().getLegalAddress()}"></div>
                 </font>

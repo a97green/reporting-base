@@ -4,54 +4,61 @@ function details(element) {
     innerBlock.append('<div class="card animate__animated animate__fadeIn animate__fast">' +
         '                 <div class="card-body">' +
         '                     <h4 class="card-title">Карточка рейса</h4>' +
+        // '                         <div class="form-group row">' +
+        // '                             <label class="col-sm-3 col-form-label"></label>' +
+        // '                             <div class="col-sm-3">' +
+        // '                                <div class="d-none d-sm-block">\n' +
+        // '                                     <div class="dropdown pt-3 d-inline-block">\n' +
+        // '                                         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\n' +
+        // '                                           <i class="mdi mdi-check-all mr-1"></i>Документы<i class="mdi mdi-chevron-down ml-1"></i>\n' +
+        // '                                         </a>\n' +
+        // '                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">\n' +
+        // '                                             <button class="dropdown-item waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-sm">Акт/УПД от заказчика</button>' +
+        // '                                             <button class="dropdown-item waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-sm">Акт/УПД от перевозчика</button>' +
+        // '                                             <button class="dropdown-item waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-sm">ТТН от перевозчика</button>' +
+        // '                                             <button class="dropdown-item waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-sm">ТрН от перевозчика</button>' +
+        // '                                             <button class="dropdown-item waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-sm">ТН от перевозчика</button>' +
+        // '                                         </div>\n' +
+        // '                                     </div>\n' +
+        // '                                </div>' +
+        // '                             </div>' +
+        // '                             <div class="col-sm-3">' +
+        // '                               <div class="dropdown pt-3 d-inline-block">\n' +
+        // '                                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\n' +
+        // '                                      <i class="mdi mdi-printer-check mr-1"></i>Печать<i class="mdi mdi-chevron-down ml-1"></i>\n' +
+        // '                                 </a>\n' +
+        // '                                   <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">\n' +
+        // '                                        <form target="_blank" action="/print/act/' + element.id + '" method="get">' +
+        // '                                            <button type="submit" class="dropdown-item">Акт</button>\n' +
+        // '                                        </form>' +
+        // '                                        <form target="_blank"  action="/print/payment/' + element.id + '" method="get">' +
+        // '                                            <button type="submit" class="dropdown-item">Счёт</button>\n' +
+        // '                                        </form>' +
+        // '                                        <form target="_blank" action="/print/invoice/' + element.id + '" method="get">' +
+        // '                                            <button type="submit" class="dropdown-item">Счёт фактура</button>\n' +
+        // '                                        </form>' +
+        // '                                        <form target="_blank" action="/print/app-customer/' + element.id + '" method="get">' +
+        // '                                            <button type="submit" class="dropdown-item">Заявка с заказчиком</button>\n' +
+        // '                                        </form>' +
+        // '                                        <form target="_blank" action="/print/app-carrier/' + element.id + '" method="get">' +
+        // '                                            <button type="submit" class="dropdown-item">Заявка с перевозчиком</button>\n' +
+        // '                                        </form>' +
+        // '                                        <form target="_blank" action="/print/attorney/' + element.id + '" method="get">' +
+        // '                                            <button type="submit" class="dropdown-item">Доверенность</button>\n' +
+        // '                                        </form>' +
+        // '                                   </div>\n' +
+        // '                                </div>' +
+        // '                             </div>' +
+        // '                         </div>' +
+        '                         <form action="/forming/save/' + element.id + '" method="post">' +
+
+        '                         <h5 class="card-title text-center border-top"><br>Основная информация<br></h5>' +
         '                         <div class="form-group row">' +
-        '                             <label class="col-sm-3 col-form-label"></label>' +
-        '                             <div class="col-sm-3">' +
-        '                                <div class="d-none d-sm-block">\n' +
-        '                                     <div class="dropdown pt-3 d-inline-block">\n' +
-        '                                         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\n' +
-        '                                           <i class="mdi mdi-check-all mr-1"></i>Документы<i class="mdi mdi-chevron-down ml-1"></i>\n' +
-        '                                         </a>\n' +
-        '                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">\n' +
-        '                                             <button class="dropdown-item waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-sm">Акт/УПД от заказчика</button>' +
-        '                                             <button class="dropdown-item waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-sm">Акт/УПД от перевозчика</button>' +
-        '                                             <button class="dropdown-item waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-sm">ТТН от перевозчика</button>' +
-        '                                             <button class="dropdown-item waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-sm">ТрН от перевозчика</button>' +
-        '                                             <button class="dropdown-item waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-sm">ТН от перевозчика</button>' +
-        '                                         </div>\n' +
-        '                                     </div>\n' +
-        '                                </div>' +
-        '                             </div>' +
-        '                             <div class="col-sm-3">' +
-        '                               <div class="dropdown pt-3 d-inline-block">\n' +
-        '                                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\n' +
-        '                                      <i class="mdi mdi-printer-check mr-1"></i>Печать<i class="mdi mdi-chevron-down ml-1"></i>\n' +
-        '                                 </a>\n' +
-        '                                   <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">\n' +
-        '                                        <form target="_blank" action="/print/act/' + element.id + '" method="get">' +
-        '                                            <button type="submit" class="dropdown-item">Акт</button>\n' +
-        '                                        </form>' +
-        '                                        <form target="_blank"  action="/print/payment/' + element.id + '" method="get">' +
-        '                                            <button type="submit" class="dropdown-item">Счёт</button>\n' +
-        '                                        </form>' +
-        '                                        <form target="_blank" action="/print/invoice/' + element.id + '" method="get">' +
-        '                                            <button type="submit" class="dropdown-item">Счёт фактура</button>\n' +
-        '                                        </form>' +
-        '                                        <form target="_blank" action="/print/app-customer/' + element.id + '" method="get">' +
-        '                                            <button type="submit" class="dropdown-item">Заявка с заказчиком</button>\n' +
-        '                                        </form>' +
-        '                                        <form target="_blank" action="/print/app-carrier/' + element.id + '" method="get">' +
-        '                                            <button type="submit" class="dropdown-item">Заявка с перевозчиком</button>\n' +
-        '                                        </form>' +
-        '                                        <form target="_blank" action="/print/attorney/' + element.id + '" method="get">' +
-        '                                            <button type="submit" class="dropdown-item">Доверенность</button>\n' +
-        '                                        </form>' +
-        '                                   </div>\n' +
-        '                                </div>' +
+        '                             <label class="col-sm-3 col-form-label">Комментарии к полученным документам</label>' +
+        '                             <div class="col-sm-9">' +
+        '                                 <input id="commentDoc" value="' + element.commentDoc + '" text="' + element.commentDoc + '" type="text" name="commentDoc" class="form-control form-details comment" placeholder="Полученные документы" required disabled>' +
         '                             </div>' +
         '                         </div>' +
-        '                         <form action="/forming/save/' + element.id + '" method="post">' +
-        '                         <h5 class="card-title text-center border-top"><br>Основная информация<br></h5>' +
         '                         <div class="form-group row">' +
         '                             <label class="col-sm-3 col-form-label">Номер перевозки</label>' +
         '                             <div class="col-sm-9">' +
@@ -199,10 +206,40 @@ function details(element) {
         '                        </div>' +
         '                     </form>' +
         '                     <div class="form-group row buttons-edit">' +
-        '                        <button type="button" id="btn-edit" class="btn btn-primary waves-effect mr-1" onclick="showButtonsSave()"><i class="mdi mdi-file-document-edit-outline mr-1"></i>Редактировать</button>' +
+        '                             <div class="col-sm-3">' +
+        '                        <button type="button" id="btn-edit" class=" btn btn-primary waves-effect mr-1" onclick="showButtonsSave()"><i class="mdi mdi-file-document-edit-outline mr-1"></i>Редактировать</button>' +
         '                        <form action="/forming/remove/' + element.id + '" method="post">' +
-        '                            <button type="submit" class="btn btn-danger waves-effect"><i class="mdi mdi mdi-delete-circle-outline mr-1"></i>Удалить</button>' +
+        '                            <button type="submit" class="btn btn-danger waves-effect mt-2"><i class="mdi mdi mdi-delete-circle-outline mr-1 ml-5"></i>Удалить</button>' +
         '                        </form>' +
+        '                             </div>' +
+        '                             <div class="col-sm-6">' +
+
+        '                               <div class="dropdown d-inline-block">\n' +
+        '                                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\n' +
+        '                                      <i class="mdi mdi-printer-check mr-1"></i>Печать<i class="mdi mdi-chevron-down ml-1"></i>\n' +
+        '                                 </a>\n' +
+        '                                   <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">\n' +
+        '                                        <form target="_blank" action="/print/act/' + element.id + '" method="get">' +
+        '                                            <button type="submit" class="dropdown-item">Акт</button>\n' +
+        '                                        </form>' +
+        '                                        <form target="_blank"  action="/print/payment/' + element.id + '" method="get">' +
+        '                                            <button type="submit" class="dropdown-item">Счёт</button>\n' +
+        '                                        </form>' +
+        '                                        <form target="_blank" action="/print/invoice/' + element.id + '" method="get">' +
+        '                                            <button type="submit" class="dropdown-item">Счёт фактура</button>\n' +
+        '                                        </form>' +
+        '                                        <form target="_blank" action="/print/app-customer/' + element.id + '" method="get">' +
+        '                                            <button type="submit" class="dropdown-item">Заявка с заказчиком</button>\n' +
+        '                                        </form>' +
+        '                                        <form target="_blank" action="/print/app-carrier/' + element.id + '" method="get">' +
+        '                                            <button type="submit" class="dropdown-item">Заявка с перевозчиком</button>\n' +
+        '                                        </form>' +
+        '                                        <form target="_blank" action="/print/attorney/' + element.id + '" method="get">' +
+        '                                            <button type="submit" class="dropdown-item">Доверенность</button>\n' +
+        '                                        </form>' +
+        '                                   </div>\n' +
+        '                                </div>' +
+        '                                </div>' +
         '                     </div>' +
         '                 </div>' +
         '             </div>');
@@ -272,11 +309,11 @@ function iDetails(element, ourCompanies, formPays, managers, customers, transpor
             '                                   <div class="form-group row">' +
             '                                       <label class="col-sm-3 col-form-label">Груз №' + i + '</label>' +
             '                                       <div class="col-sm-5">' +
-            '                                           <input id="cargo" value="' + element.cargo[i].name + '" text="' + element.cargo[i].name + '" type="text" name="cargo" class="form-control form-details cargo" placeholder="Наименование груза" required disabled>' +
+            '                                           <input id="" value="' + element.cargo[i].name + '" text="' + element.cargo[i].name + '" type="text" name="cargo[]" class="form-control form-details cargo" placeholder="Наименование груза" required disabled>' +
             '                                       </div>' +
             '                                       <label class="col-sm-1 col-form-label">Вес</label>' +
             '                                       <div class="col-sm-3">' +
-            '                                           <input id="cargo" value="' + element.cargo[i].weight + '" text="' + element.cargo[i].weight + '" type="text" name="cargo" class="form-control form-details cargo" placeholder="Вес груза" required disabled>' +
+            '                                           <input id="" value="' + element.cargo[i].weight + '" text="' + element.cargo[i].weight + '" type="text" name="weight[]" class="form-control form-details cargo" placeholder="Вес груза" required disabled>' +
             '                                       </div>' +
             '                                   </div>');
     }
@@ -285,7 +322,7 @@ function iDetails(element, ourCompanies, formPays, managers, customers, transpor
             '                                   <div class="form-group row">' +
             '                                       <label class="col-sm-3 col-form-label">Место погрузки №' + i + '</label>' +
             '                                       <div class="col-sm-9">' +
-            '                                           <input id="loadingPlace" value="' + element.loading.positions[i].position + '" text="' + element.loading.positions[i].position + '" type="text" name="loadingPlace" class="form-control form-details loadingPlace" placeholder="" required disabled>' +
+            '                                           <input id="loadingPlace" value="' + element.loading.positions[i].position + '" text="' + element.loading.positions[i].position + '" type="text" name="loadingPlace[]" class="form-control form-details loadingPlace" placeholder="" required disabled>' +
             '                                       </div>' +
             '                                   </div>');
     }
@@ -294,7 +331,7 @@ function iDetails(element, ourCompanies, formPays, managers, customers, transpor
             '                                   <div class="form-group row">' +
             '                                       <label class="col-sm-3 col-form-label">Место выгрузки №' + i + '</label>' +
             '                                       <div class="col-sm-9">' +
-            '                                           <input id="unloadingPlace" value="' + element.unloading.positions[i].position + '" text="' + element.unloading.positions[i].position + '" type="text" name="unloadingPlace" class="form-control form-details unloadingPlace" placeholder="" required disabled>' +
+            '                                           <input id="unloadingPlace" value="' + element.unloading.positions[i].position + '" text="' + element.unloading.positions[i].position + '" type="text" name="unloadingPlace[]" class="form-control form-details unloadingPlace" placeholder="" required disabled>' +
             '                                       </div>' +
             '                                   </div>');
     }

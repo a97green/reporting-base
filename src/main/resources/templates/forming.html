@@ -77,9 +77,9 @@
                                     <tr th:each="element : ${formings}">
                                         <td th:text="${element.getEnumerate()}"></td>
                                         <td>
-                                            <button onclick="innerPop()" type="button"
+                                            <button type="button"
                                                     class="btn btn-secondary btn-sm waves-effect waves-light"
-                                                    data-toggle="popover" data-trigger="focus" title=""
+                                                    data-toggle="popover" data-trigger="focus" title="" th:data-content="${element.getCommentDoc()}"
                                                     data-original-title="Полученные документы">
                                                 <i class="mdi mdi-file-document-box-check"></i>
                                             </button>
@@ -182,12 +182,10 @@
 
 <!-- My Scripts -->
 <script type="text/javascript" th:inline="javascript">
-    function innerPop() {
+    function innerPop(text) {
         let popBody = $('.popover-body');
         popBody.empty();
-        popBody.append('' +
-            'Первая строка<br>' +
-            'Вторая строка');
+        popBody.append(text);
 
     }
 

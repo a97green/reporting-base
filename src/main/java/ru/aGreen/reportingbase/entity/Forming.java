@@ -41,6 +41,8 @@ public class Forming {
     private List<Doc> docs;
     private String comment;
     private String date;
+    private String commentDoc;
+
 
 
     public Forming() {
@@ -190,5 +192,13 @@ public class Forming {
 
     public void setDocs(List<Doc> docs) {
         this.docs = docs;
+    }
+
+    public String getCommentDoc() {
+        return commentDoc;
+    }
+
+    public void setCommentDoc(String commentDoc) {
+        this.commentDoc = commentDoc;
     }
 }

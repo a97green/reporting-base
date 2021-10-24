@@ -91,6 +91,33 @@ public class FormingController {
         return "redirect:/";
     }
 
+    @PostMapping("/forming/save/{id}")
+    public String saveForming(@PathVariable(value = "id") Long id, @RequestParam Long enumerate, @RequestParam Long ourCompany, @RequestParam Long manager, @RequestParam Long customer, @RequestParam Long transporter, @RequestParam Long driver, @RequestParam Long vehicle, @RequestParam String commentDoc,
+                             @RequestParam String comment,
+                             @RequestParam("cargo[]") List<String> cargo, @RequestParam("weight[]") List<String> weight,
+                             @RequestParam("loadingPlace[]") List<String> loadingPlace, @RequestParam String loadingPerson, @RequestParam String loadingDate, @RequestParam String loadingNumber,
+                             @RequestParam("loadingPlace[]") List<String> unloadingPlace, @RequestParam String unloadingPerson, @RequestParam String unloadingNumber, @RequestParam String unloadingDate,
+                             @RequestParam Long formPayCust, @RequestParam String amountCust, @RequestParam String amountWordsCust, @RequestParam String payTermsCust, @RequestParam TypePaying typeCust,
+                             @RequestParam Long formPayCarr, @RequestParam String amountCarr, @RequestParam String amountWordsCarr, @RequestParam String payTermsCarr, @RequestParam TypePaying typeCarr,
+                             Model model) {
+        Forming forming = formingRepository.findById(id).orElseThrow(() -> new NoSuchElementException(""));
+        forming.setOurCompany(receiveEnterprise(ourCompany));
+        forming.setManager(receiveManager(manager));
+        forming.setCustomer(receiveEnterprise(customer));
+        forming.setTransporter(receiveEnterprise(transporter));
+        forming.setDriver(receiveDriver(driver));
+        forming.setVehicle(receiveVehicle(vehicle));
+        forming.setCargo(receiveCargo(cargo, weight));
+        forming.setLoading(receivePlace(loadingPlace, loadingPerson, loadingNumber, loadingDate));
+        forming.setUnloading(receivePlace(unloadingPlace, unloadingPerson, unloadingNumber, unloadingDate));
+        forming.setCustomerPay(receivePaying(amountCust, amountWordsCust, payTermsCust, formPayCust, typeCust));
+        forming.setCarrierPay(receivePaying(amountCarr, amountWordsCarr, payTermsCarr, formPayCarr, typeCarr));
+        forming.setComment(comment);
+        forming.setCommentDoc(commentDoc);
+        formingRepository.save(forming);
+        return "redirect:/";
+    }
+
     private Manager receiveManager(Long id) {
         return managerRepository.findById(id).orElseThrow(() -> new NoSuchElementException(""));
     }
