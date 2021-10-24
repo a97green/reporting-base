@@ -30,7 +30,6 @@ public class FormingController {
     private final PositionRepository positionRepository;
     private final DocRepository docRepository;
 
-
     @Autowired
     public FormingController(FormingRepository formingRepository, EnterpriseRepository enterpriseRepository, ManagerRepository managerRepository, DriverRepository driverRepository, VehicleRepository vehicleRepository, TrailerRepository trailerRepository, CargoRepository cargoRepository, PlaceRepository placeRepository, PayingRepository payingRepository, PaymentFormRepository paymentFormRepository, PositionRepository positionRepository, DocRepository docRepository) {
         this.formingRepository = formingRepository;
@@ -72,54 +71,42 @@ public class FormingController {
                              @RequestParam Long formPayCust, @RequestParam String amountCust, @RequestParam String amountWordsCust, @RequestParam String payTermsCust, @RequestParam TypePaying typeCust,
                              @RequestParam Long formPayCarr, @RequestParam String amountCarr, @RequestParam String amountWordsCarr, @RequestParam String payTermsCarr, @RequestParam TypePaying typeCarr,
                              Model model) {
-
         Forming forming = new Forming(
-                enumerate,
-                receiveEnterprise(ourCompany),
-                receiveManager(manager),
-                receiveEnterprise(customer),
-                receiveEnterprise(transporter),
-                receiveDriver(driver),
-                receiveVehicle(vehicle),
-                receiveCargo(cargo,weight),
-                receivePlace(loadingPlace, loadingPerson, loadingNumber, loadingDate),
-                receivePlace(unloadingPlace, unloadingPerson, unloadingNumber, unloadingDate),
-                receivePaying(amountCust, amountWordsCust, payTermsCust, formPayCust, typeCust),
-                receivePaying(amountCarr, amountWordsCarr, payTermsCarr, formPayCarr, typeCarr),
-                new SimpleDateFormat("dd.MM.yyyy").format(new Date()),
-                comment,
-                receiveDocs());
+            enumerate,
+            receiveEnterprise(ourCompany),
+            receiveManager(manager),
+            receiveEnterprise(customer),
+            receiveEnterprise(transporter),
+            receiveDriver(driver),
+            receiveVehicle(vehicle),
+            receiveCargo(cargo, weight),
+            receivePlace(loadingPlace, loadingPerson, loadingNumber, loadingDate),
+            receivePlace(unloadingPlace, unloadingPerson, unloadingNumber, unloadingDate),
+            receivePaying(amountCust, amountWordsCust, payTermsCust, formPayCust, typeCust),
+            receivePaying(amountCarr, amountWordsCarr, payTermsCarr, formPayCarr, typeCarr),
+            new SimpleDateFormat("dd.MM.yyyy").format(new Date()),
+            comment,
+            receiveDocs());
         formingRepository.save(forming);
         return "redirect:/";
     }
 
-//    @PostMapping("/forming/confirm/{id}")
-//    public String confirmForming(@PathVariable(value = "id") Long id,
-//                                 @ModelAttribute("doc") Doc doc,
-//                                 Model model) {
-//        Forming forming = formingRepository.findById(id).orElseThrow(() -> new NoSuchElementException(""));
-//        List<Doc> docs = forming.getDocs();
-//        for (Doc doc1 : docs) {
-//            if (doc1.getType().equals(doc.getType())) {
-//
-//            }
-//        }
-//        formingRepository.save();
-//        return "redirect:/forming";
-//    }
-
     private Manager receiveManager(Long id) {
         return managerRepository.findById(id).orElseThrow(() -> new NoSuchElementException(""));
     }
+
     private Enterprise receiveEnterprise(Long id) {
         return enterpriseRepository.findById(id).orElseThrow(() -> new NoSuchElementException(""));
     }
+
     private Driver receiveDriver(Long id) {
         return driverRepository.findById(id).orElseThrow(() -> new NoSuchElementException(""));
     }
+
     private Vehicle receiveVehicle(Long id) {
         return vehicleRepository.findById(id).orElseThrow(() -> new NoSuchElementException(""));
     }
+
     private List<Cargo> receiveCargo(List<String> cargos, List<String> weights) {
         List<Cargo> cargos1 = new ArrayList<>();
         for (int i = 0; i < cargos.size(); i++) {
@@ -131,6 +118,7 @@ public class FormingController {
         }
         return cargos1;
     }
+
     private Place receivePlace(List<String> places, String person, String number, String date) {
         List<Position> positions = new ArrayList<>();
         for (String s : places) {
@@ -144,11 +132,13 @@ public class FormingController {
         placeRepository.save(place);
         return place;
     }
+
     private Paying receivePaying(String amount, String amountWords, String payTerms, Long formPay, TypePaying type) {
         Paying paying = new Paying(amount, amountWords, payTerms, paymentFormRepository.findById(formPay).orElseThrow(() -> new NoSuchElementException("")), type);
         payingRepository.save(paying);
         return paying;
     }
+
     private List<Doc> receiveDocs() {
         List<Doc> docs = new ArrayList<>();
         for (DocType type : DocType.values()) {

@@ -6,6 +6,7 @@ xmlns:w="http://www.w3.org/TR/REC-html40">
 <head>
 <meta http-equiv=Content-Type content="text/html; charset=utf-8">
  <title>Печать - Счёт фактура</title>
+
  <meta name=ProgId content=Excel.Sheet>
 <meta name=Generator content="Microsoft Excel 15">
 <link rel=File-List href="pattern.files/filelist.xml">
@@ -4352,7 +4353,7 @@ DIV будут заменены.-->
  </tr>
  <tr class=xl6523195 height=17 style='height:12.75pt'>
   <td colspan=43 height=17 class=xl18123195 style='height:12.75pt'>
-   <div th:text="${forming.getOurCompany().getName()} + ' ИНН/КПП ' + ${forming.getOurCompany().getInn()} + '/' + ${forming.getOurCompany().getKpp()}"></div>
+   <div th:text="${forming.getOurCompany().getName()} + ' ИНН ' + ${forming.getOurCompany().getInn()}"></div>
 
   </td>
   <td class=xl6523195></td>

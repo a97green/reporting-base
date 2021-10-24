@@ -1130,7 +1130,7 @@
                     <div th:text="${forming.getOurCompany().getName()}"></div>
                 </font>
                 <font class="font531110">
-                    <div th:text="'ИНН ' + ${forming.getOurCompany().getInn()} + ', КПП ' + ${forming.getOurCompany().getKpp()} + ', ОГРН ' + ${forming.getOurCompany().getOgrn()} + ', Р/сч ' +
+                    <div th:text="'ИНН ' + ${forming.getOurCompany().getInn()} + ', ОГРНИП ' + ${forming.getOurCompany().getOgrnIp()} + ', Р/сч ' +
                     ${forming.getOurCompany().getRequisites().getPayAccount()} + ', ' + ${forming.getOurCompany().getRequisites().getNameBank()} + ', БИК ' + ${forming.getOurCompany().getRequisites().getBik()} +
                     ' K/сч ' + ${forming.getOurCompany().getRequisites().getCorAccount()} + ' Юридический адрес: ' + ${forming.getOurCompany().getLegalAddress()} +
                     ' Почтовый адрес: ' + ${forming.getOurCompany().getPostalAddress()}"></div>
@@ -1218,7 +1218,7 @@
             </td>
             <td class=xl8331110 width=211 style='border-top:none;border-left:none;
   width:158pt'>
-                <div th:text="'ИНН ' + ${forming.getOurCompany().getInn()} + ', КПП ' + ${forming.getOurCompany().getKpp()}"></div>
+                <div th:text="'ИНН ' + ${forming.getOurCompany().getInn()}"></div>
              <span
                     style='mso-spacerun:yes'> </span></td>
             <td class=xl1531110></td>

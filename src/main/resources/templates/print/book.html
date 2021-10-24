@@ -592,7 +592,7 @@
         <tr height=17 style='height:12.75pt'>
             <td height=17 class=xl1515669 width=4 style='height:12.75pt;width:3pt'></td>
             <td class=xl5815669 colspan=2 width=359 style='width:269pt'>
-                <div th:text="${forming.getOurCompany().getName()}"></div>
+                <div th:text="${bookUpd.getOurCompany().getName()}"></div>
             </td>
             <td class=xl1515669 width=69 style='width:52pt'></td>
             <td class=xl1515669 width=83 style='width:62pt'></td>
@@ -602,7 +602,7 @@
         <tr height=17 style='height:12.75pt'>
             <td height=17 class=xl1515669 style='height:12.75pt'></td>
             <td class=xl5915669 colspan=3>
-                <div th:text="'Адрес: ' + ${forming.getOurCompany().getLegalAddress()}"></div>
+                <div th:text="'Адрес: ' + ${bookUpd.getOurCompany().getLegalAddress()}"></div>
             </td>
             <td class=xl1515669></td>
             <td class=xl1515669></td>
@@ -620,7 +620,7 @@
         <tr height=24 style='height:18.0pt'>
             <td height=24 class=xl1515669 style='height:18.0pt'></td>
             <td colspan=5 class=xl6015669 align=center>
-                <div th:text="'АКТ №  ' + ${forming.getEnumerate()} + ' от ' + ${forming.getDate()} + ' г.'"></div>
+                <div th:text="'АКТ №  ' + ${bookUpd.getEnumerate()} + ' от ' + ${bookUpd.getExposedDate()} + ' г.'"></div>
                 <span style='mso-spacerun:yes'>  </span>
             </td>
             <td class=xl1515669></td>
@@ -639,8 +639,8 @@
             <td colspan=6 rowspan=2 class=xl8215669 width=698 style='width:523pt'>
                 Заказчик:
                 <font class="font515669">
-                    <div th:text="${forming.getCustomer().getName()} + ', ИНН ' + ${forming.getCustomer().getInn()} + ', КПП ' + ${forming.getCustomer().getKpp()} + ','"></div>
-                    <div th:text="${forming.getCustomer().getLegalAddress()}"></div>
+                    <div th:text="${bookUpd.getCustomer().getName()} + ', ИНН ' + ${bookUpd.getCustomer().getInn()} + ', КПП ' + ${bookUpd.getCustomer().getKpp()} + ','"></div>
+                    <div th:text="${bookUpd.getCustomer().getLegalAddress()}"></div>
                 </font></td>
         </tr>
         <tr height=20 style='mso-height-source:userset;height:15.0pt'>
@@ -669,18 +669,13 @@
             <td class=xl7415669 style='border-top:none'>1</td>
             <td class=xl7715669 width=324 style='border-top:none;border-left:none;
   width:243pt'>
-                <i>Транспортно-экспедиционные услуги по маршруту:</i>
-                <i th:each="element : ${forming.getLoading().getPositions()}" th:text="${element.getPosition()} + ' - '"></i>
-                <i th:each="element : ${forming.getUnloading().getPositions()}" th:text="${element.getPosition} + ' - '"></i>
-                <i th:text="', рейс от ' + ${forming.getLoading().getDate()} + ' г.,'"></i>
-                <i th:text="' вод.: ' + ${forming.getDriver().getPassport().getLastName()}"></i>
-                <i th:text="' т/с.: ' + ${forming.getVehicle().getModel()} + ' (' + ${forming.getVehicle().getStateNumber()} + ') '"></i>
-                <i th:text="' прицеп: ' + ${forming.getVehicle().getTrailer().getModel()} + ' (' + ${forming.getVehicle().getTrailer().getStateNumber()} + ') '"></i>
+                <i>Вид работы:</i>
+                <i th:text="${bookUpd.getWorkType()}"></i>
             </td>
-            <td class=xl6515669 style='border-top:none'>рейс</td>
+            <td class=xl6515669 style='border-top:none'></td>
             <td class=xl7515669 style='border-top:none'>1</td>
-            <td class="xl7615669 xxlse" style='border-top:none' ></td>
-            <td class="xl7215669 xxlse" style='border-top:none' ></td>
+            <td class="xl7615669 xxlse" style='border-top:none'  th:text="${bookUpd.getAmount()}"></td>
+            <td class="xl7215669 xxlse" style='border-top:none'  th:text="${bookUpd.getAmount()}"></td>
         </tr>
         <tr height=17 style='height:12.75pt'>
             <td height=17 class=xl1515669 style='height:12.75pt'></td>
@@ -689,7 +684,7 @@
             <td class=xl6715669></td>
             <td class=xl6815669></td>
             <td class=xl6915669>Итого:</td>
-            <td class="xl7215669 xxlse" style='border-top:none' ></td>
+            <td class="xl7215669 xxlse" style='border-top:none'  th:text="${bookUpd.getAmount()}"></td>
         </tr>
         <tr height=17 style='height:12.75pt'>
             <td height=17 class=xl1515669 style='height:12.75pt'></td>
@@ -698,7 +693,7 @@
             <td class=xl6215669></td>
             <td class=xl6215669></td>
             <td class=xl6915669>Без налога:</td>
-            <td class=xl7315669 style='border-top:none'></td>
+            <td class=xl7315669 style='border-top:none'>-</td>
         </tr>
         <tr height=21 style='mso-height-source:userset;height:15.75pt'>
             <td height=21 class=xl1515669 style='height:15.75pt'></td>
@@ -707,7 +702,7 @@
             <td class=xl6215669></td>
             <td class=xl7015669></td>
             <td class=xl7115669>Всего:</td>
-            <td class=xl7215669 style='border-top:none' th:text="${forming.getCustomerPay().getAmount()}"></td>
+            <td class=xl7215669 style='border-top:none' th:text="${bookUpd.getAmount()}"></td>
         </tr>
         <tr height=15 style='height:11.25pt'>
             <td height=15 class=xl1515669 style='height:11.25pt'></td>
@@ -721,8 +716,7 @@
         <tr height=33 style='mso-height-source:userset;height:24.75pt'>
             <td height=33 class=xl1515669 style='height:24.75pt'></td>
             <td colspan=6 class=xl8015669 width=698 style='width:523pt'>
-                Всего оказано услуг на сумму:
-                <p th:text="${forming.getCustomerPay().getAmountWords()}"></p>
+
             </td>
         </tr>
         <tr height=43 style='mso-height-source:userset;height:32.25pt'>
@@ -997,32 +991,6 @@
     </table>
 
 </div>
-<script src="/assets/libs/jquery/jquery.min.js"></script>
-
-<script th:inline="javascript" type="text/javascript">
-    $(document).ready(function () {
-        setVal();
-    })
-
-    function setVal() {
-        let amount = [[${forming.getCustomerPay().getAmount()}]];
-        let idPayForm = [[${forming.getCustomerPay().getPaymentForm().getId()}]];
-        if (idPayForm == 1) {
-            let temp = (amount * 20 / 120);
-            let putVal1 = $('.xl7315669');
-            putVal1.append(temp.toFixed(2));
-
-            let value = (amount / 1.2).toFixed(2);
-            let putVal2 = $('.xxlse');
-            putVal2.append(value);
-        }
-        else {
-            let putVal2 = $('.xxlse');
-            putVal2.append(amount);
-        }
-
-    }
-</script>
 <!----------------------------->
 <!--КОНЕЦ ФРАГМЕНТА ПУБЛИКАЦИИ МАСТЕРА ВЕБ-СТРАНИЦ EXCEL-->
 <!----------------------------->

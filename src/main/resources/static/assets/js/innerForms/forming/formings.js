@@ -6,7 +6,7 @@ function details(element) {
         '                     <h4 class="card-title">Карточка рейса</h4>' +
         '                         <div class="form-group row">' +
         '                             <label class="col-sm-3 col-form-label"></label>' +
-        '                             <div class="col-sm-2">' +
+        '                             <div class="col-sm-3">' +
         '                                <div class="d-none d-sm-block">\n' +
         '                                     <div class="dropdown pt-3 d-inline-block">\n' +
         '                                         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\n' +
@@ -14,7 +14,7 @@ function details(element) {
         '                                         </a>\n' +
         '                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">\n' +
         '                                             <button class="dropdown-item waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-sm">Акт/УПД от заказчика</button>' +
-        '                                             <button class="dropdown-item waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-sm" onclick="confirmDoc(' + element.id + ')">Акт/УПД от перевозчика</button>' +
+        '                                             <button class="dropdown-item waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-sm">Акт/УПД от перевозчика</button>' +
         '                                             <button class="dropdown-item waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-sm">ТТН от перевозчика</button>' +
         '                                             <button class="dropdown-item waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-sm">ТрН от перевозчика</button>' +
         '                                             <button class="dropdown-item waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-sm">ТН от перевозчика</button>' +
@@ -52,19 +52,19 @@ function details(element) {
         '                         </div>' +
         '                         <form action="/forming/save/' + element.id + '" method="post">' +
         '                         <h5 class="card-title text-center border-top"><br>Основная информация<br></h5>' +
-        '                         <div class="form-group row">'  +
-        '                             <label class="col-sm-3 col-form-label">Номер перевозки</label>'  +
-        '                             <div class="col-sm-9">'  +
-        '                                 <input id="enumerate" value="' + element.enumerate + '" text="' + element.enumerate + '" type="text" name="enumerate" class="form-control form-details enumerate" placeholder="Номер перевозки" required disabled>'  +
-        '                             </div>'  +
-        '                         </div>'  +
-        '                         <div class="form-group row">'  +
-        '                             <label class="col-sm-3 col-form-label">Наша компания</label>'  +
-        '                             <div class="col-sm-9">'  +
+        '                         <div class="form-group row">' +
+        '                             <label class="col-sm-3 col-form-label">Номер перевозки</label>' +
+        '                             <div class="col-sm-9">' +
+        '                                 <input id="enumerate" value="' + element.enumerate + '" text="' + element.enumerate + '" type="text" name="enumerate" class="form-control form-details enumerate" placeholder="Номер перевозки" required disabled>' +
+        '                             </div>' +
+        '                         </div>' +
+        '                         <div class="form-group row">' +
+        '                             <label class="col-sm-3 col-form-label">Наша компания</label>' +
+        '                             <div class="col-sm-9">' +
         '                                 <select id="ourCompany" name="ourCompany" class="form-control form-details ourCompany" required disabled>' +
-        '                                 </select>'  +
-        '                             </div>'  +
-        '                         </div>'  +
+        '                                 </select>' +
+        '                             </div>' +
+        '                         </div>' +
         '                         <div class="form-group row">' +
         '                             <label class="col-sm-3 col-form-label">Менеджер</label>' +
         '                             <div class="col-sm-9">' +
@@ -95,17 +95,12 @@ function details(element) {
         '                         </div>' +
         '                         <div class="form-group row">' +
         '                             <label class="col-sm-3 col-form-label">Транспортное средство</label>' +
-        '                             <div class="col-sm-4">' +
+        '                             <div class="col-sm-9">' +
         '                                 <select id="vehicle" name="vehicle" class="form-control form-details vehicle" required disabled>' +
         '                                 </select>' +
         '                             </div>' +
-        '                             <label class="col-sm-2 col-form-label">Прицеп</label>' +
-        '                             <div class="col-sm-3">' +
-        '                                 <select id="trailer" name="trailer" class="form-control form-details trailer" required disabled>' +
-        '                                 </select>' +
-        '                             </div>' +
         '                         </div>' +
-        '                         <div class="cargo-add"> </div>'  +
+        '                         <div class="cargo-add"> </div>' +
         '                         <div class="form-group row">' +
         '                             <label class="col-sm-3 col-form-label">Комментарий</label>' +
         '                             <div class="col-sm-9">' +
@@ -119,7 +114,7 @@ function details(element) {
         '                                 <input id="loadingDate" value="' + element.loading.date + '" text="' + element.loading.date + '" type="date" name="loadingDate" class="form-control form-details loadingDate" placeholder="" required disabled>' +
         '                             </div>' +
         '                         </div>' +
-        '                         <div class="loading-add"> </div>'  +
+        '                         <div class="loading-add"> </div>' +
         '                         <div class="form-group row">' +
         '                             <label class="col-sm-3 col-form-label">Контактное лицо</label>' +
         '                             <div class="col-sm-4">' +
@@ -137,7 +132,7 @@ function details(element) {
         '                                 <input id="unloadingDate" value="' + element.unloading.date + '" text="' + element.unloading.date + '" type="date" name="unloadingDate" class="form-control form-details unloadingDate" placeholder="" required disabled>' +
         '                             </div>' +
         '                         </div>' +
-        '                         <div class="unloading-add"> </div>'  +
+        '                         <div class="unloading-add"> </div>' +
         '                         <div class="form-group row">' +
         '                             <label class="col-sm-3 col-form-label">Контактное лицо</label>' +
         '                             <div class="col-sm-4">' +
@@ -215,6 +210,7 @@ function details(element) {
     $(".unloadingNumber").mask("8 999 999-9999");
     $("#loadingNumber").mask("8 999 999-9999");
 }
+
 function iDetails(element, ourCompanies, formPays, managers, customers, transporters) {
     let optionManagers = $('.manager');
     let optionCustomers = $('.customer');
@@ -298,7 +294,7 @@ function iDetails(element, ourCompanies, formPays, managers, customers, transpor
             '                                   <div class="form-group row">' +
             '                                       <label class="col-sm-3 col-form-label">Место выгрузки №' + i + '</label>' +
             '                                       <div class="col-sm-9">' +
-            '                                           <input id="loadingPlace" value="' + element.unloading.positions[i].position + '" text="' + element.unloading.positions[i].position + '" type="text" name="loadingPlace" class="form-control form-details loadingPlace" placeholder="" required disabled>' +
+            '                                           <input id="unloadingPlace" value="' + element.unloading.positions[i].position + '" text="' + element.unloading.positions[i].position + '" type="text" name="unloadingPlace" class="form-control form-details unloadingPlace" placeholder="" required disabled>' +
             '                                       </div>' +
             '                                   </div>');
     }
@@ -307,153 +303,153 @@ function iDetails(element, ourCompanies, formPays, managers, customers, transpor
 function newForming() {
     let innerBlock = $('.inner-block');
     innerBlock.empty();
-    innerBlock.append('<div class="card animate__animated animate__fadeIn animate__fast">'  +
-        '                                        <div class="card-body">'  +
-        '                                            <h4 class="card-title">Новое формирование</h4>'  +
-        '                                            <p class="card-title-desc">Создайте новое формирование</p>'  +
-        '                                            <form id="form-input" action="/forming/add" method="post">'  +
-        '                                                <h5 class="card-title text-center border-top"><br>Основная информация<br></h5>'  +
-        '                                                <div class="form-group row">'  +
-        '                                                    <label class="col-sm-3 col-form-label">Номер перевозки</label>'  +
-        '                                                   <div class="col-sm-9">'  +
-        '                                                        <input id="enumerate" type="text" name="enumerate" class="form-control form-details enumerate" placeholder="Номер перевозки" required>'  +
-        '                                                   </div>'  +
-        '                                                </div>'  +
-        '                                                <div class="form-group row">'  +
-        '                                                    <label class="col-sm-3 col-form-label">Наша компания</label>'  +
-        '                                                   <div class="col-sm-9">'  +
-        '                                                        <select id="ourCompany" name="ourCompany" class="form-control form-details ourCompany" required>' +
-        '                                                           <option></option>'  +
-        '                                                        </select>'  +
-        '                                                   </div>'  +
-        '                                                </div>'  +
-        '                                                <div class="form-group row">'  +
-        '                                                    <label class="col-sm-3 col-form-label">Менеджер</label>'  +
-        '                                                   <div class="col-sm-9">'  +
-        '                                                        <select id="manager" name="manager" class="form-control form-details manager" required>' +
-        '                                                           <option></option>'  +
-        '                                                        </select>'  +
-        '                                                   </div>'  +
-        '                                                </div>'  +
-        '                                                <div class="form-group row">'  +
-        '                                                    <label class="col-sm-3 col-form-label">Заказчик</label>'  +
-        '                                                    <div class="col-sm-9">'  +
-        '                                                        <select id="customer" name="customer" class="form-control form-details customer" required>'  +
-        '                                                           <option></option>'  +
-        '                                                        </select>'  +
-        '                                                    </div>'  +
-        '                                                </div>'  +
-        '                                                <div class="form-group row">'  +
-        '                                                    <label class="col-sm-3 col-form-label">Перевозчик</label>'  +
-        '                                                    <div class="col-sm-9">'  +
-        '                                                        <select id="transporter" name="transporter" class="form-control form-details transporter" onchange="innerDV()" required>'  +
-        '                                                           <option></option>'  +
-        '                                                        </select>'  +
-        '                                                    </div>'  +
-        '                                                </div>'  +
-        '                                                <div class="form-group row">'  +
-        '                                                    <label class="col-sm-3 col-form-label">Водитель</label>'  +
-        '                                                    <div class="col-sm-9">'  +
-        '                                                        <select id="driver" name="driver" class="form-control form-details driver" required>'  +
-        '                                                        </select>'  +
-        '                                                    </div>'  +
-        '                                                </div>'  +
-        '                                                <div class="form-group row">'  +
-        '                                                    <label class="col-sm-3 col-form-label">Транспортное средство</label>'  +
-        '                                                    <div class="col-sm-9">'  +
-        '                                                        <select id="vehicle" name="vehicle" class="form-control form-details vehicle" required>'  +        '                                                           <option disabled></option>'  +
-        '                                                        </select>'  +
-        '                                                    </div>'  +
-        '                                                </div>'  +
-        '                                                <div class="form-group row">'  +
-        '                                                    <label class="col-sm-3 col-form-label">Груз</label>'  +
-        '                                                        <div class="col-sm-5">'  +
-        '                                                            <input id="cargo" type="text" name="cargo[]" class="form-control form-details cargo" placeholder="Наименование груза" required>'  +
-        '                                                        </div>'  +
-        '                                                        <div class="col-sm-4">'  +
-        '                                                            <input id="weight" type="text" name="weight[]" class="form-control form-details weight" placeholder="Вес груза" required>'  +
-        '                                                        </div>'  +
-        '                                                </div>'  +
-        '                                                <div class="cargo-add"> </div>'  +
+    innerBlock.append('<div class="card animate__animated animate__fadeIn animate__fast">' +
+        '                                        <div class="card-body">' +
+        '                                            <h4 class="card-title">Новое формирование</h4>' +
+        '                                            <p class="card-title-desc">Создайте новое формирование</p>' +
+        '                                            <form id="form-input" action="/forming/add" method="post">' +
+        '                                                <h5 class="card-title text-center border-top"><br>Основная информация<br></h5>' +
         '                                                <div class="form-group row">' +
-        '                                                    <label class="col-sm-3 col-form-label"></label>'  +
-        '                                                        <div class="col-sm-5">'  +
-        '                                                              <button type="button" class="btn btn-primary btn-sm btn-cargo-add" onclick="cargoAdd()"><i class="mdi mdi-plus-circle"></i></button>'  +
-        '                                                        </div>'  +
-        '                                                </div>'  +
+        '                                                    <label class="col-sm-3 col-form-label">Номер перевозки</label>' +
+        '                                                   <div class="col-sm-9">' +
+        '                                                        <input id="enumerate" type="text" name="enumerate" class="form-control form-details enumerate" placeholder="Номер перевозки" required>' +
+        '                                                   </div>' +
+        '                                                </div>' +
+        '                                                <div class="form-group row">' +
+        '                                                    <label class="col-sm-3 col-form-label">Наша компания</label>' +
+        '                                                   <div class="col-sm-9">' +
+        '                                                        <select id="ourCompany" name="ourCompany" class="form-control form-details ourCompany" required>' +
+        '                                                           <option></option>' +
+        '                                                        </select>' +
+        '                                                   </div>' +
+        '                                                </div>' +
+        '                                                <div class="form-group row">' +
+        '                                                    <label class="col-sm-3 col-form-label">Менеджер</label>' +
+        '                                                   <div class="col-sm-9">' +
+        '                                                        <select id="manager" name="manager" class="form-control form-details manager" required>' +
+        '                                                           <option></option>' +
+        '                                                        </select>' +
+        '                                                   </div>' +
+        '                                                </div>' +
+        '                                                <div class="form-group row">' +
+        '                                                    <label class="col-sm-3 col-form-label">Заказчик</label>' +
+        '                                                    <div class="col-sm-9">' +
+        '                                                        <select id="customer" name="customer" class="form-control form-details customer" required>' +
+        '                                                           <option></option>' +
+        '                                                        </select>' +
+        '                                                    </div>' +
+        '                                                </div>' +
+        '                                                <div class="form-group row">' +
+        '                                                    <label class="col-sm-3 col-form-label">Перевозчик</label>' +
+        '                                                    <div class="col-sm-9">' +
+        '                                                        <select id="transporter" name="transporter" class="form-control form-details transporter" onchange="innerDV()" required>' +
+        '                                                           <option></option>' +
+        '                                                        </select>' +
+        '                                                    </div>' +
+        '                                                </div>' +
+        '                                                <div class="form-group row">' +
+        '                                                    <label class="col-sm-3 col-form-label">Водитель</label>' +
+        '                                                    <div class="col-sm-9">' +
+        '                                                        <select id="driver" name="driver" class="form-control form-details driver" required>' +
+        '                                                        </select>' +
+        '                                                    </div>' +
+        '                                                </div>' +
+        '                                                <div class="form-group row">' +
+        '                                                    <label class="col-sm-3 col-form-label">Транспортное средство</label>' +
+        '                                                    <div class="col-sm-9">' +
+        '                                                        <select id="vehicle" name="vehicle" class="form-control form-details vehicle" required>' + '                                                           <option disabled></option>' +
+        '                                                        </select>' +
+        '                                                    </div>' +
+        '                                                </div>' +
+        '                                                <div class="form-group row">' +
+        '                                                    <label class="col-sm-3 col-form-label">Груз</label>' +
+        '                                                        <div class="col-sm-5">' +
+        '                                                            <input id="cargo" type="text" name="cargo[]" class="form-control form-details cargo" placeholder="Наименование груза" required>' +
+        '                                                        </div>' +
+        '                                                        <div class="col-sm-4">' +
+        '                                                            <input id="weight" type="text" name="weight[]" class="form-control form-details weight" placeholder="Вес груза" required>' +
+        '                                                        </div>' +
+        '                                                </div>' +
+        '                                                <div class="cargo-add"> </div>' +
+        '                                                <div class="form-group row">' +
+        '                                                    <label class="col-sm-3 col-form-label"></label>' +
+        '                                                        <div class="col-sm-5">' +
+        '                                                              <button type="button" class="btn btn-primary btn-sm btn-cargo-add" onclick="cargoAdd()"><i class="mdi mdi-plus-circle"></i></button>' +
+        '                                                        </div>' +
+        '                                                </div>' +
         '                                             <div class="form-group row">' +
         '                                                 <label class="col-sm-3 col-form-label">Комментарий</label>' +
         '                                                    <div class="col-sm-9">' +
         '                                                        <input id="comment" type="text" name="comment" class="form-control form-details comment" placeholder="Комментарии к перевозке" required>' +
         '                                                  </div>' +
         '                                             </div>' +
-        '                                                <h5 class="card-title text-center border-top"><br>Данные о погрузке<br></h5>'  +
-        '                                                <div class="form-group row">'  +
-        '                                                    <label class="col-sm-3 col-form-label">Дата погрузки</label>'  +
-        '                                                    <div class="col-sm-9">'  +
-        '                                                        <input id="loadingDate" type="date" pattern="dd.MM.yyy" name="loadingDate" class="form-control form-details loadingDate" placeholder="" required>'  +
-        '                                                    </div>'  +
-        '                                                </div>'  +
-        '                                                <div class="form-group row">'  +
-        '                                                    <label class="col-sm-3 col-form-label">Место погрузки</label>'  +
-        '                                                    <div class="col-sm-9">'  +
-        '                                                        <input id="loadingPlace" type="text" name="loadingPlace[]" class="form-control form-details loadingPlace" placeholder="Адрес места погрузки" required>'  +
-        '                                                    </div>'  +
-        '                                                </div>'  +
-        '                                                <div class="loadingPlace-add"></div>'  +
+        '                                                <h5 class="card-title text-center border-top"><br>Данные о погрузке<br></h5>' +
         '                                                <div class="form-group row">' +
-        '                                                    <label class="col-sm-3 col-form-label"></label>'  +
-        '                                                        <div class="col-sm-5">'  +
-        '                                                              <button type="button" class="btn btn-primary btn-sm btn-cargo-add" onclick="loadingPlaceAdd()"><i class="mdi mdi-plus-circle"></i></button>'  +
-        '                                                        </div>'  +
-        '                                                </div>'  +
+        '                                                    <label class="col-sm-3 col-form-label">Дата погрузки</label>' +
+        '                                                    <div class="col-sm-9">' +
+        '                                                        <input id="loadingDate" type="date" pattern="dd.MM.yyy" name="loadingDate" class="form-control form-details loadingDate" placeholder="" required>' +
+        '                                                    </div>' +
+        '                                                </div>' +
+        '                                                <div class="form-group row">' +
+        '                                                    <label class="col-sm-3 col-form-label">Место погрузки</label>' +
+        '                                                    <div class="col-sm-9">' +
+        '                                                        <input id="loadingPlace" type="text" name="loadingPlace[]" class="form-control form-details loadingPlace" placeholder="Адрес места погрузки" required>' +
+        '                                                    </div>' +
+        '                                                </div>' +
+        '                                                <div class="loadingPlace-add"></div>' +
+        '                                                <div class="form-group row">' +
+        '                                                    <label class="col-sm-3 col-form-label"></label>' +
+        '                                                        <div class="col-sm-5">' +
+        '                                                              <button type="button" class="btn btn-primary btn-sm btn-cargo-add" onclick="loadingPlaceAdd()"><i class="mdi mdi-plus-circle"></i></button>' +
+        '                                                        </div>' +
+        '                                                </div>' +
 
-        '                                                <div class="form-group row">'  +
-        '                                                    <label class="col-sm-3 col-form-label">Контактное лицо</label>'  +
-        '                                                    <div class="col-sm-5">'  +
-        '                                                        <input id="loadingPerson" type="text" name="loadingPerson" class="form-control form-details loadingPerson" placeholder="Имя" required>'  +
-        '                                                    </div>'  +
-        '                                                    <div class="col-sm-4">'  +
-        '                                                        <input id="loadingNumber" type="text" name="loadingNumber" class="form-control form-details loadingNumber" placeholder="" required>'  +
-        '                                                    </div>'  +
-        '                                                </div>'  +
-        '            ' +
-        '                                                <h5 class="card-title text-center border-top"><br>Данные о выгрузке<br></h5>'  +
-        '                                                <div class="form-group row">'  +
-        '                                                    <label class="col-sm-3 col-form-label">Дата выгрузке</label>'  +
-        '                                                    <div class="col-sm-9">'  +
-        '                                                        <input id="unloadingDate" type="date" name="unloadingDate" class="form-control form-details unloadingDate" placeholder="" required>'  +
-        '                                                    </div>'  +
-        '                                                </div>'  +
-        '                                                <div class="form-group row">'  +
-        '                                                    <label class="col-sm-3 col-form-label">Место выгрузке</label>'  +
-        '                                                    <div class="col-sm-9">'  +
-        '                                                        <input id="unloadingPlace" type="text" name="unloadingPlace[]" class="form-control form-details unloadingPlace" placeholder="Адрес места выгрузки" required>'  +
-        '                                                    </div>'  +
-        '                                                </div>'  +
-        '                                                <div class="unloadingPlace-add"></div>'  +
         '                                                <div class="form-group row">' +
-        '                                                    <label class="col-sm-3 col-form-label"></label>'  +
-        '                                                        <div class="col-sm-5">'  +
-        '                                                              <button type="button" class="btn btn-primary btn-sm btn-cargo-add" onclick="unloadingPlaceAdd()"><i class="mdi mdi-plus-circle"></i></button>'  +
-        '                                                        </div>'  +
-        '                                                </div>'  +
-        '                                                <div class="form-group row">'  +
-        '                                                    <label class="col-sm-3 col-form-label">Контактное лицо</label>'  +
-        '                                                    <div class="col-sm-5">'  +
-        '                                                        <input id="unloadingPerson" type="text" name="unloadingPerson" class="form-control form-details unloadingPerson" placeholder="Имя" required>'  +
-        '                                                    </div>'  +
-        '                                                    <div class="col-sm-4">'  +
-        '                                                        <input id=unloadingNumber" type="text" name="unloadingNumber" class="form-control form-details unloadingNumber" placeholder="" required>'  +
-        '                                                    </div>'  +
-        '                                                </div>'  +
+        '                                                    <label class="col-sm-3 col-form-label">Контактное лицо</label>' +
+        '                                                    <div class="col-sm-5">' +
+        '                                                        <input id="loadingPerson" type="text" name="loadingPerson" class="form-control form-details loadingPerson" placeholder="Имя" required>' +
+        '                                                    </div>' +
+        '                                                    <div class="col-sm-4">' +
+        '                                                        <input id="loadingNumber" type="text" name="loadingNumber" class="form-control form-details loadingNumber" placeholder="" required>' +
+        '                                                    </div>' +
+        '                                                </div>' +
+        '            ' +
+        '                                                <h5 class="card-title text-center border-top"><br>Данные о выгрузке<br></h5>' +
+        '                                                <div class="form-group row">' +
+        '                                                    <label class="col-sm-3 col-form-label">Дата выгрузке</label>' +
+        '                                                    <div class="col-sm-9">' +
+        '                                                        <input id="unloadingDate" type="date" name="unloadingDate" class="form-control form-details unloadingDate" placeholder="" required>' +
+        '                                                    </div>' +
+        '                                                </div>' +
+        '                                                <div class="form-group row">' +
+        '                                                    <label class="col-sm-3 col-form-label">Место выгрузке</label>' +
+        '                                                    <div class="col-sm-9">' +
+        '                                                        <input id="unloadingPlace" type="text" name="unloadingPlace[]" class="form-control form-details unloadingPlace" placeholder="Адрес места выгрузки" required>' +
+        '                                                    </div>' +
+        '                                                </div>' +
+        '                                                <div class="unloadingPlace-add"></div>' +
+        '                                                <div class="form-group row">' +
+        '                                                    <label class="col-sm-3 col-form-label"></label>' +
+        '                                                        <div class="col-sm-5">' +
+        '                                                              <button type="button" class="btn btn-primary btn-sm btn-cargo-add" onclick="unloadingPlaceAdd()"><i class="mdi mdi-plus-circle"></i></button>' +
+        '                                                        </div>' +
+        '                                                </div>' +
+        '                                                <div class="form-group row">' +
+        '                                                    <label class="col-sm-3 col-form-label">Контактное лицо</label>' +
+        '                                                    <div class="col-sm-5">' +
+        '                                                        <input id="unloadingPerson" type="text" name="unloadingPerson" class="form-control form-details unloadingPerson" placeholder="Имя" required>' +
+        '                                                    </div>' +
+        '                                                    <div class="col-sm-4">' +
+        '                                                        <input id=unloadingNumber" type="text" name="unloadingNumber" class="form-control form-details unloadingNumber" placeholder="" required>' +
+        '                                                    </div>' +
+        '                                                </div>' +
         '                                               <h5 class="card-title text-center border-top"><br>Оплата для заказчика<br></h5>' +
         '                                               <input value="CUSTOMER" name="typeCust" style="display: none">' +
         '                                                <div class="form-group row">' +
         '                                                    <label class="col-sm-3 col-form-label">Форма оплаты</label>' +
         '                                                    <div class="col-sm-9">' +
         '                                                      <select id="formPayCust" name="formPayCust" class="form-control form-details formPayCust" required>' +
-        '                                                           <option></option>'  +
+        '                                                           <option></option>' +
         '                                                     </select>' +
         '                                                  </div>' +
         '                                              </div>' +
@@ -479,7 +475,7 @@ function newForming() {
         '                                                    <label class="col-sm-3 col-form-label">Форма оплаты</label>' +
         '                                                    <div class="col-sm-9">' +
         '                                                     <select id="formPayCarr" name="formPayCarr" class="form-control form-details formPayCarr" required>' +
-        '                                                           <option></option>'  +
+        '                                                           <option></option>' +
         '                                                     </select>' +
         '                                                   </div>' +
         '                                                </div>' +
@@ -509,6 +505,7 @@ function newForming() {
     $(".unloadingNumber").mask("8 999 999-9999");
     $("#loadingNumber").mask("8 999 999-9999");
 }
+
 function iDv(drivers, vehicles, trailers) {
     let id = $('#transporter').val();
     let optionDrivers = $('.driver');
@@ -533,6 +530,7 @@ function iDv(drivers, vehicles, trailers) {
         }
     }
 }
+
 function iNew(ourCompanies, formPays, managers, customers, transporters) {
     let optionManagers = $('.manager');
     let optionCustomers = $('.customer');
@@ -571,6 +569,7 @@ function cargoAdd() {
         '                                                     </div>' +
         '                                                </div>')
 }
+
 function loadingPlaceAdd() {
     $('.loadingPlace-add').append('                                               <div class="form-group row">' +
         '                                                   <label class="col-sm-3 col-form-label"></label>' +
@@ -579,6 +578,7 @@ function loadingPlaceAdd() {
         '                                                   </div>' +
         '                                               </div>')
 }
+
 function unloadingPlaceAdd() {
     $('.unloadingPlace-add').append('                                               <div class="form-group row">' +
         '                                                   <label class="col-sm-3 col-form-label"></label>' +

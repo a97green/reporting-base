@@ -7,11 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 
-//    @GetMapping("/")
-//    public String index(Model model) {
-//        return "index";
-//    }
-
     @GetMapping("/error")
     public String error(Model model) {
         return "error";
