@@ -10,13 +10,13 @@ public class Passport {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String lastName;
-    private String firstName;
-    private String patronymic; // отчество
-    private String serialPassport;
-    private String numberPassport;
-    private String issued; // выдан
-    private String issuedDate;
+    private String lastName = "";
+    private String firstName = "";
+    private String patronymic = ""; // отчество
+    private String serialPassport = "";
+    private String numberPassport = "";
+    private String issued = ""; // выдан
+    private String issuedDate = "";
 
     public Passport() {
     }

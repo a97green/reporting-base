@@ -10,7 +10,7 @@ public class Position {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String position;
+    private String position = "";
 
     public Position() {
     }

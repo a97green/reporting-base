@@ -1,6 +1,6 @@
 package ru.aGreen.reportingbase.entity;
 
-import ru.aGreen.reportingbase.enums.TypePaying;
+import ru.aGreen.reportingbase.entity.enums.TypePaying;
 
 import javax.persistence.*;
 
@@ -9,7 +9,7 @@ public class Paying {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String amount;
+    private Double amount;
     private String amountWords;
     private String payTerms;
     private TypePaying type;
@@ -17,9 +17,14 @@ public class Paying {
     private PaymentForm paymentForm;
 
     public Paying() {
+        this.amount = 0.0;
+        this.amountWords = "";
+        this.payTerms = "";
+        this.paymentForm = new PaymentForm() ;
+        this.type = TypePaying.CUSTOMER;
     }
 
-    public Paying(String amount, String amountWords, String payTerms, PaymentForm paymentForm, TypePaying type) {
+    public Paying(Double amount, String amountWords, String payTerms, PaymentForm paymentForm, TypePaying type) {
         this.amount = amount;
         this.amountWords = amountWords;
         this.payTerms = payTerms;
@@ -35,11 +40,11 @@ public class Paying {
         this.id = id;
     }
 
-    public String getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 

@@ -911,25 +911,20 @@ DIV будут заменены.-->
         </tr>
         <tr height=58 style='mso-height-source:userset;height:44.1pt'>
             <td colspan=4 height=58 class=xl7828557 width=594 style='height:44.1pt;
-  width:446pt'><font class="font628557">
-                <font class="font631110">
-                    <div th:text="${forming.getOurCompany().getName()}"></div>
-                </font>
-                <font class="font531110">
-                    <div th:text="'ИНН ' + ${forming.getOurCompany().getInn()} + ', ОГРНИП ' + ${forming.getOurCompany().getOgrnIp()} + ', Р/сч ' +
+  width:446pt'><font class="font628557">Заказчик:</font>
+
+                    <div th:text="${forming.getOurCompany().getName()} + '; ИНН ' + ${forming.getOurCompany().getInn()} + ', ОГРНИП ' + ${forming.getOurCompany().getOgrnIp()} + ', Р/сч ' +
                     ${forming.getOurCompany().getRequisites().getPayAccount()} + ', ' + ${forming.getOurCompany().getRequisites().getNameBank()} + ', БИК ' + ${forming.getOurCompany().getRequisites().getBik()} +
-                    ' K/сч ' + ${forming.getOurCompany().getRequisites().getCorAccount()} + ' Юридический адрес: ' + ${forming.getOurCompany().getLegalAddress()} +
-                    ' Почтовый адрес: ' + ${forming.getOurCompany().getPostalAddress()}"></div>
-                </font></td>
+                    ', K/сч ' + ${forming.getOurCompany().getRequisites().getCorAccount()} + ', Юридический адрес: ' + ${forming.getOurCompany().getLegalAddress()} +
+                    ', Почтовый адрес: ' + ${forming.getOurCompany().getPostalAddress()}"></div>
+                </td>
         </tr>
         <tr height=44 style='mso-height-source:userset;height:33.0pt'>
             <td colspan=4 height=44 class=xl7828557 width=594 style='height:33.0pt;
   width:446pt'><font class="font628557">Перевозчик:</font>
-                <font class="font531110">
                     <div th:text="${forming.getTransporter().getName()} + '; ИНН ' + ${forming.getTransporter().getInn()} + ', КПП ' + ${forming.getTransporter().getKpp()} + ', ОГРН ' + ${forming.getTransporter().getOgrnIp()} +
-                    ' Пасспорт: ' + ${forming.getTransporter().getPassport().getSerialPassport()} + ' ' + ${forming.getTransporter().getPassport().getNumberPassport()} + ' выдан: ' + ${forming.getTransporter().getPassport().getIssued()} + ' ' + ${forming.getTransporter().getPassport().getIssuedDate()} +
-                    '; Юридический адрес: ' + ${forming.getOurCompany().getLegalAddress()}"></div>
-                </font>
+                    ', Пасспорт: ' + ${forming.getTransporter().getPassport().getSerialPassport()} + ' ' + ${forming.getTransporter().getPassport().getNumberPassport()} + ', выдан: ' + ${forming.getTransporter().getPassport().getIssued()} + ' ' + ${forming.getTransporter().getPassport().getIssuedDate()} +
+                    ', Юридический адрес: ' + ${forming.getOurCompany().getLegalAddress()}"></div>
                 <font
                     class="font528557"><span style='mso-spacerun:yes'>  </span>
                 </font></td>
@@ -970,14 +965,12 @@ DIV будут заменены.-->
             <td height=45 class=xl6828557 width=96 style='height:33.75pt;border-top:none;
   width:72pt'>Дата и время</td>
             <td class=xl6928557 width=201 style='border-top:none;border-left:none;
-  width:151pt'><div th:text="${forming.getLoading().getDate()} + ' 09:00-17:00 точное время по звонку о прибытии
-                сообщать заранее.'"></div></td>
+  width:151pt'><div th:text="${forming.getLoading().getDate()} + ', ' + ${forming.getLoading().getTime()} + ', ' + ${forming.getLoading().getComment()}"></div></td>
             <td class=xl6828557 width=96 style='border-top:none;border-left:none;
   width:72pt'>Дата и время</td>
             <td class=xl6928557 width=201 style='border-top:none;border-left:none;
   width:151pt'>
-                <div th:text="${forming.getUnloading().getDate()} + ' 09:00-17:00 точное время по звонку о прибытии
-                сообщать заранее.'"></div>
+                <div th:text="${forming.getUnloading().getDate()} + ', ' + ${forming.getUnloading().getTime()} + ', ' + ${forming.getUnloading().getComment()}"></div>
                 </td>
         </tr>
         <tr height=45 style='height:33.75pt'>
@@ -1134,19 +1127,22 @@ DIV будут заменены.-->
         </tr>
         <tr height=17 style='height:12.75pt'>
             <td height=17 class=xl6728557 colspan=2 style='height:12.75pt'>
-                <div th:text="${forming.getOurCompany().getName()}"></div>
+                <div th:text="${forming.getTransporter().getName()}"></div>
 
             </td>
             <td colspan=2 class=xl7728557 width=297 style='width:223pt'>
-                <div th:text="${forming.getTransporter().getName()}"></div>
+                <div th:text="${forming.getOurCompany().getName()}"></div>
+
 
             </td>
         </tr>
         <tr height=17 style='height:12.75pt'>
             <td colspan=2 height=17 class=xl7728557 width=297 style='height:12.75pt;
-  width:223pt'>________________________ /Кельин В.А./</td>
-            <td colspan=2 class=xl7728557 width=297 style='width:223pt'>_______________
-                /</td>
+  width:223pt'>________________________ /</td>
+            <td colspan=2 class=xl7728557 width=297 style='width:223pt'>________________________ /
+                <i th:text="${forming.getOurCompany().getDirector()}"></i>
+
+                </td>
         </tr>
         <tr height=15 style='height:11.25pt'>
             <td height=15 class=xl6328557 style='height:11.25pt'></td>
@@ -1184,7 +1180,32 @@ DIV будут заменены.-->
 
 </div>
 
+<script src="/libs/jquery/jquery.min.js"></script>
 
+<script th:inline="javascript" type="text/javascript">
+    $(document).ready(function () {
+        setVal();
+    })
+
+    function setVal() {
+        let forming = [[${forming}]];
+        let name = forming.transporter.name
+        let inn = forming.transporter.inn;
+        let legalAddress = forming.transporter.legalAddress;
+
+        if (!(forming.transporter.type === "IP")) {
+            let kpp = forming.transporter.kpp;
+            let ogrn = forming.transporter.ogrn;
+            $('.transporter').append(name + ', ИНН ' + inn + ', КПП ' + kpp + ', ОГРН ' + ogrn + ', Юридический адрес ' + legalAddress);
+        }
+        else {
+            let ogrnIp = forming.transporter.ogrnIp;
+            $('.transporter').append(name + ', ИНН ' + inn + ', ОГРНИП ' + ogrnIp + ', Юридический адрес ' + legalAddress);
+        }
+
+
+    }
+</script>
 <!----------------------------->
 <!--КОНЕЦ ФРАГМЕНТА ПУБЛИКАЦИИ МАСТЕРА ВЕБ-СТРАНИЦ EXCEL-->
 <!----------------------------->

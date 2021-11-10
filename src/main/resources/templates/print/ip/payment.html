@@ -1319,7 +1319,7 @@ DIV будут заменены.-->
         <tr height=24 style='height:18.0pt'>
             <td height=24 class=xl1512628 style='height:18.0pt'></td>
             <td colspan=7 class=xl7812628 align=center>
-                <div th:text="'СЧЕТ № ' + ${forming.getEnumerate()} + ' от ' + ${forming.getLoading().getDate()} "></div>
+                <div th:text="'СЧЕТ № ' + ${forming.getNumPay()} + ' от ' + ${forming.getDate()} + ' г.'"></div>
             </td>
             <td class=xl1512628></td>
             <td class=xl1512628></td>
@@ -1372,10 +1372,8 @@ DIV будут заменены.-->
 <!--            <td class=xl9912628 width=71 style='width:53pt'></td>-->
             <td colspan=6 class=xl10812628>
                 Заказчик:
-                <font class="font515669">
-                    <div th:text="${forming.getCustomer().getName()} + ', ИНН ' + ${forming.getCustomer().getInn()} + ', КПП ' + ${forming.getCustomer().getKpp()} + ','"></div>
-                    <div th:text="${forming.getCustomer().getLegalAddress()}"></div>
-                </font></td>
+                    <div th:text="${forming.getCustomer().getName()} + ', ИНН ' + ${forming.getCustomer().getInn()} + ', КПП ' + ${forming.getCustomer().getKpp()} + ', ' + ${forming.getCustomer().getLegalAddress()}"></div>
+                </td>
             </td>
             <td class=xl1512628></td>
             <td class=xl1512628></td>
@@ -1391,10 +1389,9 @@ DIV будут заменены.-->
             <td height=40 class=xl1512628 style='height:30.0pt'></td>
             <td colspan=7 class=xl10212628 width=677 style='width:509pt'>
                 Плательщик:
-                <font class="font515669">
-                    <div th:text="${forming.getCustomer().getName()} + ', ИНН ' + ${forming.getCustomer().getInn()} + ', КПП ' + ${forming.getCustomer().getKpp()} + ','"></div>
-                    <div th:text="${forming.getCustomer().getLegalAddress()}"></div>
-                </font></td>
+
+                    <div th:text="${forming.getCustomer().getName()} + ', ИНН ' + ${forming.getCustomer().getInn()} + ', КПП ' + ${forming.getCustomer().getKpp()} + ', ' + ${forming.getCustomer().getLegalAddress()}"></div>
+                </td>
             </td>
             <td class=xl1512628></td>
             <td class=xl1512628></td>
@@ -1598,8 +1595,9 @@ DIV будут заменены.-->
         </tr>
         <tr height=33 style='mso-height-source:userset;height:24.75pt'>
             <td height=33 class=xl1512628 style='height:24.75pt'></td>
-            <td class=xl5912628 colspan=5>Руководитель предприятия_____________________
-                (Кельин В.А.)</td>
+            <td class=xl5912628 colspan=5>Руководитель предприятия_____________________ /
+                <i th:text="${forming.getOurCompany().getDirector()}"></i>
+            </td>
             <td class=xl5912628></td>
             <td class=xl5912628></td>
             <td class=xl1512628></td>
@@ -1633,8 +1631,9 @@ DIV будут заменены.-->
         </tr>
         <tr height=30 style='mso-height-source:userset;height:22.5pt'>
             <td height=30 class=xl1512628 style='height:22.5pt'></td>
-            <td class=xl5912628 colspan=4>Главный бухгалтер____________________________
-                (Кельин В.А.)</td>
+            <td class=xl5912628 colspan=4>Главный бухгалтер____________________________ /
+                <i th:text="${forming.getOurCompany().getDirector()}"></i>
+            </td>
             <td class=xl5912628></td>
             <td class=xl5912628></td>
             <td class=xl5912628></td>
@@ -1843,7 +1842,7 @@ DIV будут заменены.-->
     </table>
 
 </div>
-<script src="/assets/libs/jquery/jquery.min.js"></script>
+<script src="/libs/jquery/jquery.min.js"></script>
 
 <script th:inline="javascript" type="text/javascript">
     $(document).ready(function () {

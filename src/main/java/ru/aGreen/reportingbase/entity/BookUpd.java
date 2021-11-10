@@ -1,8 +1,7 @@
 package ru.aGreen.reportingbase.entity;
 
-import ru.aGreen.reportingbase.entity.reference.Enterprise;
-
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class BookUpd {
@@ -10,18 +9,19 @@ public class BookUpd {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long enumerate;
-    @OneToOne
-    private Enterprise ourCompany;
-    @OneToOne
-    private Enterprise customer;
-    private String workType = "";
     private Double amount;
-    private Double expenditure;
+    private String workType = "";
     private String agreedDate = "";
     private String exposedDate = "";
     private String signedDate = "";
     private String paidDate = "";
     private String comment = "";
+    @OneToOne
+    private Enterprise ourCompany;
+    @OneToOne
+    private Enterprise customer;
+    @OneToMany
+    private List<Expense> expenses;
 
     public Long getId() {
         return id;
@@ -53,14 +53,6 @@ public class BookUpd {
 
     public void setAmount(Double amount) {
         this.amount = amount;
-    }
-
-    public Double getExpenditure() {
-        return expenditure;
-    }
-
-    public void setExpenditure(Double expenditure) {
-        this.expenditure = expenditure;
     }
 
     public String getAgreedDate() {
@@ -117,5 +109,13 @@ public class BookUpd {
 
     public void setCustomer(Enterprise customer) {
         this.customer = customer;
+    }
+
+    public List<Expense> getExpenses() {
+        return expenses;
+    }
+
+    public void setExpenses(List<Expense> expenses) {
+        this.expenses = expenses;
     }
 }

@@ -1,12 +1,7 @@
 package ru.aGreen.reportingbase.entity;
 
-import ru.aGreen.reportingbase.entity.Cargo;
-import ru.aGreen.reportingbase.entity.Doc;
-import ru.aGreen.reportingbase.entity.Paying;
-import ru.aGreen.reportingbase.entity.Place;
-import ru.aGreen.reportingbase.entity.reference.*;
-
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,42 +9,38 @@ public class Forming {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long enumerate;
     @OneToOne
-    private Manager manager;
+    private Manager manager = new Manager();
     @OneToOne
-    private Enterprise ourCompany;
+    private Enterprise ourCompany = new Enterprise();
     @OneToOne
-    private Enterprise customer;
+    private Enterprise customer = new Enterprise();
     @OneToOne
-    private Enterprise transporter;
+    private Enterprise transporter = new Enterprise();
     @OneToOne
-    private Driver driver;
+    private Driver driver = new Driver();
     @OneToOne
-    private Vehicle vehicle;
+    private Vehicle vehicle = new Vehicle();
     @OneToMany
-    private List<Cargo> cargo;
+    private List<Cargo> cargo = new ArrayList<>();
     @OneToOne
-    private Place loading;
+    private Place loading = new Place();
     @OneToOne
-    private Place unloading;
+    private Place unloading = new Place();
     @OneToOne
-    private Paying customerPay;
+    private Paying customerPay = new Paying();
     @OneToOne
-    private Paying carrierPay;
-    @OneToMany
-    private List<Doc> docs;
-    private String comment;
-    private String date;
-    private String commentDoc;
-
-
+    private Paying carrierPay = new Paying();
+    private String comment = "";
+    private String date = "";
+    private String commentDoc = "";
+    private String numPay = "";
+    private String numAct = "";
 
     public Forming() {
     }
 
-    public Forming(Long enumerate, Enterprise ourCompany, Manager manager, Enterprise customer, Enterprise transporter, Driver driver, Vehicle vehicle, List<Cargo> cargo, Place loading, Place unloading, Paying customerPay, Paying carrierPay, String date, String comment, List<Doc> docs) {
-        this.enumerate = enumerate;
+    public Forming(Enterprise ourCompany, Manager manager, Enterprise customer, Enterprise transporter, Driver driver, Vehicle vehicle, List<Cargo> cargo, Place loading, Place unloading, Paying customerPay, Paying carrierPay, String date, String comment, String numPay, String numAct) {
         this.ourCompany = ourCompany;
         this.manager = manager;
         this.customer = customer;
@@ -63,7 +54,8 @@ public class Forming {
         this.carrierPay = carrierPay;
         this.date = date;
         this.comment = comment;
-        this.docs = docs;
+        this.numPay = numPay;
+        this.numAct = numAct;
     }
 
     public Long getId() {
@@ -72,14 +64,6 @@ public class Forming {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getEnumerate() {
-        return enumerate;
-    }
-
-    public void setEnumerate(Long enumerate) {
-        this.enumerate = enumerate;
     }
 
     public Enterprise getOurCompany() {
@@ -186,19 +170,27 @@ public class Forming {
         this.comment = comment;
     }
 
-    public List<Doc> getDocs() {
-        return docs;
-    }
-
-    public void setDocs(List<Doc> docs) {
-        this.docs = docs;
-    }
-
     public String getCommentDoc() {
         return commentDoc;
     }
 
     public void setCommentDoc(String commentDoc) {
         this.commentDoc = commentDoc;
+    }
+
+    public String getNumPay() {
+        return numPay;
+    }
+
+    public void setNumPay(String numPay) {
+        this.numPay = numPay;
+    }
+
+    public String getNumAct() {
+        return numAct;
+    }
+
+    public void setNumAct(String numAct) {
+        this.numAct = numAct;
     }
 }

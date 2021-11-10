@@ -5,22 +5,28 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.aGreen.reportingbase.entity.BookUpd;
-import ru.aGreen.reportingbase.entity.reference.Enterprise;
-import ru.aGreen.reportingbase.enums.SubtypeEnterprise;
+import ru.aGreen.reportingbase.entity.Enterprise;
+import ru.aGreen.reportingbase.entity.Expense;
+import ru.aGreen.reportingbase.entity.enums.SubtypeEnterprise;
 import ru.aGreen.reportingbase.repositories.BoorUpdRepository;
-import ru.aGreen.reportingbase.repositories.reference.EnterpriseRepository;
+import ru.aGreen.reportingbase.repositories.EnterpriseRepository;
+import ru.aGreen.reportingbase.repositories.ExpenseRepository;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Controller
 public class BookController {
     private final BoorUpdRepository boorUpdRepository;
     private final EnterpriseRepository enterpriseRepository;
+    private final ExpenseRepository expenseRepository;
 
     @Autowired
-    public BookController(BoorUpdRepository boorUpdRepository, EnterpriseRepository enterpriseRepository) {
+    public BookController(BoorUpdRepository boorUpdRepository, EnterpriseRepository enterpriseRepository, ExpenseRepository expenseRepository) {
         this.boorUpdRepository = boorUpdRepository;
         this.enterpriseRepository = enterpriseRepository;
+        this.expenseRepository = expenseRepository;
     }
 
     @GetMapping("/book")
@@ -35,9 +41,16 @@ public class BookController {
     }
 
     @PostMapping("/book")
-    public String addBook(@ModelAttribute("bookUpd") BookUpd bookUpd, @RequestParam Long ourCompany,  @RequestParam Long customer,Model model) {
+    public String addBook(@ModelAttribute("bookUpd") BookUpd bookUpd, @RequestParam Long ourCompany, @RequestParam Long customer,
+                          @RequestParam(value = "expenditure[]", required = false) List<Double> expenditures,
+                          @RequestParam(value = "commentEx[]", required = false) List<String> comments,
+                          Model model) {
+        if (bookUpd.getEnumerate() == null) {
+            bookUpd.setEnumerate(0L);
+        }
         bookUpd.setOurCompany(receiveEnterprise(ourCompany));
         bookUpd.setCustomer(receiveEnterprise(customer));
+        bookUpd.setExpenses(receiveExpense(expenditures, comments));
         boorUpdRepository.save(bookUpd);
         return "redirect:/book";
     }
@@ -51,5 +64,24 @@ public class BookController {
     private Enterprise receiveEnterprise(Long id) {
         return enterpriseRepository.findById(id).orElseThrow(() -> new NoSuchElementException(""));
     }
+
+    private List<Expense> receiveExpense(List<Double> expenditures, List<String> comments) {
+        if (expenditures == null) {
+            expenditures = new ArrayList<>();
+        }
+        if (comments == null) {
+            comments = new ArrayList<>();
+        }
+        List<Expense> expenses = new ArrayList<>();
+        for (int i = 0; i < expenditures.size(); i++) {
+            if (!(expenditures.get(i) == null)) {
+                Expense expense = new Expense(expenditures.get(i), comments.get(i));
+                expenseRepository.save(expense);
+                expenses.add(expense);
+            }
+        }
+        return expenses;
+    }
+
 
 }

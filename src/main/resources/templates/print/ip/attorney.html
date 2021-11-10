@@ -1014,8 +1014,7 @@ DIV будут заменены.-->
         <tr height=35 style='mso-height-source:userset;height:26.25pt'>
             <td height=35 class=xl6313592 style='height:26.25pt'></td>
             <td colspan=28 class=xl7713592 width=585 style='width:446pt'>
-                <div th:text="${forming.getOurCompany().getName()} + ' ИНН ' + ${forming.getOurCompany().getInn()}"></div>
-                <div th:text="${forming.getOurCompany().getLegalAddress()}"></div>
+                <div th:text="${forming.getOurCompany().getName()} + ' ИНН ' + ${forming.getOurCompany().getInn()} + ', ' + ${forming.getOurCompany().getLegalAddress()}"></div>
             </td>
         </tr>
         <tr height=14 style='mso-height-source:userset;height:10.5pt'>
@@ -1026,8 +1025,7 @@ DIV будут заменены.-->
         <tr height=29 style='mso-height-source:userset;height:21.75pt'>
             <td height=29 class=xl6313592 style='height:21.75pt'></td>
             <td colspan=28 class=xl7713592 width=585 style='width:446pt'>
-                <div th:text="${forming.getOurCompany().getName()} + ' ИНН ' + ${forming.getOurCompany().getInn()}"></div>
-                <div th:text="${forming.getOurCompany().getLegalAddress()}"></div>
+                <div th:text="${forming.getOurCompany().getName()} + ', ИНН ' + ${forming.getOurCompany().getInn()} + ', ' + ${forming.getOurCompany().getLegalAddress()}"></div>
             </td>
         </tr>
         <tr height=14 style='mso-height-source:userset;height:10.5pt'>
@@ -1038,8 +1036,7 @@ DIV будут заменены.-->
         <tr height=44 style='mso-height-source:userset;height:33.0pt'>
             <td height=44 class=xl6313592 style='height:33.0pt'></td>
             <td colspan=28 class=xl7713592 width=585 style='width:446pt'>
-                <div th:text="'Р/сч ' + ${forming.getOurCompany().getRequisites().getPayAccount()} + ' ' + ${forming.getOurCompany().getRequisites().getNameBank()}"></div>
-                <div th:text="'К/сч ' + ${forming.getOurCompany().getRequisites().getCorAccount()}"></div>
+                <div th:text="'Р/сч ' + ${forming.getOurCompany().getRequisites().getPayAccount()} + ', ' + ${forming.getOurCompany().getRequisites().getNameBank()} + ', К/сч ' + ${forming.getOurCompany().getRequisites().getCorAccount()}"></div>
             </td>
         </tr>
         <tr height=14 style='mso-height-source:userset;height:10.5pt'>
@@ -1450,7 +1447,7 @@ DIV будут заменены.-->
             <td class=xl6313592></td>
             <td class=xl6313592></td>
             <td class=xl6313592></td>
-            <td colspan=11 class=xl6313592>Кельин В.А.</td>
+            <td colspan=11 class=xl6313592><i th:text="${forming.getOurCompany().getDirector()}"></i></td>
             <td class=xl6313592></td>
             <td class=xl6313592></td>
             <td class=xl6313592></td>
@@ -1578,7 +1575,7 @@ DIV будут заменены.-->
             <td class=xl7113592>&nbsp;</td>
             <td class=xl7113592>&nbsp;</td>
             <td class=xl7113592>&nbsp;</td>
-            <td colspan=11 class=xl7113592>Кельин В.А.</td>
+            <td colspan=11 class=xl7113592><i th:text="${forming.getOurCompany().getDirector()}"></i></td>
             <td class=xl6313592></td>
             <td class=xl6313592></td>
             <td class=xl6313592></td>

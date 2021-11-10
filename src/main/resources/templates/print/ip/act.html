@@ -620,7 +620,7 @@
         <tr height=24 style='height:18.0pt'>
             <td height=24 class=xl1515669 style='height:18.0pt'></td>
             <td colspan=5 class=xl6015669 align=center>
-                <div th:text="'АКТ №  ' + ${forming.getEnumerate()} + ' от ' + ${forming.getDate()} + ' г.'"></div>
+                <div th:text="'АКТ №  ' + ${forming.getNumAct()} + ' от ' + ${forming.getUnloading().getDate()} + ' г.'"></div>
                 <span style='mso-spacerun:yes'>  </span>
             </td>
             <td class=xl1515669></td>
@@ -639,8 +639,7 @@
             <td colspan=6 rowspan=2 class=xl8215669 width=698 style='width:523pt'>
                 Заказчик:
                 <font class="font515669">
-                    <div th:text="${forming.getCustomer().getName()} + ', ИНН ' + ${forming.getCustomer().getInn()} + ','"></div>
-                    <div th:text="${forming.getCustomer().getLegalAddress()}"></div>
+                <div th:text="${forming.getCustomer().getName()} + ', ИНН ' + ${forming.getCustomer().getInn()} + ', ' + ${forming.getCustomer().getLegalAddress()}"></div>
                 </font></td>
         </tr>
         <tr height=20 style='mso-height-source:userset;height:15.0pt'>
@@ -736,9 +735,12 @@
         </tr>
         <tr height=33 style='mso-height-source:userset;height:24.95pt'>
             <td height=33 class=xl1515669 style='height:24.95pt'></td>
-            <td colspan=2 class=xl6715669>Исполнитель:<span
+            <td colspan=2 class=xl6715669>Исполнитель:
+
+                <span
                     style='mso-spacerun:yes'>                                           
-  </span>Кельин В. А.
+  </span>
+                <i th:text="${forming.getOurCompany().getDirector()}"></i>
             </td>
             <td class=xl6215669></td>
             <td class=xl6215669>Заказчик:</td>
@@ -999,17 +1001,8 @@
     </table>
 
 </div>
-<!--<button onclick="generatePDF()">Сохранить в PDF</button>-->
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.js"></script>-->
-<!--<script>-->
-<!--    function generatePDF() {-->
-<!--        const element = document.getElementById('arn_15669');-->
-<!--        html2pdf()-->
-<!--            .from(element)-->
-<!--            .save();-->
-<!--    }-->
-<!--</script>-->
-<script src="/assets/libs/jquery/jquery.min.js"></script>
+
+<script src="/libs/jquery/jquery.min.js"></script>
 
 <script th:inline="javascript" type="text/javascript">
     $(document).ready(function () {

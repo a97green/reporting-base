@@ -10,12 +10,12 @@ public class Requisites {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String inn;
-    private String kpp;
-    private String payAccount;
-    private String corAccount;
-    private String bik;
-    private String nameBank;
+    private String inn = "";
+    private String kpp = "";
+    private String payAccount = "";
+    private String corAccount = "";
+    private String bik = "";
+    private String nameBank = "";
 
     public Requisites() {
     }

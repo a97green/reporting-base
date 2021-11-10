@@ -639,8 +639,7 @@
             <td colspan=6 rowspan=2 class=xl8215669 width=698 style='width:523pt'>
                 Заказчик:
                 <font class="font515669">
-                    <div th:text="${bookUpd.getCustomer().getName()} + ', ИНН ' + ${bookUpd.getCustomer().getInn()} + ', КПП ' + ${bookUpd.getCustomer().getKpp()} + ','"></div>
-                    <div th:text="${bookUpd.getCustomer().getLegalAddress()}"></div>
+                    <div th:text="${bookUpd.getCustomer().getName()} + ', ИНН ' + ${bookUpd.getCustomer().getInn()} + ', КПП ' + ${bookUpd.getCustomer().getKpp()} + ', ' + ${bookUpd.getCustomer().getLegalAddress()}"></div>
                 </font></td>
         </tr>
         <tr height=20 style='mso-height-source:userset;height:15.0pt'>
@@ -669,13 +668,12 @@
             <td class=xl7415669 style='border-top:none'>1</td>
             <td class=xl7715669 width=324 style='border-top:none;border-left:none;
   width:243pt'>
-                <i>Вид работы:</i>
                 <i th:text="${bookUpd.getWorkType()}"></i>
             </td>
             <td class=xl6515669 style='border-top:none'></td>
             <td class=xl7515669 style='border-top:none'>1</td>
-            <td class="xl7615669 xxlse" style='border-top:none'  th:text="${bookUpd.getAmount()}"></td>
-            <td class="xl7215669 xxlse" style='border-top:none'  th:text="${bookUpd.getAmount()}"></td>
+            <td class="xl7615669 xxlse" style='border-top:none'></td>
+            <td class="xl7215669 xxlse" style='border-top:none'></td>
         </tr>
         <tr height=17 style='height:12.75pt'>
             <td height=17 class=xl1515669 style='height:12.75pt'></td>
@@ -684,7 +682,7 @@
             <td class=xl6715669></td>
             <td class=xl6815669></td>
             <td class=xl6915669>Итого:</td>
-            <td class="xl7215669 xxlse" style='border-top:none'  th:text="${bookUpd.getAmount()}"></td>
+            <td class="xl7215669 xxlse" style='border-top:none'></td>
         </tr>
         <tr height=17 style='height:12.75pt'>
             <td height=17 class=xl1515669 style='height:12.75pt'></td>
@@ -692,8 +690,8 @@
             <td class=xl6215669></td>
             <td class=xl6215669></td>
             <td class=xl6215669></td>
-            <td class=xl6915669>Без налога:</td>
-            <td class=xl7315669 style='border-top:none'>-</td>
+            <td class=xl6915669>Итог НДС:</td>
+            <td class=xl7315669 style='border-top:none'></td>
         </tr>
         <tr height=21 style='mso-height-source:userset;height:15.75pt'>
             <td height=21 class=xl1515669 style='height:15.75pt'></td>
@@ -702,7 +700,7 @@
             <td class=xl6215669></td>
             <td class=xl7015669></td>
             <td class=xl7115669>Всего:</td>
-            <td class=xl7215669 style='border-top:none' th:text="${bookUpd.getAmount()}"></td>
+            <td class="xl7215669" style='border-top:none' th:text="${bookUpd.getAmount()}"></td>
         </tr>
         <tr height=15 style='height:11.25pt'>
             <td height=15 class=xl1515669 style='height:11.25pt'></td>
@@ -730,7 +728,7 @@
             <td height=33 class=xl1515669 style='height:24.95pt'></td>
             <td colspan=2 class=xl6715669>Исполнитель:<span
                     style='mso-spacerun:yes'>                                           
-  </span>Кельин В. А.
+  </span><i th:text="${bookUpd.getOurCompany().getDirector()}"></i>
             </td>
             <td class=xl6215669></td>
             <td class=xl6215669>Заказчик:</td>
@@ -991,6 +989,35 @@
     </table>
 
 </div>
+<script src="/libs/jquery/jquery.min.js"></script>
+
+<script th:inline="javascript" type="text/javascript">
+    $(document).ready(function () {
+        setVal();
+    })
+
+    function setVal() {
+        let amount = [[${bookUpd.getAmount()}]];
+        let ourCompany = [[${bookUpd.getOurCompany().getName()}]];
+        if (ourCompany === "А-Сервис") {
+            let temp = (amount * 20 / 120);
+            let putVal1 = $('.xl7315669');
+            putVal1.append(temp.toFixed(2));
+
+            let value = (amount / 1.2).toFixed(2);
+            let putVal2 = $('.xxlse');
+            putVal2.append(value);
+        }
+        else {
+            let putVal2 = $('.xxlse');
+            putVal2.append(amount);
+        }
+
+    }
+
+
+
+</script>
 <!----------------------------->
 <!--КОНЕЦ ФРАГМЕНТА ПУБЛИКАЦИИ МАСТЕРА ВЕБ-СТРАНИЦ EXCEL-->
 <!----------------------------->
