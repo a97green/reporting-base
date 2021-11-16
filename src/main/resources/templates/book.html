@@ -11,11 +11,11 @@
     <link rel="shortcut icon" href="/images/favicon.ico">
     <link href="/libs/chartist/chartist.min.css" rel="stylesheet">
     <!-- Bootstrap Css -->
-    <link href="/css/bootstrap-dark.min.css" id="bootstrap-style" rel="stylesheet" type="text/css"/>
+    <link href="/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css"/>
     <!-- Icons Css -->
     <link href="/css/icons.min.css" rel="stylesheet" type="text/css"/>
     <!-- App Css-->
-    <link href="/css/app-dark.min.css" id="app-style" rel="stylesheet" type="text/css"/>
+    <link href="/css/app.min.css" id="app-style" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
 
@@ -63,7 +63,7 @@
                                         <th>Стоимость</th>
                                         <th>Расходы</th>
                                         <th>Выставлено</th>
-                                        <th>Подписано/получено</th>
+                                        <th>Прибыль</th>
                                         <th>Оплачено</th>
                                         <th></th>
                                     </tr>
@@ -156,15 +156,17 @@
     function innerNew() {
         let ourCompanies = [[${ourCompanies}]];
         let customers = [[${customers}]];
+        let formPays = [[${formPays}]];
 
-        iNew(ourCompanies, customers);
+        iNew(ourCompanies, customers, formPays);
     }
 
     function innerDetails(element) {
         let ourCompanies = [[${ourCompanies}]];
         let customers = [[${customers}]];
+        let formPays = [[${formPays}]];
 
-        iDetails(element, ourCompanies, customers);
+        iDetails(element, ourCompanies, customers, formPays);
     }
 </script>
 <script th:inline="javascript" src="/js/innerForms/bookUpds/bookUpd.js"></script>

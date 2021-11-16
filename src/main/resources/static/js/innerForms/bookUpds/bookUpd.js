@@ -39,6 +39,13 @@ function details(element) {
         '                                            <input modelAttribute="bookUpd" value="' + element.amount + '" text="' + element.amount + '" type="number" name="amount" class="form-control form-details" placeholder="Стоимость (руб.)"  disabled>' +
         '                                        </div>' +
         '                                    </div>' +
+        '                                   <div class="form-group row">' +
+        '                                       <label class="col-sm-3 col-form-label">Форма оплаты</label>' +
+        '                                       <div class="col-sm-9">' +
+        '                                        <select id="formPay" name="formPay" class="form-control form-details formPay" disabled>' +
+        '                                        </select>' +
+        '                                      </div>' +
+        '                                   </div>' +
         '                                   <div class="expenses-add"></div>' +
         '                                   <div class="form-group row">' +
         '                                        <label class="col-sm-3 col-form-label">Выставлено</label>' +
@@ -47,9 +54,9 @@ function details(element) {
         '                                        </div>' +
         '                                    </div>' +
         '                                   <div class="form-group row">' +
-        '                                        <label class="col-sm-3 col-form-label">Подписано/Получено</label>' +
+        '                                        <label class="col-sm-3 col-form-label">Прибыль</label>' +
         '                                        <div class="col-sm-9">' +
-        '                                            <input modelAttribute="bookUpd" value="' + element.signedDate + '" text="' + element.signedDate + '" type="text" name="signedDate" class="form-control form-details inpDate" placeholder=""  disabled>' +
+        '                                            <input modelAttribute="bookUpd" value="' + element.signedDate + '" text="' + element.signedDate + '" type="number" name="signedDate" class="form-control form-details inpDate" placeholder=""  disabled>' +
         '                                        </div>' +
         '                                    </div>' +
         '                                   <div class="form-group row">' +
@@ -76,9 +83,25 @@ function details(element) {
         '                                   <form action="/book/remove/' + element.id + '" method="post">' +
         '                                       <button type="submit" class="btn btn-danger waves-effect mr-5"><i class="mdi mdi mdi-delete-circle-outline mr-1"></i>Удалить</button>' +
         '                                   </form>' +
+        '                                               <div class="col-sm-6">' +
+        '                                                 <div class="dropdown d-inline-block">\n' +
+        '                                                   <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\n' +
+        '                                       <i class="mdi mdi-printer-check mr-1"></i>Печать<i class="mdi mdi-chevron-down ml-1"></i>\n' +
+        '                                                   </a>\n' +
+        '                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">\n' +
         '                                        <form target="_blank" action="/print/book/' + element.id + '" method="get">' +
-        '                                            <button type="submit" class="btn btn-secondary ml-5"> Печать Акта</button>\n' +
+        '                                            <button type="submit" class="dropdown-item">Акт</button>\n' +
         '                                        </form>' +
+        '                                   <form target="_blank"  action="/print/paymentBook/' + element.id + '" method="get">' +
+        '                                       <button type="submit" class="dropdown-item">Счёт</button>\n' +
+        '                                   </form>' +
+        '                                   <form target="_blank" action="/print/invoiceBook/' + element.id + '" method="get">' +
+        '                                       <button type="submit" class="dropdown-item">Счёт фактура</button>\n' +
+        '                                   </form>' +
+        '                                    </div>\n' +
+        '                                                  </div>' +
+        '                                                  </div>' +
+
         '                                </div>' +
         '                            </div>' +
         '                        </div>');
@@ -86,15 +109,23 @@ function details(element) {
     applyMasked();
 }
 
-function iDetails(element, ourCompanies, customers) {
+function iDetails(element, ourCompanies, customers, formPays) {
 
     let optionOurCompany = $('.ourCompany');
     let optionCustomers = $('.customer');
     let optionExpenses = $('.expenses-add');
+    let optionFormPay = $('.formPay');
+
 
     optionOurCompany.append('<option value="' + element.ourCompany.id + '">' + element.ourCompany.name + '</option>')
     optionCustomers.append('<option value="' + element.customer.id + '">' + element.customer.name + '</option>')
+    optionFormPay.append('<option value="' + element.paymentForm.id + '">' + element.paymentForm.name + '</option>')
 
+    for (let i = 0; i < formPays.length; i++) {
+        if (formPays[i].id !== element.paymentForm.id) {
+            optionFormPay.append('<option value="' + formPays[i].id + '">' + formPays[i].name + '</option>')
+        }
+    }
     for (let i = 0; i < ourCompanies.length; i++) {
         if (ourCompanies[i].id !== element.ourCompany.id) {
             optionOurCompany.append('<option value="' + ourCompanies[i].id + '">' + ourCompanies[i].name + '</option>')
@@ -122,10 +153,14 @@ function iDetails(element, ourCompanies, customers) {
     }
 }
 
-function iNew(ourCompanies, customers) {
+function iNew(ourCompanies, customers, formPays) {
     let optionOurCompany = $('.ourCompany');
     let optionCustomers = $('.customer');
+    let optionFormPay = $('.formPay');
 
+    for (let i = 0; i < formPays.length; i++) {
+        optionFormPay.append('<option value="' + formPays[i].id + '">' + formPays[i].name + '</option>')
+    }
 
     for (let i = 0; i < ourCompanies.length; i++) {
         optionOurCompany.append('<option value="' + ourCompanies[i].id + '">' + ourCompanies[i].name + '</option>')
@@ -195,7 +230,13 @@ function newUpd() {
         '                 <button type="button" class="btn btn-primary btn-sm btn-cargo-add" onclick="expenseAdd()"><i class="mdi mdi-plus-circle"></i></button>' +
         '              </div>' +
         '          </div>' +
-
+        '          <div class="form-group row">' +
+        '              <label class="col-sm-3 col-form-label">Форма оплаты</label>' +
+        '              <div class="col-sm-9">' +
+        '               <select id="formPay" name="formPay" class="form-control form-details formPay" required>' +
+        '               </select>' +
+        '             </div>' +
+        '          </div>' +
         '           <div class="form-group row">' +
         '                <label class="col-sm-3 col-form-label">Выставлено</label>' +
         '                <div class="col-sm-9">' +
@@ -203,9 +244,9 @@ function newUpd() {
         '                </div>' +
         '            </div>' +
         '           <div class="form-group row">' +
-        '                <label class="col-sm-3 col-form-label">Подписано/Получено</label>' +
+        '                <label class="col-sm-3 col-form-label">Прибыль</label>' +
         '                <div class="col-sm-9">' +
-        '                    <input modelAttribute="bookUpd" type="text" name="signedDate" class="form-control form-details inpDate" placeholder="" >' +
+        '                    <input modelAttribute="bookUpd" type="number" name="signedDate" class="form-control form-details inpDate" placeholder="" >' +
         '                </div>' +
         '            </div>' +
         '           <div class="form-group row">' +

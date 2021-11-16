@@ -17,11 +17,14 @@ public class BookUpd {
     private String paidDate = "";
     private String comment = "";
     @OneToOne
+    private PaymentForm paymentForm;
+    @OneToOne
     private Enterprise ourCompany;
     @OneToOne
     private Enterprise customer;
     @OneToMany
     private List<Expense> expenses;
+
 
     public Long getId() {
         return id;
@@ -117,5 +120,13 @@ public class BookUpd {
 
     public void setExpenses(List<Expense> expenses) {
         this.expenses = expenses;
+    }
+
+    public PaymentForm getPaymentForm() {
+        return paymentForm;
+    }
+
+    public void setPaymentForm(PaymentForm paymentForm) {
+        this.paymentForm = paymentForm;
     }
 }

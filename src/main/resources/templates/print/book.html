@@ -998,8 +998,8 @@
 
     function setVal() {
         let amount = [[${bookUpd.getAmount()}]];
-        let ourCompany = [[${bookUpd.getOurCompany().getName()}]];
-        if (ourCompany === "А-Сервис") {
+        let idPayForm = [[${bookUpd.getPaymentForm().getId()}]];
+        if (idPayForm == 1) {
             let temp = (amount * 20 / 120);
             let putVal1 = $('.xl7315669');
             putVal1.append(temp.toFixed(2));

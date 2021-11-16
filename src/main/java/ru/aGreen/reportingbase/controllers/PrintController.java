@@ -79,6 +79,20 @@ public class PrintController {
         return "print/book";
     }
 
+    @GetMapping("/print/paymentBook/{id}")
+    public String printPaymentBook(@PathVariable(value = "id") Long id, Model model) {
+        BookUpd bookUpd = boorUpdRepository.findById(id).orElseThrow(() -> new NoSuchElementException(""));
+        model.addAttribute("bookUpd", bookUpd);
+        return "print/bookP";
+    }
+
+    @GetMapping("/print/invoiceBook/{id}")
+    public String printInvoiceBook(@PathVariable(value = "id") Long id, Model model) {
+        BookUpd bookUpd = boorUpdRepository.findById(id).orElseThrow(() -> new NoSuchElementException(""));
+        model.addAttribute("bookUpd", bookUpd);
+        return "print/bookI";
+    }
+
     private boolean printDocument(Long id, Model model) {
         Forming forming = formingRepository.findById(id).orElseThrow(() -> new NoSuchElementException(""));
         model.addAttribute("forming", forming);

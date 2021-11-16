@@ -11,12 +11,23 @@
     <link rel="shortcut icon" href="/images/favicon.ico">
     <link href="/libs/chartist/chartist.min.css" rel="stylesheet">
     <!-- Bootstrap Css -->
-    <link href="/css/bootstrap-dark.min.css" id="bootstrap-style" rel="stylesheet" type="text/css"/>
+    <link href="/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css"/>
     <!-- Icons Css -->
     <link href="/css/icons.min.css" rel="stylesheet" type="text/css"/>
     <!-- App Css-->
-    <link href="/css/app-dark.min.css" id="app-style" rel="stylesheet" type="text/css"/>
+    <link href="/css/app.min.css" id="app-style" rel="stylesheet" type="text/css"/>
+    <link href="/css/qqw.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        .height-table200 {
+            max-height: 50px;
+            max-width: 200px;
+            height: 50px;
+            overflow: auto;
+            text-overflow: ellipsis;
+            white-space: inherit;
+        }
+    </style>
 </head>
 
 <body data-sidebar="dark">
@@ -81,48 +92,86 @@
                                         </thead>
                                         <tbody>
                                         <tr th:each="element : ${formings}">
-                                            <td th:text="${element.getId()}"></td>
-                                            <td>
-                                                <button type="button"
-                                                        class="btn btn-secondary btn-sm waves-effect waves-light"
-                                                        data-toggle="popover" data-trigger="focus" title=""
-                                                        th:data-content="${element.getCommentDoc()}"
-                                                        data-original-title="Полученные документы">
-                                                    <i class="mdi mdi-file-document-box-check"></i>
-                                                </button>
-                                            </td>
-                                            <td th:text="${element.getOurCompany().getName()}"></td>
-                                            <td th:text="${element.getManager().getLastName()} + ' ' + ${element.getManager().getFirstName()}"></td>
-                                            <td th:type="date" th:text="${element.getLoading().getDate()}"></td>
-                                            <td>
-                                                <div th:each="position : ${element.getLoading().getPositions()}"
-                                                     th:text="'- ' + ${position.getPosition()}"></div>
+                                            <td >
+                                                <div class="height-table200" th:text="${element.getId()}"></div>
                                             </td>
                                             <td>
-                                                <div th:each="position : ${element.getUnloading().getPositions()}"
-                                                     th:text="'- ' + ${position.getPosition()}"></div>
+                                                <div class="height-table200">
+                                                    <button type="button"
+                                                            class="btn btn-secondary btn-sm waves-effect waves-light"
+                                                            data-toggle="popover" data-trigger="focus" title=""
+                                                            th:data-content="${element.getCommentDoc()}"
+                                                            data-original-title="Полученные документы">
+                                                        <i class="mdi mdi-file-document-box-check"></i>
+                                                    </button>
+                                                </div>
                                             </td>
                                             <td>
-                                                <div th:each="cargo : ${element.getCargo()}"
-                                                     th:text="'- ' + ${cargo.getName()}"></div>
+                                                <div class="height-table200" th:text="${element.getOurCompany().getName()}"></div>
                                             </td>
-                                            <td th:text="${element.getCustomer().getName()}"></td>
-                                            <td th:text="${element.getTransporter().getName()}"></td>
-                                            <td th:text="${element.getDriver().getPassport().getLastName()} + ' ' + ${element.getDriver().getPassport().getFirstName()} + ' ' + ${element.getDriver().getPassport().getPatronymic()} + ' ' + ${element.getDriver().getNumberPhone()} + ''"></td>
-                                            <td th:text="${element.getUnloading().getDate()}"></td>
-                                            <td th:text="${element.getNumPay()}"></td>
-                                            <td th:text="${element.getNumAct()}"></td>
-                                            <td th:text="${element.getCustomerPay().getAmount()}"></td>
-                                            <td th:text="${element.getCarrierPay().getAmount()}"></td>
-                                            <td th:text="(${element.getCustomerPay().getAmount()} - ${element.getCarrierPay().getAmount()})"></td>
                                             <td>
+                                                <div class="height-table200" th:text="${element.getManager().getLastName()} + ' ' + ${element.getManager().getFirstName()}"></div>
+                                            </td>
+                                            <td>
+                                                <div class="height-table200" th:type="date" th:text="${element.getLoading().getDate()}"></div>
+                                            </td>
+                                            <td>
+                                                <div class="height-table200">
+                                                    <div th:each="position : ${element.getLoading().getPositions()}"
+                                                         th:text="'- ' + ${position.getPosition()}"></div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="height-table200">
+                                                    <div th:each="position : ${element.getUnloading().getPositions()}"
+                                                         th:text="'- ' + ${position.getPosition()}"></div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="height-table200">
+                                                    <div th:each="cargo : ${element.getCargo()}"
+                                                         th:text="'- ' + ${cargo.getName()}"></div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="height-table200" th:text="${element.getCustomer().getName()}"></div>
+                                            </td>
+                                            <td>
+                                                <div class="height-table200" th:text="${element.getTransporter().getName()}"></div>
+                                            </td>
+                                            <td>
+                                                <div class="height-table200" th:text="${element.getDriver().getPassport().getLastName()} + ' ' + ${element.getDriver().getPassport().getFirstName()} + ' ' + ${element.getDriver().getPassport().getPatronymic()} + ' ' + ${element.getDriver().getNumberPhone()} + ''"></div>
+                                            </td>
+                                            <td>
+                                                <div class="height-table200" th:text="${element.getUnloading().getDate()}"></div>
+                                            </td>
+                                            <td>
+                                                <div class="height-table200" th:text="${element.getNumPay()}"></div>
+                                            </td>
+                                            <td>
+                                                <div class="height-table200" th:text="${element.getNumAct()}"></div>
+                                            </td>
+                                            <td>
+                                                <div class="height-table200" th:text="${element.getCustomerPay().getAmount()}"></div>
+                                            </td>
+                                            <td>
+                                                <div class="height-table200" th:text="${element.getCarrierPay().getAmount()}"></div>
+                                            </td>
+                                            <td>
+                                                <div class="height-table200" th:text="(${element.getCustomerPay().getAmount()} - ${element.getCarrierPay().getAmount()})"></div>
+                                            </td>
+                                            <td>
+                                                <div class="height-table200">
                                                 <button th:id="${element.getId()}"
                                                         class="btn btn-secondary btn-sm waves-effect waves-light"
                                                         data-toggle="modal" data-target="#myModal"
                                                         onclick="moreDetailed(this)"><i
                                                         class="mdi mdi-vector-difference"></i></button>
+                                                </div>
                                             </td>
+
                                         </tr>
+
                                         </tbody>
                                     </table>
                                 </div>
