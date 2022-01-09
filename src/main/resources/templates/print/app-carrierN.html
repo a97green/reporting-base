@@ -1,0 +1,946 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:o="urn:schemas-microsoft-com:office:office"
+      xmlns:x="urn:schemas-microsoft-com:office:excel"
+      xmlns:quitr="http://www.w3.org/TR/REC-html40">
+
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+    <meta name=ProgId content=Excel.Sheet>
+    <meta name=Generator content="Microsoft Excel 15">
+    <link rel=File-List href="Заявка%20с%20перевозчиком.files/filelist.xml">
+    <style id="Заявка с перевозчиком_353_Styles">
+        <!--table
+        {mso-displayed-decimal-separator:"\,";
+            mso-displayed-thousand-separator:" ";}
+        .font5353
+        {color:black;
+            font-size:8.0pt;
+            font-weight:400;
+            font-style:normal;
+            text-decoration:none;
+            font-family:Verdana, sans-serif;
+            mso-font-charset:204;}
+        .font6353
+        {color:black;
+            font-size:8.0pt;
+            font-weight:400;
+            font-style:normal;
+            text-decoration:underline;
+            text-underline-style:single;
+            font-family:Verdana, sans-serif;
+            mso-font-charset:204;}
+        .font7353
+        {color:black;
+            font-size:7.0pt;
+            font-weight:700;
+            font-style:normal;
+            text-decoration:none;
+            font-family:Verdana, sans-serif;
+            mso-font-charset:204;}
+        .font8353
+        {color:black;
+            font-size:7.0pt;
+            font-weight:400;
+            font-style:normal;
+            text-decoration:none;
+            font-family:Verdana, sans-serif;
+            mso-font-charset:204;}
+        .xl63353
+        {padding-top:1px;
+            padding-right:1px;
+            padding-left:1px;
+            mso-ignore:padding;
+            color:black;
+            font-size:8.0pt;
+            font-weight:400;
+            font-style:normal;
+            text-decoration:none;
+            font-family:Verdana, sans-serif;
+            mso-font-charset:204;
+            mso-number-format:General;
+            text-align:general;
+            vertical-align:bottom;
+            mso-background-source:auto;
+            mso-pattern:auto;
+            white-space:nowrap;}
+        .xl64353
+        {padding-top:1px;
+            padding-right:1px;
+            padding-left:1px;
+            mso-ignore:padding;
+            color:black;
+            font-size:7.0pt;
+            font-weight:700;
+            font-style:normal;
+            text-decoration:none;
+            font-family:Verdana, sans-serif;
+            mso-font-charset:204;
+            mso-number-format:General;
+            text-align:general;
+            vertical-align:bottom;
+            border:.5pt hairline windowtext;
+            background:#F2F2F2;
+            mso-pattern:black none;
+            white-space:nowrap;}
+        .xl65353
+        {padding-top:1px;
+            padding-right:1px;
+            padding-left:1px;
+            mso-ignore:padding;
+            color:black;
+            font-size:7.0pt;
+            font-weight:700;
+            font-style:normal;
+            text-decoration:none;
+            font-family:Verdana, sans-serif;
+            mso-font-charset:204;
+            mso-number-format:General;
+            text-align:right;
+            vertical-align:bottom;
+            border:.5pt hairline windowtext;
+            mso-background-source:auto;
+            mso-pattern:auto;
+            white-space:nowrap;}
+        .xl66353
+        {padding-top:1px;
+            padding-right:1px;
+            padding-left:1px;
+            mso-ignore:padding;
+            color:black;
+            font-size:7.0pt;
+            font-weight:400;
+            font-style:normal;
+            text-decoration:none;
+            font-family:Verdana, sans-serif;
+            mso-font-charset:204;
+            mso-number-format:"Short Date";
+            text-align:left;
+            vertical-align:bottom;
+            border:.5pt hairline windowtext;
+            mso-background-source:auto;
+            mso-pattern:auto;
+            white-space:nowrap;}
+        .xl67353
+        {padding-top:1px;
+            padding-right:1px;
+            padding-left:1px;
+            mso-ignore:padding;
+            color:black;
+            font-size:7.0pt;
+            font-weight:400;
+            font-style:normal;
+            text-decoration:none;
+            font-family:Verdana, sans-serif;
+            mso-font-charset:204;
+            mso-number-format:General;
+            text-align:right;
+            vertical-align:bottom;
+            border:.5pt hairline windowtext;
+            mso-background-source:auto;
+            mso-pattern:auto;
+            white-space:nowrap;}
+        .xl68353
+        {padding-top:1px;
+            padding-right:1px;
+            padding-left:1px;
+            mso-ignore:padding;
+            color:black;
+            font-size:7.0pt;
+            font-weight:400;
+            font-style:normal;
+            text-decoration:none;
+            font-family:Verdana, sans-serif;
+            mso-font-charset:204;
+            mso-number-format:General;
+            text-align:left;
+            vertical-align:bottom;
+            border:.5pt hairline windowtext;
+            mso-background-source:auto;
+            mso-pattern:auto;
+            white-space:nowrap;}
+        .xl69353
+        {padding-top:1px;
+            padding-right:1px;
+            padding-left:1px;
+            mso-ignore:padding;
+            color:black;
+            font-size:7.0pt;
+            font-weight:400;
+            font-style:normal;
+            text-decoration:none;
+            font-family:Verdana, sans-serif;
+            mso-font-charset:204;
+            mso-number-format:"dd\/mm\/yy\;\@";
+            text-align:left;
+            vertical-align:bottom;
+            border:.5pt hairline windowtext;
+            mso-background-source:auto;
+            mso-pattern:auto;
+            white-space:nowrap;}
+        .xl70353
+        {padding-top:1px;
+            padding-right:1px;
+            padding-left:1px;
+            mso-ignore:padding;
+            color:black;
+            font-size:7.0pt;
+            font-weight:700;
+            font-style:normal;
+            text-decoration:none;
+            font-family:Verdana, sans-serif;
+            mso-font-charset:204;
+            mso-number-format:General;
+            text-align:center;
+            vertical-align:bottom;
+            border:.5pt hairline windowtext;
+            background:#F2F2F2;
+            mso-pattern:black none;
+            white-space:nowrap;}
+        .xl71353
+        {padding-top:1px;
+            padding-right:1px;
+            padding-left:1px;
+            mso-ignore:padding;
+            color:black;
+            font-size:7.0pt;
+            font-weight:400;
+            font-style:normal;
+            text-decoration:none;
+            font-family:Verdana, sans-serif;
+            mso-font-charset:204;
+            mso-number-format:General;
+            text-align:center;
+            vertical-align:bottom;
+            border:.5pt hairline windowtext;
+            mso-background-source:auto;
+            mso-pattern:auto;
+            white-space:nowrap;}
+        .xl72353
+        {padding-top:1px;
+            padding-right:1px;
+            padding-left:1px;
+            mso-ignore:padding;
+            color:black;
+            font-size:8.0pt;
+            font-weight:400;
+            font-style:normal;
+            text-decoration:none;
+            font-family:Verdana, sans-serif;
+            mso-font-charset:204;
+            mso-number-format:General;
+            text-align:general;
+            vertical-align:top;
+            mso-background-source:auto;
+            mso-pattern:auto;
+            white-space:nowrap;}
+        .xl73353
+        {padding-top:1px;
+            padding-right:1px;
+            padding-left:1px;
+            mso-ignore:padding;
+            color:black;
+            font-size:7.0pt;
+            font-weight:700;
+            font-style:normal;
+            text-decoration:none;
+            font-family:Verdana, sans-serif;
+            mso-font-charset:204;
+            mso-number-format:General;
+            text-align:left;
+            vertical-align:top;
+            border:.5pt hairline windowtext;
+            background:#F2F2F2;
+            mso-pattern:black none;
+            white-space:nowrap;}
+        .xl74353
+        {padding-top:1px;
+            padding-right:1px;
+            padding-left:1px;
+            mso-ignore:padding;
+            color:black;
+            font-size:7.0pt;
+            font-weight:700;
+            font-style:normal;
+            text-decoration:none;
+            font-family:Verdana, sans-serif;
+            mso-font-charset:204;
+            mso-number-format:General;
+            text-align:center;
+            vertical-align:bottom;
+            border:.5pt hairline windowtext;
+            background:#F2F2F2;
+            mso-pattern:black none;
+            white-space:nowrap;
+            mso-text-control:shrinktofit;}
+        .xl75353
+        {padding-top:1px;
+            padding-right:1px;
+            padding-left:1px;
+            mso-ignore:padding;
+            color:black;
+            font-size:7.0pt;
+            font-weight:400;
+            font-style:normal;
+            text-decoration:none;
+            font-family:Verdana, sans-serif;
+            mso-font-charset:204;
+            mso-number-format:General;
+            text-align:center;
+            vertical-align:bottom;
+            mso-background-source:auto;
+            mso-pattern:auto;
+            white-space:nowrap;}
+        .xl76353
+        {padding-top:1px;
+            padding-right:1px;
+            padding-left:1px;
+            mso-ignore:padding;
+            color:black;
+            font-size:7.0pt;
+            font-weight:700;
+            font-style:normal;
+            text-decoration:none;
+            font-family:Verdana, sans-serif;
+            mso-font-charset:204;
+            mso-number-format:General;
+            text-align:center;
+            vertical-align:bottom;
+            mso-background-source:auto;
+            mso-pattern:auto;
+            white-space:nowrap;}
+        .xl77353
+        {padding-top:1px;
+            padding-right:1px;
+            padding-left:1px;
+            mso-ignore:padding;
+            color:black;
+            font-size:7.0pt;
+            font-weight:400;
+            font-style:normal;
+            text-decoration:none;
+            font-family:Verdana, sans-serif;
+            mso-font-charset:204;
+            mso-number-format:General;
+            text-align:left;
+            vertical-align:top;
+            border:.5pt hairline windowtext;
+            mso-background-source:auto;
+            mso-pattern:auto;
+            white-space:normal;}
+        .xl78353
+        {padding-top:1px;
+            padding-right:1px;
+            padding-left:1px;
+            mso-ignore:padding;
+            color:black;
+            font-size:8.0pt;
+            font-weight:400;
+            font-style:normal;
+            text-decoration:none;
+            font-family:Verdana, sans-serif;
+            mso-font-charset:204;
+            mso-number-format:General;
+            text-align:center;
+            vertical-align:bottom;
+            border:.5pt hairline windowtext;
+            mso-background-source:auto;
+            mso-pattern:auto;
+            white-space:nowrap;
+            mso-text-control:shrinktofit;}
+        .xl79353
+        {padding-top:1px;
+            padding-right:1px;
+            padding-left:1px;
+            mso-ignore:padding;
+            color:black;
+            font-size:7.0pt;
+            font-weight:700;
+            font-style:normal;
+            text-decoration:none;
+            font-family:Verdana, sans-serif;
+            mso-font-charset:204;
+            mso-number-format:General;
+            text-align:center;
+            vertical-align:bottom;
+            border-top:none;
+            border-right:none;
+            border-bottom:.5pt hairline windowtext;
+            border-left:none;
+            mso-background-source:auto;
+            mso-pattern:auto;
+            white-space:nowrap;}
+        .xl80353
+        {padding-top:1px;
+            padding-right:1px;
+            padding-left:1px;
+            mso-ignore:padding;
+            color:black;
+            font-size:8.0pt;
+            font-weight:700;
+            font-style:normal;
+            text-decoration:none;
+            font-family:Verdana, sans-serif;
+            mso-font-charset:204;
+            mso-number-format:General;
+            text-align:left;
+            vertical-align:bottom;
+            mso-background-source:auto;
+            mso-pattern:auto;
+            white-space:nowrap;}
+        .xl81353
+        {padding-top:1px;
+            padding-right:1px;
+            padding-left:1px;
+            mso-ignore:padding;
+            color:black;
+            font-size:7.0pt;
+            font-weight:700;
+            font-style:normal;
+            text-decoration:none;
+            font-family:Verdana, sans-serif;
+            mso-font-charset:204;
+            mso-number-format:General;
+            text-align:center;
+            vertical-align:top;
+            border-top:.5pt hairline windowtext;
+            border-right:none;
+            border-bottom:none;
+            border-left:none;
+            mso-background-source:auto;
+            mso-pattern:auto;
+            white-space:nowrap;}
+        .xl82353
+        {padding-top:1px;
+            padding-right:1px;
+            padding-left:1px;
+            mso-ignore:padding;
+            color:black;
+            font-size:7.0pt;
+            font-weight:400;
+            font-style:normal;
+            text-decoration:none;
+            font-family:Verdana, sans-serif;
+            mso-font-charset:204;
+            mso-number-format:General;
+            text-align:center;
+            vertical-align:top;
+            border-top:.5pt hairline windowtext;
+            border-right:none;
+            border-bottom:.5pt hairline windowtext;
+            border-left:.5pt hairline windowtext;
+            mso-background-source:auto;
+            mso-pattern:auto;
+            white-space:nowrap;}
+        .xl83353
+        {padding-top:1px;
+            padding-right:1px;
+            padding-left:1px;
+            mso-ignore:padding;
+            color:black;
+            font-size:7.0pt;
+            font-weight:400;
+            font-style:normal;
+            text-decoration:none;
+            font-family:Verdana, sans-serif;
+            mso-font-charset:204;
+            mso-number-format:General;
+            text-align:center;
+            vertical-align:top;
+            border-top:.5pt hairline windowtext;
+            border-right:none;
+            border-bottom:.5pt hairline windowtext;
+            border-left:none;
+            mso-background-source:auto;
+            mso-pattern:auto;
+            white-space:nowrap;}
+        .xl84353
+        {padding-top:1px;
+            padding-right:1px;
+            padding-left:1px;
+            mso-ignore:padding;
+            color:black;
+            font-size:7.0pt;
+            font-weight:400;
+            font-style:normal;
+            text-decoration:none;
+            font-family:Verdana, sans-serif;
+            mso-font-charset:204;
+            mso-number-format:General;
+            text-align:center;
+            vertical-align:top;
+            border-top:.5pt hairline windowtext;
+            border-right:.5pt hairline windowtext;
+            border-bottom:.5pt hairline windowtext;
+            border-left:none;
+            mso-background-source:auto;
+            mso-pattern:auto;
+            white-space:nowrap;}
+        .xl85353
+        {padding-top:1px;
+            padding-right:1px;
+            padding-left:1px;
+            mso-ignore:padding;
+            color:black;
+            font-size:8.0pt;
+            font-weight:400;
+            font-style:normal;
+            text-decoration:none;
+            font-family:Verdana, sans-serif;
+            mso-font-charset:204;
+            mso-number-format:General;
+            text-align:left;
+            vertical-align:bottom;
+            mso-background-source:auto;
+            mso-pattern:auto;
+            white-space:nowrap;}
+        .xl86353
+        {padding-top:1px;
+            padding-right:1px;
+            padding-left:1px;
+            mso-ignore:padding;
+            color:black;
+            font-size:4.0pt;
+            font-weight:400;
+            font-style:normal;
+            text-decoration:none;
+            font-family:Verdana, sans-serif;
+            mso-font-charset:204;
+            mso-number-format:General;
+            text-align:left;
+            vertical-align:top;
+            mso-background-source:auto;
+            mso-pattern:auto;
+            white-space:normal;}
+        .xl87353
+        {padding-top:1px;
+            padding-right:1px;
+            padding-left:1px;
+            mso-ignore:padding;
+            color:black;
+            font-size:8.0pt;
+            font-weight:400;
+            font-style:normal;
+            text-decoration:none;
+            font-family:Verdana, sans-serif;
+            mso-font-charset:204;
+            mso-number-format:General;
+            text-align:left;
+            vertical-align:top;
+            mso-background-source:auto;
+            mso-pattern:auto;
+            white-space:normal;}
+        -->
+    </style>
+</head>
+
+<body>
+<!--[if !excel]>&nbsp;&nbsp;<![endif]-->
+<!--Следующие сведения были подготовлены мастером публикации веб-страниц
+Microsoft Excel.-->
+<!--При повторной публикации этого документа из Excel все сведения между тегами
+DIV будут заменены.-->
+<!----------------------------->
+<!--НАЧАЛО ФРАГМЕНТА ПУБЛИКАЦИИ МАСТЕРА ВЕБ-СТРАНИЦ EXCEL -->
+<!----------------------------->
+
+<div id="Заявка с перевозчиком_353" align=center x:publishsource="Excel">
+
+    <table border=0 cellpadding=0 cellspacing=0 width=918 class=xl63353
+           style='border-collapse:collapse;table-layout:fixed;width:693pt'>
+        <col class=xl63353 width=102 span=9 style='width:77pt'>
+        <tr class=xl63353 height=13 style='mso-height-source:userset;height:9.95pt'>
+            <td colspan=6 height=13 class=xl76353 width=612 style='height:9.95pt;
+  width:462pt' th:text="${forming.getOurCompany().getName()}"></td>
+            <td class=xl63353 width=102 style='width:77pt'></td>
+            <td class=xl63353 width=102 style='width:77pt'></td>
+            <td class=xl63353 width=102 style='width:77pt'></td>
+        </tr>
+        <tr class=xl63353 height=13 style='mso-height-source:userset;height:9.95pt'>
+            <td colspan=6 height=13 class=xl75353 style='height:9.95pt'><font
+                    class="font7353">Менеджер:</font><font class="font8353" th:text="${forming.getManager().getLastName()} + ' ' + ${forming.getManager().getFirstName()} + ' ' + ${forming.getManager().getPatronymic()}"></font></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+        </tr>
+        <tr class=xl63353 height=13 style='mso-height-source:userset;height:9.95pt'>
+            <td colspan=6 height=13 class=xl75353 style='height:9.95pt'><font
+                    class="font7353">Договор заявка</font><font class="font8353"> на перевозку
+                груза<i th:text="' № ' + ${forming.getId()} + ' от ' + ${forming.getDate()}"></i>
+            </font></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+        </tr>
+        <tr class=xl63353 height=13 style='mso-height-source:userset;height:9.95pt'>
+            <td colspan=6 height=13 class=xl75353 style='height:9.95pt'><font
+                    class="font7353">Маршрут:</font><font class="font8353">
+                <i th:text="${forming.getLoading().getPositions().get(0).getPosition()} + ' - ' + ${forming.getUnloading().getPositions().get(0).getPosition()}"></i>
+            </font></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+        </tr>
+        <tr class=xl63353 height=13 style='mso-height-source:userset;height:9.95pt'>
+            <td colspan=6 height=13 class=xl79353 style='height:9.95pt'>1. Погрузка:</td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+        </tr>
+        <tr class=xl63353 height=13 style='mso-height-source:userset;height:9.95pt'>
+            <td height=13 class=xl64353 style='height:9.95pt;border-top:none'>Дата:</td>
+            <td class=xl66353 style='border-top:none;border-left:none'  th:text="${forming.getLoading().getDate()}"></td>
+            <td class=xl63353></td>
+            <td class=xl65353 style='border-top:none'>Время:</td>
+            <td class=xl67353 style='border-top:none;border-left:none'  th:text="${forming.getLoading().getTime()}"></td>
+            <td class=xl68353 style='border-top:none;border-left:none'></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+        </tr>
+        <tr class=xl63353 height=13 style='mso-height-source:userset;height:9.95pt'  th:each="element : ${forming.getLoading().getPositions()}">
+            <td height=13 class=xl64353 style='height:9.95pt;border-top:none'  th:text="'Адрес - ' + ${element.getId()}"></td>
+            <td colspan=5 class=xl68353 style='border-left:none'  th:text="${element.getPosition()}"></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+        </tr>
+        <tr class=xl63353 height=13 style='mso-height-source:userset;height:9.95pt'>
+            <td height=13 class=xl64353 style='height:9.95pt;border-top:none'>Примечание:</td>
+            <td colspan=5 class=xl68353 style='border-left:none'  th:text="${forming.getLoading().getComment()}"></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+        </tr>
+        <tr class=xl63353 height=13 style='mso-height-source:userset;height:9.95pt'>
+            <td colspan=6 height=13 class=xl79353 style='height:9.95pt'>2. Разгрузка:</td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+        </tr>
+        <tr class=xl63353 height=13 style='mso-height-source:userset;height:9.95pt'>
+            <td height=13 class=xl64353 style='height:9.95pt;border-top:none'>Дата:</td>
+            <td class=xl69353 style='border-top:none;border-left:none' th:text="${forming.getUnloading().getDate()}"></td>
+            <td class=xl63353></td>
+            <td class=xl65353 style='border-top:none'>Время:</td>
+            <td class=xl67353 style='border-top:none;border-left:none' th:text="${forming.getUnloading().getTime()}"></td>
+            <td class=xl68353 style='border-top:none;border-left:none'></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+        </tr>
+        <tr class=xl63353 height=13 style='mso-height-source:userset;height:9.95pt' th:each="element : ${forming.getUnloading().getPositions()}">
+            <td height=13 class=xl64353 style='height:9.95pt;border-top:none' th:text="'Адрес - ' + ${element.getId()}"></td>
+            <td colspan=5 class=xl68353 style='border-left:none' th:text="${element.getPosition()}"></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+        </tr>
+        <tr class=xl63353 height=13 style='mso-height-source:userset;height:9.95pt'>
+            <td height=13 class=xl64353 style='height:9.95pt;border-top:none'>Примечание:</td>
+            <td colspan=5 class=xl68353 style='border-left:none' th:text="${forming.getUnloading().getComment()}"></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+        </tr>
+        <tr class=xl63353 height=13 style='mso-height-source:userset;height:9.95pt'>
+            <td colspan=6 height=13 class=xl79353 style='height:9.95pt'>3. Груз:</td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+        </tr>
+        <tr class=xl63353 height=13 style='mso-height-source:userset;height:9.95pt'>
+            <td height=13 class=xl70353 style='height:9.95pt;border-top:none'>Наименование:</td>
+            <td class=xl70353 style='border-top:none;border-left:none'>Вес, т:</td>
+            <td class=xl70353 style='border-top:none;border-left:none'>Объем, м3:</td>
+            <td class=xl70353 style='border-top:none;border-left:none'>Габариты, м:</td>
+            <td class=xl70353 style='border-top:none;border-left:none'>Место, шт:</td>
+            <td class=xl74353 style='border-top:none;border-left:none'>Погрузка/разгрузка:</td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+        </tr>
+        <tr class=xl63353 height=13 style='mso-height-source:userset;height:9.95pt' th:each="element : ${forming.getCargo()}">
+            <td height=13 class=xl71353 style='height:9.95pt;border-top:none' th:text="${element.getName()}"></td>
+            <td class=xl71353 style='border-top:none;border-left:none' th:text="${element.getWeight()}"></td>
+            <td class=xl71353 style='border-top:none;border-left:none'></td>
+            <td class=xl71353 style='border-top:none;border-left:none'></td>
+            <td class=xl71353 style='border-top:none;border-left:none'></td>
+            <td class=xl71353 style='border-top:none;border-left:none'></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+        </tr>
+        <tr class=xl63353 height=13 style='mso-height-source:userset;height:9.95pt'>
+            <td colspan=6 height=13 class=xl76353 style='height:9.95pt'>4. Транспортное
+                средство:</td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+        </tr>
+        <tr class=xl63353 height=13 style='mso-height-source:userset;height:9.95pt'>
+            <td height=13 class=xl70353 style='height:9.95pt'>Тип:</td>
+            <td class=xl70353 style='border-left:none'>Марка:</td>
+            <td class=xl70353 style='border-left:none'>Гос. номер:</td>
+            <td class=xl70353 style='border-left:none'>Полуприцеп:</td>
+            <td colspan=2 class=xl70353 style='border-left:none'>Дополительно:</td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+        </tr>
+        <tr class=xl63353 height=13 style='mso-height-source:userset;height:9.95pt'>
+            <td height=13 class=xl71353 style='height:9.95pt;border-top:none'></td>
+            <td class=xl71353 style='border-top:none;border-left:none' th:text="${forming.getVehicle().getModel()}"></td>
+            <td class=xl71353 style='border-top:none;border-left:none' th:text="${forming.getVehicle().getStateNumber()}"></td>
+            <td class=xl71353 style='border-top:none;border-left:none' ></td>
+            <td colspan=2 class=xl78353 style='border-left:none'></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+        </tr>
+        <tr class=xl63353 height=13 style='mso-height-source:userset;height:9.95pt'>
+            <td colspan=6 height=13 class=xl76353 style='height:9.95pt'>5. Водитель:</td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+        </tr>
+        <tr class=xl63353 height=13 style='mso-height-source:userset;height:9.95pt'>
+            <td height=13 class=xl64353 style='height:9.95pt'>ФИО:</td>
+            <td colspan=5 class=xl68353 style='border-left:none'  th:text="${forming.getDriver().getPassport().getLastName()} + ' ' + ${forming.getDriver().getPassport().getFirstName()} + ' ' + ${forming.getDriver().getPassport().getPatronymic()} + ', ' + ${forming.getDriver().getNumberPhone()}"></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+        </tr>
+        <tr class=xl63353 height=36 style='mso-height-source:userset;height:27.0pt'>
+            <td height=36 class=xl73353 style='height:27.0pt;border-top:none'>Паспорт:</td>
+            <td colspan=5 class=xl77353 width=510 style='border-left:none;width:385pt' th:text="
+            ${forming.getDriver().getPassport().getSerialPassport()} +
+            ' ' + ${forming.getDriver().getPassport().getNumberPassport()} +
+            ' ' + ${forming.getDriver().getPassport().getIssued()} +
+            ' ' + ${forming.getDriver().getPassport().getIssuedDate()}"></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+        </tr>
+        <tr class=xl63353 height=13 style='mso-height-source:userset;height:9.95pt'>
+            <td colspan=6 height=13 class=xl76353 style='height:9.95pt'>6. Цена и срок
+                оплаты:</td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+        </tr>
+        <tr class=xl63353 height=13 style='mso-height-source:userset;height:9.95pt'>
+            <td height=13 class=xl64353 style='height:9.95pt'>Цена:</td>
+            <td colspan=5 class=xl68353 style='border-left:none' th:text="${forming.getCustomerPay().getAmount()} + ' ' + ${forming.getCustomerPay().getAmountWords()}"></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+        </tr>
+        <tr class=xl63353 height=36 style='mso-height-source:userset;height:27.0pt'>
+            <td height=36 class=xl73353 style='height:27.0pt;border-top:none'>Условия:</td>
+            <td colspan=5 class=xl77353 width=510 style='border-left:none;width:385pt'>По
+                оригиналу ТТН и бухгалтерских документов и скану + код отслеживания почтового
+                отправления в течении 10 банковских дней</td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+        </tr>
+        <tr class=xl63353 height=13 style='mso-height-source:userset;height:9.95pt'>
+            <td colspan=6 height=13 class=xl81353 style='height:9.95pt'>7. Дополнительные
+                условия</td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+        </tr>
+        <tr class=xl63353 height=36 style='mso-height-source:userset;height:27.0pt'>
+            <td colspan=6 height=36 class=xl82353 style='border-right:.5pt hairline black;
+  height:27.0pt'>Без страховки!!! Обязанность страховки груза лежит на
+                грузовладельце!</td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+        </tr>
+        <tr class=xl63353 height=13 style='mso-height-source:userset;height:9.95pt'>
+            <td colspan=6 height=13 class=xl76353 style='height:9.95pt'>8. Права и
+                обязанности сторон:</td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+        </tr>
+        <tr class=xl63353 height=206 style='mso-height-source:userset;height:155.1pt'>
+            <td colspan=6 height=206 class=xl86353 width=612 style='height:155.1pt;
+  width:462pt'>7.1. Водитель обязан:<br>
+                - Присутствовать в момент погрузки на территории и производить визуальный
+                контроль загрузки.<br>
+                - С места погрузки и выгрузки забирать оригинальные ТТН с оригинальными
+                печатями.<br>
+                - Иметь при себе мобильный телефон в работоспособном состоянии.<br>
+                7.2. Перевозчик обязан сообщать по телефону, указанному для связи:<br>
+                - О затруднениях при проведении погрузочно-разгрузочных работ.<br>
+                - В случае поломки транспорта о задержке своевременной доставки груза.<br>
+                - О местонахождении, т/с на протяжении всего рейса<br>
+                - Все изменения/отклонения от маршрута согласованные в заявке (а именно,
+                дополнительные точки погрузки/разгрузки, изменения адреса разгрузки)
+                производятся исключительно с письменного подтверждения заказчика. В
+                телефонном режиме водитель не имеет права отклоняться от маршрута (по
+                указанию третьих лиц).<br>
+                7.3. Срок предоставления оригиналов документов 12 календарных дней с
+                момента выполнения услуги. При несоблюдении данных условий на виновную
+                сторону налагаются штрафные санкции в размере 1000 руб./сутки.<br>
+                7.4. Перевозчик несет ответственность перед заказчиком в виде возмещения
+                реального ущерба:<br>
+                - За утрату, недостачу или повреждение (порчу), выдачу груза ненадлежащему
+                получателю после принятия его перевозчиком и до выдачи груза надлежащему
+                получателю. Перевозчик обязуется возместить действительную сумму груза или
+                недостающей его части в течение 10 банковских дней после предъявления
+                клиентом претензии.<br>
+                - За предоставление ложных (полностью или частично неверных) сведений,
+                касающихся перевозки (данные на водителя, включая телефон, местонахождение
+                транспорта и т.д.).<br>
+                7.5. Перевозчик не в праве удерживать переданные ему для перевозки грузы в
+                обеспечение причитающихся ему провозной платы и других платежей по
+                перевозке.<br>
+                7.6. В случае срыва перевозки клиентом, принятой к исполнению заявки,
+                клиент обязуется выплатить штраф в размере 5% от стоимости перевозки.<br>
+                7.7. Нормативный простой под загрузкой/выгрузкой 24 часа с момента
+                регистрации водителя на КПП грузоотправителя/грузополучателя.<br>
+                7.8. Сверхнормативный простой/опоздание на выгрузку оплачивается из расчета
+                1500 руб. за каждые просроченные полные сутки, при условии своевременного
+                уведомления клиента в письменной форме и предоставлении надлежаще оформленных
+                документов.<br>
+                7.9. При не достижении соглашения споры между сторонами передаются в
+                Арбитражный суд Красноярского края и разрешаются в порядке, установленном
+                законодательством Российской Федерации.<br>
+                7.10. Заявка имеет силу договора. В случае не подтверждения заявки в
+                течение 15 мин., она аннулируется.<br>
+                7.11. Во всем остальном, не предусмотренном настоящей заявкой-договором,
+                стороны будут руководствоваться действующим УАТ.<br>
+                7.12. За несогласованную рабату напрямую с нашим клиентом Перевозчик несет
+                абсолютную ответственность, которая определяется исходя из прямого ущерба и
+                потенциально упущенной выгоды, и выплачивает штраф в размере 50000 (пятьдесят
+                тысяч) рублей.<br>
+                7.13. Договор-заявка подписанная электронным и факсимальными сообщениями
+                имеет юридическую силу.</td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+        </tr>
+        <tr class=xl63353 height=13 style='mso-height-source:userset;height:9.95pt'>
+            <td colspan=6 height=13 class=xl76353 style='height:9.95pt'>9. Реквизиты:</td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+        </tr>
+        <tr class=xl63353 height=13 style='mso-height-source:userset;height:9.95pt'>
+            <td colspan=3 height=13 class=xl80353 style='height:9.95pt'>Заказчик:</td>
+            <td colspan=3 class=xl80353>Перевозчик:</td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+        </tr>
+        <tr class=xl63353 height=13 style='mso-height-source:userset;height:9.95pt'>
+            <td colspan=3 height=13 class=xl80353 style='height:9.95pt' th:text="${forming.getOurCompany().getName()}"></td>
+            <td colspan=3 class=xl80353 th:text="${forming.getTransporter().getName()}"></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+        </tr>
+        <tr class=xl63353 height=13 style='mso-height-source:userset;height:9.95pt'>
+            <td colspan=3 height=13 class=xl85353 style='height:9.95pt' th:text="'ИНН: ' + ${forming.getOurCompany().getInn()}"></td>
+            <td colspan=3 class=xl85353  th:text="'ИНН: ' + ${forming.getTransporter().getInn()}"></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+        </tr>
+        <tr class=xl63353 height=13 style='mso-height-source:userset;height:9.95pt'>
+            <td colspan=3 height=13 class=xl85353 style='height:9.95pt' th:text="'КПП: ' + ${forming.getOurCompany().getKpp()}"></td>
+            <td colspan=3 class=xl85353 th:text="'КПП: ' + ${forming.getTransporter().getKpp()}"><span style='mso-spacerun:yes'> </span></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+        </tr>
+        <tr class=xl63353 height=13 style='mso-height-source:userset;height:9.95pt'>
+            <td colspan=3 height=13 class=xl85353 style='height:9.95pt' th:text="'ОГРН: ' + ${forming.getOurCompany().getOgrn()}"></td>
+            <td colspan=3 class=xl85353 th:text="'ОГРН: ' + ${forming.getTransporter().getOgrn()}"><span style='mso-spacerun:yes'> </span></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+        </tr>
+        <tr class=xl72353 height=36 style='mso-height-source:userset;height:27.0pt'>
+            <td colspan=3 height=36 class=xl87353 width=306 style='height:27.0pt;
+  width:231pt'  th:text="'Юр. адрес: ' + ${forming.getOurCompany().getLegalAddress()}"></td>
+            <td colspan=3 class=xl87353 width=306 style='width:231pt' th:text="'Юр. адрес: ' + ${forming.getTransporter().getLegalAddress()}">
+                <span style='mso-spacerun:yes'> </span></td>
+            <td class=xl72353></td>
+            <td class=xl72353></td>
+            <td class=xl72353></td>
+        </tr>
+        <tr class=xl72353 height=36 style='mso-height-source:userset;height:27.0pt'>
+            <td colspan=3 height=36 class=xl87353 width=306 style='height:27.0pt;
+  width:231pt' th:text="'Почт. адрес: ' + ${forming.getOurCompany().getPostalAddress()}"></td>
+            <td colspan=3 class=xl87353 width=306 style='width:231pt' th:text="'Почт. адрес: ' + ${forming.getTransporter().getPostalAddress()}">
+                <span style='mso-spacerun:yes'> </span></td>
+            <td class=xl72353></td>
+            <td class=xl72353></td>
+            <td class=xl72353></td>
+        </tr>
+        <tr class=xl72353 height=13 style='mso-height-source:userset;height:9.95pt'>
+            <td colspan=3 height=13 class=xl87353 width=306 style='height:9.95pt;
+  width:231pt' th:text="'Тел.: ' + ${forming.getOurCompany().getNumberPhone()}"></td>
+            <td colspan=3 class=xl87353 width=306 style='width:231pt' th:text="'Тел.: ' + ${forming.getTransporter().getNumberPhone()}">
+                <span style='mso-spacerun:yes'> </span></td>
+            <td class=xl72353></td>
+            <td class=xl72353></td>
+            <td class=xl72353></td>
+        </tr>
+        <tr class=xl63353 height=13 style='mso-height-source:userset;height:9.95pt'>
+            <td colspan=3 height=13 class=xl85353 style='height:9.95pt' th:text="'Код в ATI: ' + ${forming.getOurCompany().getAtiCode()}"><span
+                    style='mso-spacerun:yes'> </span></td>
+            <td colspan=3 class=xl85353 th:text="'Код в ATI: ' + ${forming.getTransporter().getAtiCode()}"><span style='mso-spacerun:yes'> </span></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+        </tr>
+        <tr class=xl63353 height=13 style='mso-height-source:userset;height:9.95pt'>
+            <td colspan=3 height=13 class=xl85353 style='height:9.95pt'>_______<font
+                    class="font6353" th:text="'/' + ${forming.getOurCompany().getDirector()}"></font><font class="font5353">/</font></td>
+            <td colspan=3 class=xl85353>_______<font class="font6353">/</font><font
+                    class="font5353">__________________/</font></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+        </tr>
+        <tr class=xl63353 height=13 style='mso-height-source:userset;height:9.95pt'>
+            <td height=13 class=xl63353 style='height:9.95pt'>М.П.</td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353>М.П.</td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+            <td class=xl63353></td>
+        </tr>
+        <![if supportMisalignedColumns]>
+        <tr height=0 style='display:none'>
+            <td width=102 style='width:77pt'></td>
+            <td width=102 style='width:77pt'></td>
+            <td width=102 style='width:77pt'></td>
+            <td width=102 style='width:77pt'></td>
+            <td width=102 style='width:77pt'></td>
+            <td width=102 style='width:77pt'></td>
+            <td width=102 style='width:77pt'></td>
+            <td width=102 style='width:77pt'></td>
+            <td width=102 style='width:77pt'></td>
+        </tr>
+        <![endif]>
+    </table>
+
+</div>
+
+
+<!----------------------------->
+<!--КОНЕЦ ФРАГМЕНТА ПУБЛИКАЦИИ МАСТЕРА ВЕБ-СТРАНИЦ EXCEL-->
+<!----------------------------->
+</body>
+
+</html>

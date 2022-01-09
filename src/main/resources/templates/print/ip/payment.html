@@ -1450,11 +1450,9 @@ DIV будут заменены.-->
             <td colspan=2 class=xl10012628 width=272 style='border-right:.5pt solid black;
   border-left:none;width:205pt'>
                 <p th:text="'Транспортно-экспедиционные услуги по маршруту: ' + ${forming.getLoading().getPositions().get(0).getPosition()} + ' - ' + ${forming.getUnloading().getPositions().get(0).getPosition()} +
-                    ', рейс от ' + ${forming.getLoading().getDate()} + ' г.,' + ' вод. ' + ${forming.getDriver().getPassport().getLastName()} + ', т/с: ' + ${forming.getVehicle().getModel()} + ' ' + ${forming.getVehicle().getStateNumber()} +
-                    ', ' + ${forming.getVehicle().getTrailer().getModel()} + ' ' + ${forming.getVehicle().getTrailer().getStateNumber()}">
+                    ', рейс от ' + ${forming.getLoading().getDate()} + ' г.,' + ' вод. ' + ${forming.getDriver().getPassport().getLastName()} + ', т/с: ' + ${forming.getVehicle().getModel()} + ' ' + ${forming.getVehicle().getStateNumber()} ">
                 </p>
-            </td>
-            <td class=xl8212628 style='border-left:none'>рейс</td>
+            </td>            <td class=xl8212628 style='border-left:none'>рейс</td>
             <td class=xl9312628>1</td>
             <td class="xl9512628 xxskfh" style='border-top:none'></td>
             <td class="xl9612628 xxskfh" style='border-top:none'></td>
@@ -1514,7 +1512,7 @@ DIV будут заменены.-->
             <td class=xl5912628></td>
             <td class=xl8512628></td>
             <td class=xl9812628>Всего:</td>
-            <td class=xl9612628 style='border-top:none' th:text="${forming.getCustomerPay().getAmount()}"></td>
+            <td class="xl9612628 jkbcfkgk" style='border-top:none'></td>
             <td class=xl8612628 style='border-left:none'>&nbsp;</td>
             <td class=xl1512628></td>
             <td class=xl1512628></td>
@@ -1547,7 +1545,7 @@ DIV будут заменены.-->
         <tr height=17 style='height:12.75pt'>
             <td height=17 class=xl1512628 style='height:12.75pt'></td>
             <td colspan=7 class=xl10312628 width=677 style='width:509pt'>
-                <div th:text="'Всего наименований ' + ${forming.getCargo().size()} + ', на сумму ' + ${forming.getCustomerPay().getAmount()}"></div>
+                <div th:text="'Всего наименований ' + ${forming.getCargo().size()} + ', на сумму ' + ${forming.getCustomerPay().getAmount()} + ' руб.'"></div>
             </td>
             <td class=xl1512628></td>
             <td class=xl1512628></td>
@@ -1562,7 +1560,7 @@ DIV будут заменены.-->
         <tr height=17 style='height:12.75pt'>
             <td height=17 class=xl1512628 style='height:12.75pt'></td>
             <td colspan=7 class=xl10412628 width=677 style='width:509pt'>
-                <div th:text="${forming.getCustomerPay().getAmountWords()}"></div>
+                <div th:text="${forming.getCustomerPay().getAmountWords()} + ' руб.'"></div>
             </td>
             <td class=xl1512628></td>
             <td class=xl1512628></td>
@@ -1856,15 +1854,18 @@ DIV будут заменены.-->
 
             let temp = (amount * 20 / 120);
             let putVal1 = $('.xl9112628');
-            putVal1.append(temp.toFixed(2));
+            putVal1.append(temp.toFixed(2) + ' руб.');
 
             let value = (amount / 1.2).toFixed(2);
             let putVal2 = $('.xxskfh');
-            putVal2.append(value);
+            putVal2.append(value + ' руб.');
         } else {
             let putVal2 = $('.xxskfh');
-            putVal2.append(amount);
+            putVal2.append(amount.toFixed(2) + ' руб.');
+
         }
+        let putVal2 = $('.jkbcfkgk');
+        putVal2.append(amount.toFixed(2) + ' руб.');
     }
 
 

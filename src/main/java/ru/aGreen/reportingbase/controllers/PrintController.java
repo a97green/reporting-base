@@ -43,25 +43,25 @@ public class PrintController {
     @GetMapping("/print/payment/{id}")
     public String printPayment(@PathVariable(value = "id") Long id, Model model) {
         if (printDocument(id, model)) {
-            return "print/ip/payment";
+            return "print/ip/paymentN";
         }
-        return "print/payment";
+        return "print/paymentN";
     }
 
     @GetMapping("/print/app-customer/{id}")
     public String printAppCustomer(@PathVariable(value = "id") Long id, Model model) {
         if (printDocument(id, model)) {
-            return "print/ip/app-customer";
+            return "print/ip/app-customerN";
         }
-        return "print/app-customer";
+        return "print/app-customerN";
     }
 
     @GetMapping("/print/app-carrier/{id}")
     public String printAppCarrier(@PathVariable(value = "id") Long id, Model model) {
         if (printDocument(id, model)) {
-            return "print/ip/app-carrier";
+            return "print/ip/app-carrierN";
         }
-        return "print/app-carrier";
+        return "print/app-carrierN";
     }
 
     @GetMapping("/print/attorney/{id}")

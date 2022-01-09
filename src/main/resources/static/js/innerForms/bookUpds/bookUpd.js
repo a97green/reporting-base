@@ -36,7 +36,7 @@ function details(element) {
         '                                   <div class="form-group row">' +
         '                                        <label class="col-sm-3 col-form-label">Стоимость</label>' +
         '                                        <div class="col-sm-9">' +
-        '                                            <input modelAttribute="bookUpd" value="' + element.amount + '" text="' + element.amount + '" type="number" name="amount" class="form-control form-details" placeholder="Стоимость (руб.)"  disabled>' +
+        '                                            <input modelAttribute="bookUpd" value="' + element.amount + '" text="' + element.amount + '" type="number" name="amount" class="form-control form-details" placeholder="Стоимость (руб.)"  step=".01" disabled>' +
         '                                        </div>' +
         '                                    </div>' +
         '                                   <div class="form-group row">' +
@@ -56,7 +56,7 @@ function details(element) {
         '                                   <div class="form-group row">' +
         '                                        <label class="col-sm-3 col-form-label">Прибыль</label>' +
         '                                        <div class="col-sm-9">' +
-        '                                            <input modelAttribute="bookUpd" value="' + element.signedDate + '" text="' + element.signedDate + '" type="number" name="signedDate" class="form-control form-details inpDate" placeholder=""  disabled>' +
+        '                                            <input modelAttribute="bookUpd" value="' + element.signedDate + '" text="' + element.signedDate + '" type="number" name="signedDate" class="form-control form-details " placeholder=""  step=".01" disabled>' +
         '                                        </div>' +
         '                                    </div>' +
         '                                   <div class="form-group row">' +
@@ -142,7 +142,7 @@ function iDetails(element, ourCompanies, customers, formPays) {
             '<div class="form-group row">' +
             '     <label class="col-sm-3 col-form-label">Расходы</label>' +
             '     <div class="col-sm-3">' +
-            '         <input value="' + element.expenses[i].expenditure + '" text="' + element.expenses[i].expenditure + '" type="number" name="expenditure[]" class="form-control form-details" placeholder="Расходы (руб.)"  disabled>' +
+            '         <input value="' + element.expenses[i].expenditure + '" text="' + element.expenses[i].expenditure + '" type="number" name="expenditure[]" class="form-control form-details" placeholder="Расходы (руб.)"  step=".01" disabled>' +
             '     </div>' +
             '     <label class="col-sm-3 col-form-label">Комментарий</label>' +
             '     <div class="col-sm-3">' +
@@ -209,14 +209,14 @@ function newUpd() {
         '        <div class="form-group row">' +
         '             <label class="col-sm-3 col-form-label">Стоимость</label>' +
         '             <div class="col-sm-9">' +
-        '                 <input modelAttribute="bookUpd" type="number" name="amount" class="form-control form-details" placeholder="Стоимость (руб.)" >' +
+        '                 <input modelAttribute="bookUpd" type="number" name="amount" class="form-control form-details" placeholder="Стоимость (руб.)"  step=".01">' +
         '             </div>' +
         '         </div>' +
 
         '         <div class="form-group row">' +
         '             <label class="col-sm-3 col-form-label">Расходы</label>' +
         '             <div class="col-sm-3">' +
-        '                 <input type="number" name="expenditure[]" class="form-control form-details" placeholder="Расходы (руб.)" >' +
+        '                 <input type="number" name="expenditure[]" class="form-control form-details" placeholder="Расходы (руб.)"  step=".01">' +
         '             </div>' +
         '             <label class="col-sm-2 col-form-label">Комментарий</label>' +
         '             <div class="col-sm-4">' +
@@ -246,7 +246,7 @@ function newUpd() {
         '           <div class="form-group row">' +
         '                <label class="col-sm-3 col-form-label">Прибыль</label>' +
         '                <div class="col-sm-9">' +
-        '                    <input modelAttribute="bookUpd" type="number" name="signedDate" class="form-control form-details inpDate" placeholder="" >' +
+        '                    <input modelAttribute="bookUpd" type="number" name="signedDate" class="form-control form-details" placeholder=""  step=".01">' +
         '                </div>' +
         '            </div>' +
         '           <div class="form-group row">' +
@@ -270,7 +270,7 @@ function expenseAdd() {
         '<div class="form-group row">' +
         '    <label class="col-sm-3 col-form-label">Расходы</label>' +
         '    <div class="col-sm-3">' +
-        '        <input type="number" name="expenditure[]" class="form-control form-details" placeholder="Расходы (руб.)" >' +
+        '        <input type="number" name="expenditure[]" class="form-control form-details" placeholder="Расходы (руб.)" step=".01" >' +
         '    </div>' +
         '    <label class="col-sm-2 col-form-label">Комментарий</label>' +
         '    <div class="col-sm-4">' +

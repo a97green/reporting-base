@@ -86,7 +86,7 @@
                                             <th>УПД</th>
                                             <th>Доход (руб.)</th>
                                             <th>Расход (руб.)</th>
-                                            <th>Прибыль (руб.)</th>
+<!--                                            <th>Прибыль (руб.)</th>-->
                                             <th></th>
                                         </tr>
                                         </thead>
@@ -157,9 +157,9 @@
                                             <td>
                                                 <div class="height-table200" th:text="${element.getCarrierPay().getAmount()}"></div>
                                             </td>
-                                            <td>
-                                                <div class="height-table200" th:text="(${element.getCustomerPay().getAmount()} - ${element.getCarrierPay().getAmount()})"></div>
-                                            </td>
+<!--                                            <td>-->
+<!--&lt;!&ndash;                                                <div class="height-table200" th:text="${element.getCustomerPay().getAmount()} - ${element.getCarrierPay().getAmount()}"></div>&ndash;&gt;-->
+<!--                                            </td>-->
                                             <td>
                                                 <div class="height-table200">
                                                 <button th:id="${element.getId()}"

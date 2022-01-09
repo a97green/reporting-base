@@ -90,7 +90,9 @@ function details(element) {
         '                 <input id="loadingComment" value="' + element.loading.comment + '" text="' + element.loading.comment + '" type="text" name="loadingComment" class="form-control form-details loadingComment" placeholder="Комментарии к погрузке"  disabled>' +
         '            </div>' +
         '        </div>' +
-        '        <div class="loading-add"> </div>' +
+        '        <div class="loading-add">' +
+        '            <input type="text" name="loadingPlace" class="loadingPlace" style="display: none">' +
+        '        </div>' +
         '        <div class="form-group row">' +
         '            <label class="col-sm-3 col-form-label">Контактное лицо</label>' +
         '            <div class="col-sm-4">' +
@@ -103,7 +105,7 @@ function details(element) {
         '        </div>' +
         '        <h5 class="card-title text-center border-top"><br>Данные о выгрузке<br></h5>' +
         '        <div class="form-group row">' +
-        '            <label class="col-sm-3 col-form-label">Дата выгрузке</label>' +
+        '            <label class="col-sm-3 col-form-label">Дата выгрузки</label>' +
         '            <div class="col-sm-3">' +
         '                <input id="unloadingDate" value="' + element.unloading.date + '" text="' + element.unloading.date + '" type="text" name="unloadingDate" class="form-control form-details unloadingDate" placeholder="" disabled>' +
         '            </div>' +
@@ -118,7 +120,9 @@ function details(element) {
         '                <input id="unloadingComment" value="' + element.unloading.comment + '" text="' + element.unloading.comment + '" type="text" name="unloadingComment" class="form-control form-details unloadingComment" placeholder="Комментарии к погрузке"  disabled>' +
         '             </div>' +
         '        </div>' +
-        '        <div class="unloading-add"> </div>' +
+        '        <div class="unloading-add">' +
+        '            <input type="text" name="unloadingPlace" class="unloadingPlace" style="display: none">' +
+        '        </div>' +
         '        <div class="form-group row">' +
         '            <label class="col-sm-3 col-form-label">Контактное лицо</label>' +
         '            <div class="col-sm-4">' +
@@ -141,7 +145,7 @@ function details(element) {
         '        <div class="form-group row">' +
         '            <label class="col-sm-3 col-form-label">Сумма рейса</label>' +
         '            <div class="col-sm-2">' +
-        '                <input id="amountCust" value="' + element.customerPay.amount + '" text="' + element.customerPay.amount + '" type="number" name="amountCust" class="form-control form-details amountCust" placeholder="Сумма в рублях"  disabled>' +
+        '                <input id="amountCust" value="' + element.customerPay.amount + '" text="' + element.customerPay.amount + '" type="number" name="amountCust" class="form-control form-details amountCust" placeholder="Сумма в рублях" step=".01" disabled>' +
         '            </div>' +
         '            <label class="col-sm-2 col-form-label">Прописью</label>' +
         '            <div class="col-sm-5">' +
@@ -166,7 +170,7 @@ function details(element) {
         '        <div class="form-group row">' +
         '            <label class="col-sm-3 col-form-label">Сумма рейса</label>' +
         '            <div class="col-sm-2">' +
-        '                <input id="amountCarr" value="' + element.carrierPay.amount + '" text="' + element.carrierPay.amount + '" type="number" name="amountCarr" class="form-control form-details amountCarr" placeholder="Сумма в рублях"  disabled>' +
+        '                <input id="amountCarr" value="' + element.carrierPay.amount + '" text="' + element.carrierPay.amount + '" type="number" name="amountCarr" class="form-control form-details amountCarr" placeholder="Сумма в рублях" step=".01" disabled>' +
         '            </div>' +
         '            <label class="col-sm-2 col-form-label">Прописью</label>' +
         '            <div class="col-sm-5">' +
@@ -330,8 +334,10 @@ function newForming() {
         '     </div>' +
         '        <div class="form-group row">' +
         '            <label class="col-sm-3 col-form-label">Место погрузки</label>' +
+        '            <input type="text" name="loadingPlace" class="loadingPlace" style="display: none">' +
+
         '            <div class="col-sm-9">' +
-        '                <input id="loadingPlace" type="text" name="loadingPlace[]" class="form-control form-details loadingPlace" placeholder="Адрес места погрузки" required>' +
+        '                <input type="text" name="loadingPlace" class="form-control form-details loadingPlace" placeholder="Адрес места погрузки" required>' +
         '            </div>' +
         '        </div>' +
         '        <div class="loadingPlace-add"></div>' +
@@ -352,11 +358,11 @@ function newForming() {
         '        </div>' +
         '        <h5 class="card-title text-center border-top"><br>Данные о выгрузке<br></h5>' +
         '        <div class="form-group row">' +
-        '            <label class="col-sm-3 col-form-label">Дата выгрузке</label>' +
+        '            <label class="col-sm-3 col-form-label">Дата выгрузки</label>' +
         '            <div class="col-sm-3">' +
         '                <input id="unloadingDate" type="text" name="unloadingDate" class="form-control form-details unloadingDate" placeholder="" >' +
         '            </div>' +
-        '            <label class="col-sm-3 col-form-label">Время выгрузке</label>' +
+        '            <label class="col-sm-3 col-form-label">Время выгрузки</label>' +
         '            <div class="col-sm-3">' +
         '                <input id="unloadingTime" type="text" name="unloadingTime" class="form-control form-details unloadingTime" placeholder="" >' +
         '            </div>' +
@@ -368,9 +374,10 @@ function newForming() {
         '          </div>' +
         '     </div>' +
         '        <div class="form-group row">' +
-        '            <label class="col-sm-3 col-form-label">Место выгрузке</label>' +
+        '            <label class="col-sm-3 col-form-label">Место выгрузки</label>' +
+        '            <input type="text" name="unloadingPlace" class="unloadingPlace" style="display: none">' +
         '            <div class="col-sm-9">' +
-        '                <input id="unloadingPlace" type="text" name="unloadingPlace[]" class="form-control form-details unloadingPlace" placeholder="Адрес места выгрузки" required>' +
+        '                <input type="text" name="unloadingPlace" class="form-control form-details unloadingPlace" placeholder="Адрес места выгрузки" required>' +
         '            </div>' +
         '        </div>' +
         '        <div class="unloadingPlace-add"></div>' +
@@ -401,7 +408,7 @@ function newForming() {
         '      <div class="form-group row">' +
         '         <label class="col-sm-3 col-form-label">Сумма рейса</label>' +
         '          <div class="col-sm-4">' +
-        '                <input modelAttribute="payingCust" id="amountCust" type="number" name="amountCust" class="form-control form-details amountCust" placeholder="Сумма в рублях" >' +
+        '                <input modelAttribute="payingCust" id="amountCust" type="number" name="amountCust" class="form-control form-details amountCust" placeholder="Сумма в рублях" step=".01">' +
         '            </div>' +
         '            <div class="col-sm-5">' +
         '              <input modelAttribute="payingCust" id=amountWordsCust" type="text" name="amountWordsCust" class="form-control form-details amountWordsCust" placeholder="Сумма прописью" >' +
@@ -426,7 +433,7 @@ function newForming() {
         '      <div class="form-group row">' +
         '           <label class="col-sm-3 col-form-label">Сумма рейса</label>' +
         '           <div class="col-sm-4">' +
-        '               <input id="amountCarr" type="number" name="amountCarr" class="form-control form-details amountCarr" placeholder="Сумма в рублях" >' +
+        '               <input id="amountCarr" type="number" name="amountCarr" class="form-control form-details amountCarr" placeholder="Сумма в рублях" step=".01">' +
         '         </div>' +
         '            <div class="col-sm-5">' +
         '                <input id=amountWordsCarr" type="text" name="amountWordsCarr" class="form-control form-details amountWordsCarr" placeholder="Сумма прописью" >' +
@@ -455,7 +462,7 @@ function iDetails(element, ourCompanies, formPays, managers, customers, transpor
     let optionTransporters = $('.transporter');
     let optionDrivers = $('.driver');
     let optionVehicles = $('.vehicle');
-    let optionTrailer = $('.trailer');
+    // let optionTrailer = $('.trailer');
     let optionCargo = $('.cargo-add');
     let optionLoading = $('.loading-add');
     let optionUnloading = $('.unloading-add');
@@ -469,7 +476,7 @@ function iDetails(element, ourCompanies, formPays, managers, customers, transpor
         optionTransporters.append('<option value="' + element.transporter.id + '">' + element.transporter.name + '</option>')
         optionDrivers.append('<option value="' + element.driver.id + '">' + element.driver.passport.lastName + ' ' + element.driver.passport.firstName + ' ' + element.driver.passport.patronymic + '</option>')
         optionVehicles.append('<option value="' + element.vehicle.id + '">' + element.vehicle.model + ' (' + element.vehicle.stateNumber + ')</option>')
-        optionTrailer.append('<option value="' + element.vehicle.trailer.id + '">' + element.vehicle.trailer.model + ' (' + element.vehicle.trailer.stateNumber + ')</option>')
+        // optionTrailer.append('<option value="' + element.vehicle.trailer.id + '">' + element.vehicle.trailer.model + ' (' + element.vehicle.trailer.stateNumber + ')</option>')
         optionOurCompany.append('<option value="' + element.ourCompany.id + '">' + element.ourCompany.name + '</option>')
         optionFormPayCust.append('<option value="' + element.customerPay.paymentForm.id + '">' + element.customerPay.paymentForm.name + '</option>')
         optionFormPayCarr.append('<option value="' + element.carrierPay.paymentForm.id + '">' + element.carrierPay.paymentForm.name + '</option>')
@@ -506,9 +513,10 @@ function iDetails(element, ourCompanies, formPays, managers, customers, transpor
         }
     }
     for (let i = 0; i < element.cargo.length; i++) {
+        let t = i + 1;
         optionCargo.append('' +
             ' <div class="form-group row">' +
-            '     <label class="col-sm-3 col-form-label">Груз №' + i + '</label>' +
+            '     <label class="col-sm-3 col-form-label">Груз №' + t + '</label>' +
             '     <div class="col-sm-5">' +
             '   <input id="" value="' + element.cargo[i].name + '" text="' + element.cargo[i].name + '" type="text" name="cargo[]" class="form-control form-details cargo" placeholder="Наименование груза"  disabled>' +
             '     </div>' +
@@ -519,20 +527,22 @@ function iDetails(element, ourCompanies, formPays, managers, customers, transpor
             ' </div>');
     }
     for (let i = 0; i < element.loading.positions.length; i++) {
+        let t = i + 1;
         optionLoading.append('' +
             ' <div class="form-group row">' +
-            '     <label class="col-sm-3 col-form-label">Место погрузки №' + i + '</label>' +
+            '     <label class="col-sm-3 col-form-label">Место погрузки №' + t + '</label>' +
             '     <div class="col-sm-9">' +
-            '   <input id="loadingPlace" value="' + element.loading.positions[i].position + '" text="' + element.loading.positions[i].position + '" type="text" name="loadingPlace[]" class="form-control form-details loadingPlace" placeholder=""  disabled>' +
+            '   <input value="' + element.loading.positions[i].position + '" text="' + element.loading.positions[i].position + '" type="text" name="loadingPlace" class="form-control form-details loadingPlace" placeholder=""  disabled>' +
             '     </div>' +
             ' </div>');
     }
     for (let i = 0; i < element.unloading.positions.length; i++) {
+        let t = i + 1;
         optionUnloading.append('' +
             ' <div class="form-group row">' +
-            '     <label class="col-sm-3 col-form-label">Место выгрузки №' + i + '</label>' +
+            '     <label class="col-sm-3 col-form-label">Место выгрузки №' + t + '</label>' +
             '     <div class="col-sm-9">' +
-            '   <input id="unloadingPlace" value="' + element.unloading.positions[i].position + '" text="' + element.unloading.positions[i].position + '" type="text" name="unloadingPlace[]" class="form-control form-details unloadingPlace" placeholder=""  disabled>' +
+            '   <input value="' + element.unloading.positions[i].position + '" text="' + element.unloading.positions[i].position + '" type="text" name="unloadingPlace" class="form-control form-details unloadingPlace" placeholder=""  disabled>' +
             '     </div>' +
             ' </div>');
     }
@@ -601,16 +611,19 @@ function loadingPlaceAdd() {
     $('.loadingPlace-add').append('       <div class="form-group row">' +
         '           <label class="col-sm-3 col-form-label"></label>' +
         '           <div class="col-sm-9">' +
-        '                <input id="loadingPlace" type="text" name="loadingPlace[]" class="form-control form-details loadingPlace" placeholder="Адрес места погрузки">' +
+        '                <input type="text" name="loadingPlace" class="form-control form-details loadingPlace" placeholder="Адрес места погрузки">' +
         '           </div>' +
         '       </div>')
 }
+
+let unloadingPlacei = 1;
+let loadingPlacei = 1;
 
 function unloadingPlaceAdd() {
     $('.unloadingPlace-add').append('       <div class="form-group row">' +
         '           <label class="col-sm-3 col-form-label"></label>' +
         '           <div class="col-sm-9">' +
-        '                <input id="unloadingPlace" type="text" name="unloadingPlace[]" class="form-control form-details unloadingPlace" placeholder="Адрес места выгрузки">' +
+        '                <input type="text" name="unloadingPlace" class="form-control form-details unloadingPlace" placeholder="Адрес места выгрузки">' +
         '           </div>' +
         '       </div>')
 }

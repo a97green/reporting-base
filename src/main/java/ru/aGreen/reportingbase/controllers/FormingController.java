@@ -63,8 +63,8 @@ public class FormingController {
                              @RequestParam String numPay,
                              @RequestParam String numAct,
                              @RequestParam("cargo[]") List<String> cargo, @RequestParam("weight[]") List<String> weight,
-                             @RequestParam("loadingPlace[]") List<String> loadingPlace, @RequestParam String loadingPerson, @RequestParam String loadingDate, @RequestParam String loadingNumber, @RequestParam String loadingTime, @RequestParam String loadingComment,
-                             @RequestParam("unloadingPlace[]") List<String> unloadingPlace, @RequestParam String unloadingPerson, @RequestParam String unloadingNumber, @RequestParam String unloadingDate, @RequestParam String unloadingTime, @RequestParam String unloadingComment,
+                             @RequestParam("loadingPlace") List<String> loadingPlace, @RequestParam String loadingPerson, @RequestParam String loadingDate, @RequestParam String loadingNumber, @RequestParam String loadingTime, @RequestParam String loadingComment,
+                             @RequestParam("unloadingPlace") List<String> unloadingPlace, @RequestParam String unloadingPerson, @RequestParam String unloadingNumber, @RequestParam String unloadingDate, @RequestParam String unloadingTime, @RequestParam String unloadingComment,
                              @RequestParam Long formPayCust, @RequestParam(required = false) Double amountCust, @RequestParam String amountWordsCust, @RequestParam String payTermsCust, @RequestParam TypePaying typeCust,
                              @RequestParam Long formPayCarr, @RequestParam(required = false) Double amountCarr, @RequestParam String amountWordsCarr, @RequestParam String payTermsCarr, @RequestParam TypePaying typeCarr,
                              Model model) {
@@ -100,8 +100,8 @@ public class FormingController {
                               @RequestParam String numPay,
                               @RequestParam String numAct,
                               @RequestParam(value = "cargo[]", required = false) List<String> cargo, @RequestParam(value = "weight[]", required = false) List<String> weight,
-                              @RequestParam(value = "loadingPlace[]", required = false) List<String> loadingPlace, @RequestParam String loadingPerson, @RequestParam String loadingDate, @RequestParam String loadingNumber, @RequestParam String loadingTime, @RequestParam String loadingComment,
-                              @RequestParam(value = "unloadingPlace[]", required = false) List<String> unloadingPlace, @RequestParam String unloadingPerson, @RequestParam String unloadingNumber, @RequestParam String unloadingDate, @RequestParam String unloadingTime, @RequestParam String unloadingComment,
+                              @RequestParam(value = "loadingPlace", required = false) List<String> loadingPlace, @RequestParam String loadingPerson, @RequestParam String loadingDate, @RequestParam String loadingNumber, @RequestParam String loadingTime, @RequestParam String loadingComment,
+                              @RequestParam(value = "unloadingPlace", required = false) List<String> unloadingPlace, @RequestParam String unloadingPerson, @RequestParam String unloadingNumber, @RequestParam String unloadingDate, @RequestParam String unloadingTime, @RequestParam String unloadingComment,
                               @RequestParam Long formPayCust, @RequestParam(required = false) Double amountCust, @RequestParam String amountWordsCust, @RequestParam String payTermsCust, @RequestParam TypePaying typeCust,
                               @RequestParam Long formPayCarr, @RequestParam(required = false) Double amountCarr, @RequestParam String amountWordsCarr, @RequestParam String payTermsCarr, @RequestParam TypePaying typeCarr,
                               Model model) {
@@ -183,7 +183,9 @@ public class FormingController {
         List<Position> positions = new ArrayList<>();
         for (String s : places) {
             if (!s.equals("")) {
-                Position position = new Position(s);
+                System.out.println(s);
+                String t = s.replaceAll("\"", "'");
+                Position position = new Position(t);
                 positionRepository.save(position);
                 positions.add(position);
             }
